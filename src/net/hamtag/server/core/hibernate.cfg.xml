@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+   <session-factory>
+   <property name="hibernate.dialect">
+      org.hibernate.dialect.PostgreSQLDialect
+   </property>
+   <property name="hibernate.connection.driver_class">
+      org.postgresql.Driver
+   </property>
+
+   <!-- Assume students is the database name -->
+   <property name="hibernate.connection.url">
+      jdbc:postgresql://localhost:5432/hamtag
+   </property>
+   <property name="hibernate.connection.username">
+      hamtag
+   </property>
+   <property name="hibernate.connection.password">
+      another
+   </property>
+   
+   	<property name="connection.provider_class">
+		org.hibernate.connection.C3P0ConnectionProvider
+	</property>
+	<property name="hibernate.connection.autoReconnect">true</property>
+	<property name="hibernate.c3p0.acquire_increment">1</property> 
+	<property name="hibernate.c3p0.max_size">120</property>
+	<property name="hibernate.c3p0.timeout">150</property>  
+	<property name="hibernate.c3p0.idle_test_period">100</property>
+	
+	<mapping class="net.hamtag.server.datatypes.ad.Test"/>
+	<mapping class="net.hamtag.server.datatypes.corporation.Corporation"/>
+	<mapping class="net.hamtag.server.datatypes.ad.Ad"/>
+
+</session-factory>
+</hibernate-configuration>
