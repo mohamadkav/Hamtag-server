@@ -21,8 +21,9 @@ public class RootMgr {
 		}
 		return sessionFactory;
 	}
+
 	public static Session getInstance(){
-		if(session!=null)
+		if(session!=null&&session.isOpen())
 			return session;
 		session=getInstancedSessionFactory().openSession();
 		return session;

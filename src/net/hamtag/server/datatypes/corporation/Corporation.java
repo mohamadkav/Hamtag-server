@@ -32,6 +32,14 @@ public class Corporation {
 	private Set<Ad> ads = new HashSet<Ad>(0);
 	
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public Set<Ad> getAds() {
 		return this.ads;
 	}

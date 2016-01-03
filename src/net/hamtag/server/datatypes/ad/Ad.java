@@ -1,5 +1,8 @@
 package net.hamtag.server.datatypes.ad;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,14 +10,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import net.hamtag.server.datatypes.corporation.Corporation;
 
 @Entity
-@Table(name="ADS")
+@Table(name="ADS", indexes = {
+        @Index(columnList = "CORPORATIONID", name = "corporation_index")})
 public class Ad {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,15 +41,56 @@ public class Ad {
 	private String location;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CORPORATION_ID", nullable = false)
+	@JoinColumn(name = "CORPORATIONID", nullable = false)
 	private Corporation corporation;
 	
+	@OneToMany
+	(fetch = FetchType.LAZY, mappedBy = "ad")
+	private Set<AdShown> adShown = new HashSet<AdShown>(0);
+	
 
+	public Set<AdShown> getAdShown() {
+		return adShown;
+	}
+	public void setAdShown(Set<AdShown> adShown) {
+		this.adShown = adShown;
+	}
 	public Corporation getCorporation() {
 		return this.corporation;
 	}
 	public void setCorporation(Corporation corporation){
 		this.corporation=corporation;
 	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public String getLink() {
+		return link;
+	}
+	public void setLink(String link) {
+		this.link = link;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 	
 }

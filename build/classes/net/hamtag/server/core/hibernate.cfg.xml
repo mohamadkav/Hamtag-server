@@ -31,9 +31,10 @@
 	<property name="hibernate.c3p0.timeout">150</property>  
 	<property name="hibernate.c3p0.idle_test_period">100</property>
 	
-	<mapping class="net.hamtag.server.datatypes.ad.Test"/>
 	<mapping class="net.hamtag.server.datatypes.corporation.Corporation"/>
 	<mapping class="net.hamtag.server.datatypes.ad.Ad"/>
+	<mapping class="net.hamtag.server.datatypes.ad.AdShown"/>
+	<mapping class="net.hamtag.server.datatypes.device.Device"/>
 
 </session-factory>
 </hibernate-configuration>
