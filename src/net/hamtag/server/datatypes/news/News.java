@@ -35,7 +35,7 @@ public class News {
 	private File content;
 	
 	@OneToMany
-	(fetch = FetchType.LAZY, mappedBy = "ad")
+	(fetch = FetchType.LAZY, mappedBy = "news")
 	private Set<NewsShown> newsShowns = new HashSet<NewsShown>(0);
 
 	public Integer getId() {

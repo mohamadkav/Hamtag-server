@@ -31,9 +31,15 @@
 	<property name="hibernate.c3p0.idle_test_period">100</property>
 	
 	<mapping class="net.hamtag.server.datatypes.corporation.Corporation"/>
+	<mapping class="net.hamtag.server.datatypes.corporation.DealerCorporation"/>
 	<mapping class="net.hamtag.server.datatypes.ad.Ad"/>
 	<mapping class="net.hamtag.server.datatypes.ad.AdShown"/>
 	<mapping class="net.hamtag.server.datatypes.device.Device"/>
+	<mapping class="net.hamtag.server.datatypes.device.TempDevice"/>
+	<mapping class="net.hamtag.server.datatypes.marketcontent.MarketContent"/>
+	<mapping class="net.hamtag.server.datatypes.news.News"/>
+	<mapping class="net.hamtag.server.datatypes.news.NewsShown"/>
+	<mapping class="net.hamtag.server.datatypes.purchase.Purchase"/>
 
 </session-factory>
 </hibernate-configuration>

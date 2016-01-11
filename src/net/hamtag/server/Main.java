@@ -3,6 +3,7 @@ package net.hamtag.server;
 import net.hamtag.server.datatypes.ad.AdShown;
 import net.hamtag.server.datatypes.device.Device;
 import net.hamtag.server.datatypes.device.DeviceMgr;
+import net.hamtag.server.utils.SmsConfirmationUtil;
 
 public class Main {
 	public static void main(String[] args) {
