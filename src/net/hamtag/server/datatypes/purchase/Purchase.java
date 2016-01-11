@@ -19,7 +19,7 @@ import net.hamtag.server.datatypes.marketcontent.MarketContent;
 
 @Entity
 @Table(name="PURCHASES", indexes = {@Index(columnList = "CONTENTID", name = "MARKET_CONTENT_PURCHASE_INDEX"),
-		@Index(columnList = "DEVICEID", name = "DEVICE_ID_INDEX")})
+		@Index(columnList = "DEVICEID", name = "DEVICE_ID_PURCHASE_INDEX")})
 public class Purchase {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

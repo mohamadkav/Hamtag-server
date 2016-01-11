@@ -1,5 +1,4 @@
-package net.hamtag.server.datatypes.ad;
-
+package net.hamtag.server.datatypes.news;
 
 import java.util.Date;
 
@@ -16,11 +15,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import net.hamtag.server.datatypes.device.Device;
+
 @Entity
-@Table(name="AD_DISPLAY", indexes = {@Index(columnList = "ADID", name = "AD_INDEX"),
-		@Index(columnList = "SHOWDATE", name = "AD_SHOW_DATE_INDEX"),
-		@Index(columnList = "DEVICEID", name = "AD_SHOWN_DEVICE_INDEX")})
-public class AdShown {
+@Table(name="NEWS_DISPLAY", indexes = {@Index(columnList = "NEWSID", name = "NEWS_INDEX"),
+		@Index(columnList = "SHOWDATE", name = "NEWS_SHOWN_DATE"),
+		@Index(columnList = "DEVICEID", name = "NEWS_SHOWN_DEVICE_INDEX")})
+public class NewsShown {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -34,21 +34,12 @@ public class AdShown {
 	private Date showDate;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ADID", nullable = false)
-	private Ad ad;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DEVICEID", nullable = false)
 	private Device device;
 	
-
-	public Device getDevice() {
-		return device;
-	}
-
-	public void setDevice(Device device) {
-		this.device = device;
-	}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "NEWSID", nullable = false)
+	private News news;
 
 	public Integer getId() {
 		return id;
@@ -74,12 +65,20 @@ public class AdShown {
 		this.showDate = showDate;
 	}
 
-	public Ad getAd() {
-		return ad;
+	public Device getDevice() {
+		return device;
 	}
 
-	public void setAd(Ad ad) {
-		this.ad = ad;
+	public void setDevice(Device device) {
+		this.device = device;
+	}
+
+	public News getNews() {
+		return news;
+	}
+
+	public void setNews(News news) {
+		this.news = news;
 	}
 	
 	
