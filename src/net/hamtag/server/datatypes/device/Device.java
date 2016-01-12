@@ -31,7 +31,7 @@ public class Device {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "device")
 	private Set<Purchase> purchases = new HashSet<Purchase>(0);
 
-	@Column(name = "PHONE_NUMBER", unique = true, nullable = false)
+	@Column(name = "PHONE_NUMBER", unique = true, nullable = false, columnDefinition = "int default 100")
 	private String phoneNumber;
 
 	@Column(name = "CHARGE")

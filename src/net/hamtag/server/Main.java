@@ -1,14 +1,9 @@
 package net.hamtag.server;
 
-import net.hamtag.server.datatypes.ad.AdShown;
-import net.hamtag.server.datatypes.device.Device;
-import net.hamtag.server.datatypes.device.DeviceMgr;
-import net.hamtag.server.utils.SmsConfirmationUtil;
+import net.hamtag.server.api.request.types.ConfirmDeviceRequest;
 
 public class Main {
 	public static void main(String[] args) {
-		for(AdShown as:DeviceMgr.getInstance().get(Device.class, 1).getAdShown()){
-			System.out.println(as.getShowDate());
-		}
+		System.out.println(new ConfirmDeviceRequest("09128145827", "4884").handle());
 	}
 }
