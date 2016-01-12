@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,10 +13,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import net.hamtag.server.datatypes.category.Category;
 import net.hamtag.server.datatypes.corporation.Corporation;
 
 @Entity
@@ -48,7 +52,19 @@ public class Ad {
 	(fetch = FetchType.LAZY, mappedBy = "ad")
 	private Set<AdShown> adShown = new HashSet<AdShown>(0);
 	
-
+	@JoinColumn
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "AD_CATEGORY", joinColumns = {
+			@JoinColumn(name = "ADID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "CATEGORYID", nullable = false, updatable = false) })
+	private Set<Category> categories;
+	
+	public Set<Category> getCategories() {
+		return categories;
+	}
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
 	public Set<AdShown> getAdShown() {
 		return adShown;
 	}
@@ -88,9 +104,8 @@ public class Ad {
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	
 }

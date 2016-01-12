@@ -5,38 +5,64 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import net.hamtag.server.datatypes.category.Category;
+
 @Entity
-@Table(name="NEWS", indexes = {
-        @Index(columnList = "CATEGORY", name = "NEWS_CATEGORY_INDEX")})
+@Table(name = "NEWS")
 public class News {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id",unique=true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
-	
-	@Column(name="CONTENT_TYPE")
+
+	@Column(name = "CONTENT_TYPE")
 	private String contentType;
-	
-	@Column(name="CATEGORY")
-	private String category;
-	
+
+	@Column(name = "NEWSTEXT")
+	private String text;
+
 	@Column(name = "CONTENT")
 	private File content;
-	
-	@OneToMany
-	(fetch = FetchType.LAZY, mappedBy = "news")
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "news")
 	private Set<NewsShown> newsShowns = new HashSet<NewsShown>(0);
+
+	@JoinColumn
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "NEWS_CATEGORY", joinColumns = {
+			@JoinColumn(name = "NEWSID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "CATEGORYID", nullable = false, updatable = false) })
+	private Set<Category> categories;
+
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
 
 	public Integer getId() {
 		return id;
@@ -54,14 +80,6 @@ public class News {
 		this.contentType = contentType;
 	}
 
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
 	public File getContent() {
 		return content;
 	}
@@ -77,6 +95,5 @@ public class News {
 	public void setNewsShowns(Set<NewsShown> newsShowns) {
 		this.newsShowns = newsShowns;
 	}
-	
-	
+
 }

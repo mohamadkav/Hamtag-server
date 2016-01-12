@@ -40,6 +40,7 @@
 	<mapping class="net.hamtag.server.datatypes.news.News"/>
 	<mapping class="net.hamtag.server.datatypes.news.NewsShown"/>
 	<mapping class="net.hamtag.server.datatypes.purchase.Purchase"/>
+	<mapping class="net.hamtag.server.datatypes.category.Category"/>
 
 </session-factory>
 </hibernate-configuration>

@@ -1,9 +1,28 @@
 package net.hamtag.server;
 
-import net.hamtag.server.api.request.types.ConfirmDeviceRequest;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.hibernate.Criteria;
+
+import net.hamtag.server.datatypes.category.Category;
+import net.hamtag.server.datatypes.category.CategoryMgr;
+import net.hamtag.server.datatypes.news.News;
+import net.hamtag.server.datatypes.news.NewsMgr;
 
 public class Main {
 	public static void main(String[] args) {
-		System.out.println(new ConfirmDeviceRequest("09128145827", "4884").handle());
+		News ne=NewsMgr.getInstance().get(News.class, 1);
+		ne.setText("Khabar resid ke shiit!");
+		NewsMgr.getInstance().update(ne);
+		Criteria c=CategoryMgr.getInstance().createCriteria(Category.class);
+		List<Category>all=c.list();
+		for(Category ca:all){
+			Set<News>n=ca.getNews();
+			for(News news:n){
+				System.err.println(news.getText());
+			}
+		}
 	}
 }

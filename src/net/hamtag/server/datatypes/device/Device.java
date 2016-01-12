@@ -4,16 +4,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import net.hamtag.server.datatypes.ad.AdShown;
+import net.hamtag.server.datatypes.category.Category;
 import net.hamtag.server.datatypes.purchase.Purchase;
 
 @Entity
@@ -31,11 +36,26 @@ public class Device {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "device")
 	private Set<Purchase> purchases = new HashSet<Purchase>(0);
 
-	@Column(name = "PHONE_NUMBER", unique = true, nullable = false, columnDefinition = "int default 100")
+	@Column(name = "PHONE_NUMBER", unique = true, nullable = false)
 	private String phoneNumber;
 
-	@Column(name = "CHARGE")
+	@Column(name = "CHARGE",nullable = false, insertable=false, columnDefinition = "INT NOT NULL DEFAULT 0")
 	private Integer charge;
+	
+	@JoinColumn
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "DEVICE_CATEGORY", joinColumns = {
+			@JoinColumn(name = "DEVICEID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "CATEGORYID", nullable = false, updatable = false) })
+	private Set<Category> categories;
+	
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
 
 	public Integer getId() {
 		return id;
