@@ -18,7 +18,13 @@ public class NewDeviceRequest {
 		NUMBER_ALREADY_ENROLLED,
 		REQUEST_SENDING_ERROR;
 	}
-	public static Response addNewDevice(String number,boolean reallySendMessage){
+	private String number;
+	private boolean reallySendMessage;
+	public NewDeviceRequest(String number, boolean reallySendMessage){
+		this.number=number;
+		this.reallySendMessage=reallySendMessage;
+	}
+	public Response handle(){
 		if(number==null){
 			return new Response(Error.NUMBER_NULL_OR_INVALID);
 		}

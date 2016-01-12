@@ -1,6 +1,5 @@
 package net.hamtag.server;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -12,6 +11,7 @@ import net.hamtag.server.datatypes.news.News;
 import net.hamtag.server.datatypes.news.NewsMgr;
 
 public class Main {
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		News ne=NewsMgr.getInstance().get(News.class, 1);
 		ne.setText("Khabar resid ke shiit!");

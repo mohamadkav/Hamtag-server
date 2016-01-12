@@ -16,7 +16,7 @@ public class DeviceResource {
 	@Path("/new/{number}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String requestMessage(@PathParam("number")String number){
-		return NewDeviceRequest.addNewDevice(number,true).toString();
+		return new NewDeviceRequest(number,true).handle().toString();
 	}
 	
 	@GET
