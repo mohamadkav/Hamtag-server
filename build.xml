@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Project >
+
+<project name="Hamtag" default="usage" basedir=".">
+
+	<property name="project.name" value="${ant.project.name}" />
+	<property environment="env" />
+	<property file="build.xml.properties" />
+	
+
+	<path id="compile.classpath">
+		<pathelement location="${catalina.home}/common/classes" />
+		<fileset dir="${catalina.home}/lib">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${sourcelibdir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="usage">
+		<echo message=""/>
+		<echo message="${webapp.name} build file"/>
+		<echo message="-----------------------------------"/>	
+	</target>
+	
+	<target name="clean" description="Clean">
+		<delete dir="${build.home}" />
+		<delete dir="${deploy.home}" />
+		<delete failonerror="false" dir="${deploy.work}" />
+	</target>
+	
+	<target name="cleanJars" description="Delete the jar files">
+		<delete dir="${build.home}/WEB-INF/lib" />
+		<delete dir="${deploy.home}/WEB-INF/lib" />
+		<delete failonerror="false" dir="${deploy.work}" />
+		<delete>
+			<fileset dir="${weblibdir}">
+				<include name="*.jar" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="prepare" >
+		<mkdir dir="${build.home}" />
+		<mkdir dir="${build.home}/WEB-INF" />
+		<mkdir dir="${build.home}/WEB-INF/classes" />
+	</target>
+
+	<target name="makeJars" description="Build the jar files" >
+		<copy todir="${weblibdir}" flatten="true">
+			<fileset dir="${sourcelibdir}" casesensitive="yes">
+				<include name="*.jar" />
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="compile" depends="prepare,makeJars" description="Compile Java sources">
+		<!-- Compile Java classes as necessary -->
+		<javac srcdir="${sourcedir}"
+			destdir="${build.home}/WEB-INF/classes"
+			debug="${compile.debug}"
+			optimize="${compile.optimize}">
+			<classpath refid="compile.classpath" />
+		</javac>
+	</target>
+
+	<target name="build" depends="compile" description="Build the project" >
+		<copy todir="${build.home}/WEB-INF/classes">
+			<fileset dir="${sourcedir}" excludes="**/i18n/**/*.properties, **/*.java, **/*.class, **/*.utf8" casesensitive="yes" />
+		</copy>
+
+		<copy todir="${build.home}">
+			<fileset dir="${webroot}" casesensitive="yes">
+				<exclude name="WEB-INF/classes/**" />
+			</fileset>
+		</copy>
+
+	</target>
+
+	<target name="deploy" depends="build" description="Deploy to tomcat dir" >
+		<mkdir dir="${deploy.home}" />
+		<copy todir="${deploy.home}">
+			<fileset dir="${build.home}" />
+		</copy>
+	</target>
+
+
+	
+</project>
+

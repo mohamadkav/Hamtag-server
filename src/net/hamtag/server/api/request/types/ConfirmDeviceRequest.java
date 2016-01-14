@@ -1,5 +1,7 @@
 package net.hamtag.server.api.request.types;
 
+import java.util.Date;
+
 import net.hamtag.server.api.response.Response;
 import net.hamtag.server.datatypes.device.Device;
 import net.hamtag.server.datatypes.device.DeviceMgr;
@@ -20,9 +22,10 @@ public class ConfirmDeviceRequest {
 		TempDevice tempDevice=TempDeviceMgr.getByNumber(number);
 		if(tempDevice==null)
 			return new Response(Error.NUMBER_NOT_IN_TEMP_DEVICES);
-		if(tempDevice.getToken().equals(token)){
+		if(tempDevice.getToken().equals(token)&&tempDevice.getValidUntill().getTime()>=new Date().getTime()){
 			Device device = new Device();
 			device.setPhoneNumber(number);
+			device.setPassword(tempDevice.getPassword());
 			DeviceMgr.add(device);
 			return new Response();
 		}

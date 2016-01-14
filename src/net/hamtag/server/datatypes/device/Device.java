@@ -38,6 +38,9 @@ public class Device {
 
 	@Column(name = "PHONE_NUMBER", unique = true, nullable = false)
 	private String phoneNumber;
+	
+	@Column(name = "PASSWORD", nullable = false)
+	private String password;
 
 	@Column(name = "CHARGE",nullable = false, insertable=false, columnDefinition = "INT NOT NULL DEFAULT 0")
 	private Integer charge;
@@ -55,6 +58,14 @@ public class Device {
 
 	public void setCategories(Set<Category> categories) {
 		this.categories = categories;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Integer getId() {

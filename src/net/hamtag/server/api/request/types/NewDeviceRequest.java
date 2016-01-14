@@ -20,9 +20,11 @@ public class NewDeviceRequest {
 	}
 	private String number;
 	private boolean reallySendMessage;
-	public NewDeviceRequest(String number, boolean reallySendMessage){
+	private String password;
+	public NewDeviceRequest(String number,String password, boolean reallySendMessage){
 		this.number=number;
 		this.reallySendMessage=reallySendMessage;
+		this.password=password;
 	}
 	public Response handle(){
 		if(number==null){
@@ -57,6 +59,7 @@ public class NewDeviceRequest {
 		TempDevice tempDevice=new TempDevice();
 		tempDevice.setPhoneNumber(number);
 		tempDevice.setToken(token);
+		tempDevice.setPassword(password);
 		date=new Date().getTime();
 		//3 Minutes Validation
 		date+=180000;

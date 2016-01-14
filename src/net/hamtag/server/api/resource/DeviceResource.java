@@ -13,10 +13,10 @@ import net.hamtag.server.api.request.types.NewDeviceRequest;
 public class DeviceResource {
 
 	@GET
-	@Path("/new/{number}")
+	@Path("/new/{number}/{sha256password}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String requestMessage(@PathParam("number")String number){
-		return new NewDeviceRequest(number,true).handle().toString();
+	public String requestMessage(@PathParam("number")String number,@PathParam("password")String password){
+		return new NewDeviceRequest(number,password,true).handle().toString();
 	}
 	
 	@GET

@@ -25,6 +25,9 @@ public class TempDevice {
 	@Column(name="VALID_UNTILL")
 	private Date validUntill;
 	
+	@Column(name = "PASSWORD", nullable = false)
+	private String password;
+	
 	@Column(name = "TOKEN", nullable = false)
 	private String token;
 
@@ -34,6 +37,14 @@ public class TempDevice {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getPhoneNumber() {
