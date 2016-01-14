@@ -1,4 +1,4 @@
-package net.hamtag.server.api.response.types;
+package net.hamtag.server.api.response.types.ads;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

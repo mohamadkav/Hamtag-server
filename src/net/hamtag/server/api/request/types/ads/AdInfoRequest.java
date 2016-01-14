@@ -1,4 +1,4 @@
-package net.hamtag.server.api.request.types;
+package net.hamtag.server.api.request.types.ads;
 
 import net.hamtag.server.api.request.BaseRequest;
 import net.hamtag.server.api.request.handler.BaseRequestHandler;

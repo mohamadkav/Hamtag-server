@@ -1,4 +1,4 @@
-package net.hamtag.server.api.request.types;
+package net.hamtag.server.api.request.types.device;
 
 import java.util.Date;
 
@@ -9,7 +9,7 @@ import net.hamtag.server.datatypes.device.TempDevice;
 import net.hamtag.server.datatypes.device.TempDeviceMgr;
 
 public class ConfirmDeviceRequest {
-	enum Error{
+	private enum Error{
 		TOKEN_INVALID,
 		NUMBER_NOT_IN_TEMP_DEVICES
 	}

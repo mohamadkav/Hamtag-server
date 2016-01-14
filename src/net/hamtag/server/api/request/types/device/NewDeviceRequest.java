@@ -1,4 +1,4 @@
-package net.hamtag.server.api.request.types;
+package net.hamtag.server.api.request.types.device;
 
 import java.util.Date;
 import java.util.List;

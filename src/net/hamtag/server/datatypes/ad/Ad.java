@@ -1,5 +1,6 @@
 package net.hamtag.server.datatypes.ad;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -44,13 +45,30 @@ public class Ad {
 	@Column(name="location")
 	private String location;
 	
+	@Column(name="address")
+	private String address;
+	
+	@Column(name="comments")
+	private String comments;
+	
+	@Column(name="publish_time")
+	private Date publishTime;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CORPORATIONID", nullable = false)
 	private Corporation corporation;
 	
+	
+	@Column(name="TUMBNAILID")
+	private Long thumbnailId;
+	
 	@OneToMany
 	(fetch = FetchType.LAZY, mappedBy = "ad")
 	private Set<AdShown> adShown = new HashSet<AdShown>(0);
+	
+	@OneToMany
+	(fetch = FetchType.LAZY, mappedBy = "ad")
+	private Set<AdContent> adContents = new HashSet<AdContent>(0);
 	
 	@JoinColumn
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -59,11 +77,43 @@ public class Ad {
 					@JoinColumn(name = "CATEGORYID", nullable = false, updatable = false) })
 	private Set<Category> categories;
 	
+	public Date getPublishTime() {
+		return publishTime;
+	}
+
+	public void setPublishTime(Date publishTime) {
+		this.publishTime = publishTime;
+	}
+
 	public Set<Category> getCategories() {
 		return categories;
 	}
+	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
 	public void setCategories(Set<Category> categories) {
 		this.categories = categories;
+	}
+	
+	public Long getThumbnailId() {
+		return thumbnailId;
+	}
+	public void setThumbnailId(Long thumbnailId) {
+		this.thumbnailId = thumbnailId;
 	}
 	public Set<AdShown> getAdShown() {
 		return adShown;
@@ -76,6 +126,13 @@ public class Ad {
 	}
 	public void setCorporation(Corporation corporation){
 		this.corporation=corporation;
+	}
+	
+	public Set<AdContent> getAdContents() {
+		return adContents;
+	}
+	public void setAdContents(Set<AdContent> adContents) {
+		this.adContents = adContents;
 	}
 	public String getPrice() {
 		return price;
