@@ -34,6 +34,7 @@
 	<mapping class="net.hamtag.server.datatypes.corporation.DealerCorporation"/>
 	<mapping class="net.hamtag.server.datatypes.ad.Ad"/>
 	<mapping class="net.hamtag.server.datatypes.ad.AdShown"/>
+	<mapping class="net.hamtag.server.datatypes.ad.AdContent"/>
 	<mapping class="net.hamtag.server.datatypes.device.Device"/>
 	<mapping class="net.hamtag.server.datatypes.device.TempDevice"/>
 	<mapping class="net.hamtag.server.datatypes.marketcontent.MarketContent"/>
