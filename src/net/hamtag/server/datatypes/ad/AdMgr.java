@@ -30,7 +30,8 @@ public class AdMgr extends RootMgr {
 			criteria.createAlias("categories", "categoriesAlias");
 			criteria.add(Restrictions.in("categoriesAlias.name", categories));
 		}
-		criteria.add(Restrictions.sqlRestriction("1=1 order by rand()"));
+		//TODO: DB restriction/ random is just for PostgreSQL
+		criteria.add(Restrictions.sqlRestriction("1=1 order by random()"));
 		return criteria.list();
 	}
 }

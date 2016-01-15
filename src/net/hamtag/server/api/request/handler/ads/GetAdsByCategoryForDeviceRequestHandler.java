@@ -33,7 +33,6 @@ public class GetAdsByCategoryForDeviceRequestHandler extends BaseRequestHandler{
 			dto.setLocation(ad.getLocation());
 			dto.setPhone(ad.getPhone());
 			dto.setPrice(ad.getPrice());
-			dto.setThumbnailId(ad.getThumbnailId());
 			dtos.add(dto);
 		}
 		return new Response(dtos);

@@ -58,10 +58,6 @@ public class Ad {
 	@JoinColumn(name = "CORPORATIONID", nullable = false)
 	private Corporation corporation;
 	
-	
-	@Column(name="TUMBNAILID")
-	private Long thumbnailId;
-	
 	@OneToMany
 	(fetch = FetchType.LAZY, mappedBy = "ad")
 	private Set<AdShown> adShown = new HashSet<AdShown>(0);
@@ -108,19 +104,11 @@ public class Ad {
 	public void setCategories(Set<Category> categories) {
 		this.categories = categories;
 	}
-	
-	public Long getThumbnailId() {
-		return thumbnailId;
-	}
-	public void setThumbnailId(Long thumbnailId) {
-		this.thumbnailId = thumbnailId;
-	}
+
 	public Set<AdShown> getAdShown() {
 		return adShown;
 	}
-	public void setAdShown(Set<AdShown> adShown) {
-		this.adShown = adShown;
-	}
+	
 	public Corporation getCorporation() {
 		return this.corporation;
 	}

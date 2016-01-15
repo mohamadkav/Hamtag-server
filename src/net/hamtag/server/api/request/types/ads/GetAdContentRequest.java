@@ -16,12 +16,11 @@ public class GetAdContentRequest {
 	public Response handle(){
 		if(id==null||id.trim().isEmpty())
 			return null;
-		AdContent ac=AdContentMgr.getInstance().get(AdContent.class, Long.parseLong(id));
+		AdContent ac=AdContentMgr.getInstance().get(AdContent.class, Integer.parseInt(id));
 		if(ac==null)
 			return null;
 	    File file = ac.getContent();
 	    ResponseBuilder response = javax.ws.rs.core.Response.ok((Object) file);
-	    response.header("Content-Type", ac.getType());
 	    return response.build();
 	}
 }

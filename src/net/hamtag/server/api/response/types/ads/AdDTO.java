@@ -33,13 +33,13 @@ public class AdDTO {
 	private Long thumbnailId;
 	
 	@JsonProperty
-	private List<Long> contentIds;
+	private List<Integer> contentIds;
 	
-	public List<Long> getContentIds() {
+	public List<Integer> getContentIds() {
 		return contentIds;
 	}
 
-	public void setContentIds(List<Long> contentIds) {
+	public void setContentIds(List<Integer> contentIds) {
 		this.contentIds = contentIds;
 	}
 

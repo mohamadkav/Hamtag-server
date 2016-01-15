@@ -10,7 +10,7 @@ import net.hamtag.server.core.RootMgr;
 
 public class AdContentMgr extends RootMgr{
 	@SuppressWarnings("unchecked")
-	public static List<Long>getContentIdsByAd(Ad ad){
+	public static List<Integer>getContentIdsByAd(Ad ad){
 		Criteria criteria=getInstance().createCriteria(AdContent.class);
 		criteria.add(Restrictions.eq("ad", ad));
 		criteria.setProjection(Projections.property("id"));

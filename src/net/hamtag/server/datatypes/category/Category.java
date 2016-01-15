@@ -26,7 +26,7 @@ public class Category {
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 
-	@Column(name = "name")
+	@Column(name = "name",unique=true)
 	private String name;
 	
 
@@ -40,6 +40,11 @@ public class Category {
 	private Set<Ad> ads = new HashSet<Ad>(0);
 	
 	
+	
+	public void setAds(Set<Ad> ads) {
+		this.ads = ads;
+	}
+
 	public Set<News> getNews() {
 		return news;
 	}
@@ -58,10 +63,6 @@ public class Category {
 
 	public Set<Ad> getAds() {
 		return ads;
-	}
-
-	public void setAds(Set<Ad> ads) {
-		this.ads = ads;
 	}
 
 	public Integer getId() {
