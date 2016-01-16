@@ -47,7 +47,7 @@ public class RootMgr {
 		return addedId;
 	}
 
-	public static void update(Integer id, Object toUpdate,Class<Object> classType) {
+	public static void update(Object toUpdate) {
 		Session session = getInstance();
 		Transaction tx = null;
 		try {

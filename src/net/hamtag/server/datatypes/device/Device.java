@@ -41,6 +41,9 @@ public class Device {
 	
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;
+	
+	@Column(name = "TOKEN")
+	private String token;
 
 	@Column(name = "CHARGE",nullable = false, insertable=false, columnDefinition = "INT NOT NULL DEFAULT 0")
 	private Integer charge;
@@ -66,6 +69,14 @@ public class Device {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}	
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public Integer getId() {

@@ -1,15 +1,16 @@
 package net.hamtag.server.api.request.types.ads;
 
-import net.hamtag.server.api.request.BaseRequest;
 import net.hamtag.server.api.request.handler.BaseRequestHandler;
 import net.hamtag.server.api.request.handler.ads.GetAdsByCategoryForDeviceRequestHandler;
+import net.hamtag.server.api.request.types.BaseDeviceRequest;
 
-public class GetAdsByCategoryForDeviceRequest extends BaseRequest{
-	private String maxNumber,categories,lastUpdateTime;
-	public GetAdsByCategoryForDeviceRequest(String maxNumber,String categories,String lastupdateTime){
+public class GetAdsByCategoryForDeviceRequest extends BaseDeviceRequest{
+	private String maxNumber,lastUpdateTime;
+	public GetAdsByCategoryForDeviceRequest(String maxNumber,String lastupdateTime,String token,String phoneNumber){
 		this.maxNumber=maxNumber;
-		this.categories=categories;
 		this.lastUpdateTime=lastupdateTime;
+		setToken(token);
+		setPhoneNumber(phoneNumber);
 	}
 	@Override
 	public BaseRequestHandler getHandler() {
@@ -18,15 +19,18 @@ public class GetAdsByCategoryForDeviceRequest extends BaseRequest{
 	public String getNumber() {
 		return maxNumber;
 	}
+	
+	public String getMaxNumber() {
+		return maxNumber;
+	}
+	public void setMaxNumber(String maxNumber) {
+		this.maxNumber = maxNumber;
+	}
+	
 	public void setNumber(String number) {
 		this.maxNumber = number;
 	}
-	public String getCategories() {
-		return categories;
-	}
-	public void setCategories(String categories) {
-		this.categories = categories;
-	}
+
 	public String getLastUpdateTime() {
 		return lastUpdateTime;
 	}

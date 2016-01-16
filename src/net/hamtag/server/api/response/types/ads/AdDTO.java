@@ -30,9 +30,6 @@ public class AdDTO {
 	private String corporation;
 	
 	@JsonProperty
-	private Long thumbnailId;
-	
-	@JsonProperty
 	private List<Integer> contentIds;
 	
 	public List<Integer> getContentIds() {
@@ -105,15 +102,6 @@ public class AdDTO {
 
 	public void setCorporation(String corporation) {
 		this.corporation = corporation;
-	}
-
-	public Long getThumbnailId() {
-		return thumbnailId;
-	}
-
-	public void setThumbnailId(Long thumbnailId) {
-		this.thumbnailId = thumbnailId;
-	}
-	
+	}	
 	
 }

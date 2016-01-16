@@ -1,8 +1,10 @@
 package net.hamtag.server.api.request.types.device;
 
 import net.hamtag.server.api.response.Response;
+import net.hamtag.server.api.response.types.device.TokenDTO;
 import net.hamtag.server.datatypes.device.Device;
 import net.hamtag.server.datatypes.device.DeviceMgr;
+import net.hamtag.server.utils.GenerateTokenUtil;
 
 public class LoginDeviceRequest {
 	private enum Error{
@@ -19,8 +21,13 @@ public class LoginDeviceRequest {
 		if(device==null){
 			 return new Response(Error.DEVICE_NOT_IN_DB);
 		}
-		if(password.equals(device.getPassword()))
-			return new Response();
+		if(password.equals(device.getPassword())){
+			device.setToken(GenerateTokenUtil.generateNewToken());
+			DeviceMgr.update(device);
+			TokenDTO dto=new TokenDTO();
+			dto.setToken(device.getToken());
+			return new Response(dto);
+		}
 		return new Response(Error.WRONG_PASSWORD);
 	}
 }

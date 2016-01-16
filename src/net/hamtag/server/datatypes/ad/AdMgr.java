@@ -2,11 +2,13 @@ package net.hamtag.server.datatypes.ad;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
 import net.hamtag.server.core.RootMgr;
+import net.hamtag.server.datatypes.category.Category;
 import net.hamtag.server.datatypes.corporation.Corporation;
 
 public class AdMgr extends RootMgr {
@@ -17,7 +19,7 @@ public class AdMgr extends RootMgr {
 		return (List<Ad>)criteria.list();
 	}
 	@SuppressWarnings("unchecked")
-	public static List<Ad>getAdsByCategory(List<String> categories,String lastUpdateTime,String maxNumber){
+	public static List<Ad>getAdsByCategory(Set<Category> categories,String lastUpdateTime,String maxNumber){
 		Criteria criteria=getInstance().createCriteria(Ad.class);
 		if(lastUpdateTime!=null&&!(lastUpdateTime.trim().isEmpty()))
 			criteria.add(Restrictions.ge("publishTime", new Date(Long.parseLong(lastUpdateTime))));
@@ -27,8 +29,7 @@ public class AdMgr extends RootMgr {
 		else
 			criteria.setMaxResults(Integer.parseInt(maxNumber));
 		if(categories!=null&&!categories.isEmpty()){
-			criteria.createAlias("categories", "categoriesAlias");
-			criteria.add(Restrictions.in("categoriesAlias.name", categories));
+			criteria.add(Restrictions.in("categories", categories));
 		}
 		//TODO: DB restriction/ random is just for PostgreSQL
 		criteria.add(Restrictions.sqlRestriction("1=1 order by random()"));

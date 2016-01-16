@@ -25,7 +25,7 @@ public class TempDevice {
 	@Column(name="VALID_UNTILL")
 	private Date validUntill;
 	
-	@Column(name = "PASSWORD", nullable = false)
+	@Column(name = "PASSWORD")
 	private String password;
 	
 	@Column(name = "TOKEN", nullable = false)

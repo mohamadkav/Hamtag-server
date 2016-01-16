@@ -12,7 +12,7 @@ import net.hamtag.server.datatypes.device.TempDeviceMgr;
 import net.hamtag.server.utils.SmsConfirmationUtil;
 
 public class NewDeviceRequest {
-	enum Error{
+	private enum Error{
 		NUMBER_ALREADY_HAS_VALID_TOKEN,
 		NUMBER_NULL_OR_INVALID,
 		NUMBER_ALREADY_ENROLLED,
@@ -62,6 +62,7 @@ public class NewDeviceRequest {
 		tempDevice.setPassword(password);
 		date=new Date().getTime();
 		//3 Minutes Validation
+		//TODO: CONFIG
 		date+=180000;
 		tempDevice.setValidUntill(new Date(date));
 		TempDeviceMgr.add(tempDevice);
