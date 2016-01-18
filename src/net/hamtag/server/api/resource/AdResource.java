@@ -1,8 +1,8 @@
 package net.hamtag.server.api.resource;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -27,16 +27,19 @@ public class AdResource {
 	@POST
 	@Path("/get")
 	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getAdsByCategory(@QueryParam("max-results") String maxResults,@QueryParam("token") String token,
 			@QueryParam("phone-number") String phoneNumber,
 			@QueryParam("last-update-time") String lastUpdateTime){
 		return new GetAdsByCategoryForDeviceRequest(maxResults, lastUpdateTime,token,phoneNumber).getHandler().handle();
 	}
-	
+	//EG: http://localhost:8080/Hamtag/resource/ads/content/?id=2&token=RifJzGdMoRXKhD3HRbNzH24uUOym9B&phone=09128145827
 	@POST
-	@Path("/content/{id}")
+	@Path("/content")
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
-	public Response getAdContents(@PathParam("id") String id){
-		return new GetAdContentRequest(id).handle();
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getAdContents(@QueryParam("id") String id,@QueryParam("token") String token,
+			@QueryParam("phone") String phoneNumber){
+		return new GetAdContentRequest(id,token,phoneNumber).handle();
 	}
 }

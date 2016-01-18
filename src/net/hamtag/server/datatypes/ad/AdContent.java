@@ -1,7 +1,5 @@
 package net.hamtag.server.datatypes.ad;
 
-import java.io.File;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +27,7 @@ public class AdContent {
 	private Ad ad;
 	
 	@Column(name = "CONTENT")
-	private File content;
+	private byte[] content;
 	
 	@Column(name = "CONTENT_TYPE")
 	private String type;
@@ -50,11 +48,11 @@ public class AdContent {
 		this.ad = ad;
 	}
 
-	public File getContent() {
+	public byte[] getContent() {
 		return content;
 	}
 
-	public void setContent(File content) {
+	public void setContent(byte[] content) {
 		this.content = content;
 	}
 
