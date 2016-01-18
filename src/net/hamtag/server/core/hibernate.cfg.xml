@@ -39,6 +39,7 @@
 	<mapping class="net.hamtag.server.datatypes.device.TempDevice"/>
 	<mapping class="net.hamtag.server.datatypes.marketcontent.MarketContent"/>
 	<mapping class="net.hamtag.server.datatypes.news.News"/>
+	<mapping class="net.hamtag.server.datatypes.news.NewsContent"/>
 	<mapping class="net.hamtag.server.datatypes.news.NewsShown"/>
 	<mapping class="net.hamtag.server.datatypes.purchase.Purchase"/>
 	<mapping class="net.hamtag.server.datatypes.category.Category"/>

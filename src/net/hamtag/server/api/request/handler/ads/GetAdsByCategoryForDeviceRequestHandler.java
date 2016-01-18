@@ -35,7 +35,7 @@ public class GetAdsByCategoryForDeviceRequestHandler extends BaseRequestHandler{
 			AdDTO dto=new AdDTO();
 			dto.setAddress(ad.getAddress());
 			dto.setComments(ad.getComments());
-			dto.setContentIds(AdContentMgr.getContentIdsByAd(ad));
+			dto.setContentInfos(AdContentMgr.getContentInfoByAd(ad));
 			dto.setCorporation(ad.getCorporation().getName());
 			dto.setId(ad.getId());
 			dto.setLink(ad.getLink());

@@ -1,6 +1,6 @@
 package net.hamtag.server.datatypes.news;
 
-import java.io.File;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,17 +29,21 @@ public class News {
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 
-	@Column(name = "CONTENT_TYPE")
-	private String contentType;
-
 	@Column(name = "NEWSTEXT")
 	private String text;
 
-	@Column(name = "CONTENT")
-	private File content;
+	@Column(name = "TITLE")
+	private String title;
+	
+	@Column(name="PUBLISH_TIME")
+	private Date publishTime;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "news")
 	private Set<NewsShown> newsShowns = new HashSet<NewsShown>(0);
+	
+	@OneToMany
+	(fetch = FetchType.LAZY, mappedBy = "news")
+	private Set<NewsContent> newsContents = new HashSet<NewsContent>(0);
 
 	@JoinColumn
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -64,28 +68,36 @@ public class News {
 		this.text = text;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public Date getPublishTime() {
+		return publishTime;
+	}
+
+	public void setPublishTime(Date publishTime) {
+		this.publishTime = publishTime;
+	}
+
+	public Set<NewsContent> getNewsContents() {
+		return newsContents;
+	}
+
+	public void setNewsContents(Set<NewsContent> newsContents) {
+		this.newsContents = newsContents;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getContentType() {
-		return contentType;
-	}
-
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
-	}
-
-	public File getContent() {
-		return content;
-	}
-
-	public void setContent(File content) {
-		this.content = content;
 	}
 
 	public Set<NewsShown> getNewsShowns() {

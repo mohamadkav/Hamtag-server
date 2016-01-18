@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import net.hamtag.server.api.response.types.content.ContentDTO;
+
 public class AdDTO {
 	@JsonProperty
 	private Integer id;
@@ -30,14 +32,14 @@ public class AdDTO {
 	private String corporation;
 	
 	@JsonProperty
-	private List<Integer> contentIds;
-	
-	public List<Integer> getContentIds() {
-		return contentIds;
+	private List<ContentDTO> contentInfos;
+
+	public List<ContentDTO> getContentInfos() {
+		return contentInfos;
 	}
 
-	public void setContentIds(List<Integer> contentIds) {
-		this.contentIds = contentIds;
+	public void setContentInfos(List<ContentDTO> contentInfos) {
+		this.contentInfos = contentInfos;
 	}
 
 	public Integer getId() {
