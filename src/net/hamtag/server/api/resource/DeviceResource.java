@@ -6,6 +6,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import net.hamtag.server.api.request.types.device.ConfirmDeviceRequest;
 import net.hamtag.server.api.request.types.device.ConfirmForgotPasswordRequest;
@@ -28,30 +29,30 @@ public class DeviceResource {
 	@Path("/confirm/{number}/{token}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String confirmNumber(@PathParam("number")String number,@PathParam("token")String token){
-		return new ConfirmDeviceRequest(number, token).handle().toString();
+	public Response confirmNumber(@PathParam("number")String number,@PathParam("token")String token){
+		return new ConfirmDeviceRequest(number, token).handle();
 	}
 	
 	@POST
 	@Path("/forgot/{number}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String forgotPassword(@PathParam("number")String number){
-		return new ForgotPasswordRequest(number).handle().toString();
+	public Response forgotPassword(@PathParam("number")String number){
+		return new ForgotPasswordRequest(number).handle();
 	}
 	
 	@POST
 	@Path("/forgot/confirm/{number}/{token}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String confirmForgotPassword(@PathParam("number")String number,@PathParam("token")String token,@PathParam("password")String password){
-		return new ConfirmForgotPasswordRequest(number,token,password).handle().toString();
+	public Response confirmForgotPassword(@PathParam("number")String number,@PathParam("token")String token,@PathParam("password")String password){
+		return new ConfirmForgotPasswordRequest(number,token,password).handle();
 	}
 	
 	@POST
 	@Path("/login/{number}/{password}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String loginWithCredentials(@PathParam("number")String number,@PathParam("password")String password){
-		return new LoginDeviceRequest(number, password).handle().toString();
+	public Response loginWithCredentials(@PathParam("number")String number,@PathParam("password")String password){
+		return new LoginDeviceRequest(number, password).handle() ;
 	}
 }

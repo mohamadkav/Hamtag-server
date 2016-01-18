@@ -1,12 +1,14 @@
 package net.hamtag.server.api.response;
 
 
+import javax.ws.rs.core.Response.StatusType;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class Response {
+public class HamtagResponse {
 	
 	@JsonProperty("success")
     private boolean success = true;
@@ -17,13 +19,13 @@ public class Response {
     @JsonProperty("error")
     private Enum<?> error = null;
     
-    public Response() {}
+    public HamtagResponse() {}
 
-    public Response(Object originalResponse) {
+    public HamtagResponse(Object originalResponse) {
         setOriginalResponse(originalResponse);
     }
     
-    public Response(Enum<?> error) {
+    public HamtagResponse(Enum<?> error) {
         setSuccess(false);
         setError(error);
     }
@@ -54,6 +56,7 @@ public class Response {
     
     @JsonIgnore
     @Override
+    @Deprecated
     public String toString() {
     	ObjectMapper mapper = new ObjectMapper();
     	String json = null;
@@ -64,6 +67,12 @@ public class Response {
 		}
     	return json;
     	
+    }
+    public javax.ws.rs.core.Response getResponse(StatusType error){
+    	if(error==null)
+    		return javax.ws.rs.core.Response.ok(this.toString()).build();
+    	else
+    		return javax.ws.rs.core.Response.status(error).entity(this.toString()).build();
     }
 
 	public javax.ws.rs.core.Response crossOriginResponse() {

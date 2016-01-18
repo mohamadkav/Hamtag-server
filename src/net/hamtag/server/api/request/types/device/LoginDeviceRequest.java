@@ -1,6 +1,8 @@
 package net.hamtag.server.api.request.types.device;
 
-import net.hamtag.server.api.response.Response;
+import javax.ws.rs.core.Response;
+
+import net.hamtag.server.api.response.HamtagResponse;
 import net.hamtag.server.api.response.types.device.TokenDTO;
 import net.hamtag.server.datatypes.device.Device;
 import net.hamtag.server.datatypes.device.DeviceMgr;
@@ -19,15 +21,15 @@ public class LoginDeviceRequest {
 	public Response handle(){
 		Device device=DeviceMgr.getDeviceByPhoneNumber(number);
 		if(device==null){
-			 return new Response(Error.DEVICE_NOT_IN_DB);
+			 return new HamtagResponse(Error.DEVICE_NOT_IN_DB).getResponse(Response.Status.UNAUTHORIZED);
 		}
 		if(password.equals(device.getPassword())){
 			device.setToken(GenerateTokenUtil.generateNewToken());
 			DeviceMgr.update(device);
 			TokenDTO dto=new TokenDTO();
 			dto.setToken(device.getToken());
-			return new Response(dto);
+			return new HamtagResponse(dto).getResponse(null);
 		}
-		return new Response(Error.WRONG_PASSWORD);
+		return new HamtagResponse(Error.WRONG_PASSWORD).getResponse(Response.Status.UNAUTHORIZED);
 	}
 }

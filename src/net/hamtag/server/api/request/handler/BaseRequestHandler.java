@@ -1,7 +1,6 @@
 package net.hamtag.server.api.request.handler;
 
-import net.hamtag.server.api.response.Response;
-
+import javax.ws.rs.core.Response;
 
 public abstract class BaseRequestHandler {
 	public abstract Response handle();

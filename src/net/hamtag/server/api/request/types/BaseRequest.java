@@ -1,10 +1,11 @@
 package net.hamtag.server.api.request.types;
 
+import javax.ws.rs.core.Response;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.hamtag.server.api.request.handler.BaseRequestHandler;
-import net.hamtag.server.api.response.Response;
 
 public abstract class BaseRequest {
 	private static ObjectMapper mapper;

@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.ws.rs.core.Response;
+
 import net.hamtag.server.api.request.handler.BaseRequestHandler;
 import net.hamtag.server.api.request.types.ads.GetAdsByCategoryForDeviceRequest;
-import net.hamtag.server.api.response.Response;
+import net.hamtag.server.api.response.HamtagResponse;
 import net.hamtag.server.api.response.types.ads.AdDTO;
 import net.hamtag.server.datatypes.ad.Ad;
 import net.hamtag.server.datatypes.ad.AdContentMgr;
@@ -42,6 +44,6 @@ public class GetAdsByCategoryForDeviceRequestHandler extends BaseRequestHandler{
 			dto.setPrice(ad.getPrice());
 			dtos.add(dto);
 		}
-		return new Response(dtos);
+		return new HamtagResponse(dtos).getResponse(null);
 	}
 }

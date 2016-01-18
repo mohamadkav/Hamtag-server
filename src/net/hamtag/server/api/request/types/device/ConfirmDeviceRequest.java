@@ -2,7 +2,9 @@ package net.hamtag.server.api.request.types.device;
 
 import java.util.Date;
 
-import net.hamtag.server.api.response.Response;
+import javax.ws.rs.core.Response;
+
+import net.hamtag.server.api.response.HamtagResponse;
 import net.hamtag.server.api.response.types.device.TokenDTO;
 import net.hamtag.server.datatypes.device.Device;
 import net.hamtag.server.datatypes.device.DeviceMgr;
@@ -24,9 +26,9 @@ public class ConfirmDeviceRequest {
 	public Response handle(){
 		TempDevice tempDevice=TempDeviceMgr.getByNumber(number);
 		if(tempDevice==null)
-			return new Response(Error.NUMBER_NOT_IN_TEMP_DEVICES);
+			return new HamtagResponse(Error.NUMBER_NOT_IN_TEMP_DEVICES).getResponse(Response.Status.BAD_REQUEST);
 		if(DeviceMgr.getDeviceByPhoneNumber(number)!=null)
-			return new Response(Error.NUMBER_ALREADY_ENROLLED);
+			return new HamtagResponse(Error.NUMBER_ALREADY_ENROLLED).getResponse(Response.Status.BAD_REQUEST);
 		if(tempDevice.getToken().equals(token)&&tempDevice.getValidUntill().getTime()>=new Date().getTime()){
 			Device device = new Device();
 			device.setPhoneNumber(number);
@@ -35,8 +37,8 @@ public class ConfirmDeviceRequest {
 			DeviceMgr.add(device);
 			TokenDTO dto=new TokenDTO();
 			dto.setToken(device.getToken());
-			return new Response(dto);
+			return new HamtagResponse(dto).getResponse(null);
 		}
-		return new Response(Error.TOKEN_INVALID);
+		return new HamtagResponse(Error.TOKEN_INVALID).getResponse(Response.Status.UNAUTHORIZED);
 	}
 }

@@ -1,6 +1,5 @@
 package net.hamtag.server;
 
-import net.hamtag.server.api.request.types.ads.GetAdsByCategoryForDeviceRequest;
 import net.hamtag.server.datatypes.device.Device;
 import net.hamtag.server.datatypes.device.DeviceMgr;
 import net.hamtag.server.utils.GenerateTokenUtil;

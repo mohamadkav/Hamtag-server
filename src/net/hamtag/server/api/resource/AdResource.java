@@ -6,6 +6,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import net.hamtag.server.api.request.types.ads.GetAdContentRequest;
 import net.hamtag.server.api.request.types.ads.GetAdsByCategoryForDeviceRequest;
@@ -26,16 +27,16 @@ public class AdResource {
 	@POST
 	@Path("/get")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getAdsByCategory(@QueryParam("max-results") String maxResults,@QueryParam("token") String token,
+	public Response getAdsByCategory(@QueryParam("max-results") String maxResults,@QueryParam("token") String token,
 			@QueryParam("phone-number") String phoneNumber,
 			@QueryParam("last-update-time") String lastUpdateTime){
-		return new GetAdsByCategoryForDeviceRequest(maxResults, lastUpdateTime,token,phoneNumber).getHandler().handle().toString();
+		return new GetAdsByCategoryForDeviceRequest(maxResults, lastUpdateTime,token,phoneNumber).getHandler().handle();
 	}
 	
 	@POST
 	@Path("/content/{id}")
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
-	public javax.ws.rs.core.Response getAdContents(@PathParam("id") String id){
+	public Response getAdContents(@PathParam("id") String id){
 		return new GetAdContentRequest(id).handle();
 	}
 }
