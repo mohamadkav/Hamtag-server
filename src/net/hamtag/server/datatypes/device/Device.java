@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import net.hamtag.server.datatypes.ad.AdShown;
 import net.hamtag.server.datatypes.category.Category;
 import net.hamtag.server.datatypes.purchase.Purchase;
+import net.hamtag.server.datatypes.withdrawal.MoneyWithdrawal;
 
 @Entity
 @Table(name = "DEVICES")
@@ -35,6 +36,9 @@ public class Device {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "device")
 	private Set<Purchase> purchases = new HashSet<Purchase>(0);
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "device")
+	private Set<MoneyWithdrawal> moneyWithdrawal = new HashSet<MoneyWithdrawal>(0);
 
 	@Column(name = "PHONE_NUMBER", unique = true, nullable = false)
 	private String phoneNumber;
@@ -70,6 +74,14 @@ public class Device {
 	public void setPassword(String password) {
 		this.password = password;
 	}	
+
+	public Set<MoneyWithdrawal> getMoneyWithdrawal() {
+		return moneyWithdrawal;
+	}
+
+	public void setMoneyWithdrawal(Set<MoneyWithdrawal> moneyWithdrawal) {
+		this.moneyWithdrawal = moneyWithdrawal;
+	}
 
 	public String getToken() {
 		return token;

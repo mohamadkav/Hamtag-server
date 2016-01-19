@@ -13,7 +13,7 @@ import net.hamtag.server.api.request.types.news.GetNewsContentRequest;
 
 @Path("/news/")
 public class NewsResource {
-	// http://localhost:8080/Hamtag/resource/news/get/?max-results=1&token=RifJzGdMoRXKhD3HRbNzH24uUOym9B&phone-number=09128145827&last-update-time=0
+	// http://localhost:8080/Hamtag/resource/news/get/?max-results=1&token=57lxF9vF14ImIQqRzagEujfCW3mFP6&phone-number=09128145827&last-update-time=0
 	@POST
 	@Path("/get")
 	@Produces(MediaType.APPLICATION_JSON)

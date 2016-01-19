@@ -2,11 +2,14 @@ package net.hamtag.server;
 
 import java.io.File;
 import java.io.FileInputStream;
-import net.hamtag.server.datatypes.news.News;
-import net.hamtag.server.datatypes.news.NewsContent;
-import net.hamtag.server.datatypes.news.NewsContentMgr;
-import net.hamtag.server.datatypes.news.NewsMgr;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import net.hamtag.server.datatypes.category.Category;
+import net.hamtag.server.datatypes.category.CategoryMgr;
+import net.hamtag.server.datatypes.news.News;
+import net.hamtag.server.datatypes.news.NewsMgr;
 public class Main {
 	public static void main(String[] args) {
 		// TODO: change location parameter for ad to float
@@ -41,7 +44,7 @@ public class Main {
 		n.setText("Khabar mirese");
 		n.setTitle("A GREAT NEWS!!");
 		NewsMgr.add(n);*/
-		NewsContent nc= new NewsContent();
+/*		NewsContent nc= new NewsContent();
 		nc.setNews(NewsMgr.getInstance().get(News.class, 1));
 		nc.setType("TUMBNAIL");
 		File file = new File("/home/mohammad/Desktop/1.jpg");
@@ -55,6 +58,6 @@ public class Main {
 			e.printStackTrace();
 		}
 		nc.setContent(bFile);
-		NewsContentMgr.add(nc);
+		NewsContentMgr.add(nc);*/
 	}
 }
