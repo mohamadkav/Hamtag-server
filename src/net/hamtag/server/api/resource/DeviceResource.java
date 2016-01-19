@@ -21,8 +21,8 @@ public class DeviceResource {
 	@Path("/new/{number}/{password}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String requestMessage(@PathParam("number")String number,@PathParam("password")String password){
-		return new NewDeviceRequest(number,password,true).handle().toString();
+	public Response requestMessage(@PathParam("number")String number,@PathParam("password")String password){
+		return new NewDeviceRequest(number,password,true).handle();
 	}
 	
 	@POST
