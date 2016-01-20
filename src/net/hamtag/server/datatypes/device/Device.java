@@ -17,8 +17,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import net.hamtag.server.datatypes.ad.Ad;
 import net.hamtag.server.datatypes.ad.AdShown;
 import net.hamtag.server.datatypes.category.Category;
+import net.hamtag.server.datatypes.news.News;
 import net.hamtag.server.datatypes.purchase.Purchase;
 import net.hamtag.server.datatypes.withdrawal.MoneyWithdrawal;
 
@@ -32,13 +34,13 @@ public class Device {
 	private Integer id;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "device")
-	private Set<AdShown> adShown = new HashSet<AdShown>(0);
+	private Set<AdShown> adShown;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "device")
-	private Set<Purchase> purchases = new HashSet<Purchase>(0);
+	private Set<Purchase> purchases;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "device")
-	private Set<MoneyWithdrawal> moneyWithdrawal = new HashSet<MoneyWithdrawal>(0);
+	private Set<MoneyWithdrawal> moneyWithdrawal;
 
 	@Column(name = "PHONE_NUMBER", unique = true, nullable = false)
 	private String phoneNumber;
@@ -58,6 +60,29 @@ public class Device {
 			@JoinColumn(name = "DEVICEID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "CATEGORYID", nullable = false, updatable = false) })
 	private Set<Category> categories;
+	
+	@JoinColumn
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "AD_LIKES", joinColumns = {
+			@JoinColumn(name = "DEVICEID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "ADID", nullable = false, updatable = false) })
+	private Set<Ad> likedAds;
+	
+	
+	@JoinColumn
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "NEWS_LIKES", joinColumns = {
+			@JoinColumn(name = "DEVICEID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "NEWSID", nullable = false, updatable = false) })
+	private Set<News> likedNews;
+	
+	public void addToLikes(News news){
+		if(likedNews==null){
+			likedNews=new HashSet<>();
+			likedNews.add(news);
+		}
+		likedNews.add(news);
+	}
 	
 	public Set<Category> getCategories() {
 		return categories;
@@ -131,4 +156,19 @@ public class Device {
 		this.charge = charge;
 	}
 
+	public Set<Ad> getLikedAds() {
+		return likedAds;
+	}
+
+	public void setLikedAds(Set<Ad> likedAds) {
+		this.likedAds = likedAds;
+	}
+
+	public Set<News> getLikedNews() {
+		return likedNews;
+	}
+
+	public void setLikedNews(Set<News> likedNews) {
+		this.likedNews = likedNews;
+	}
 }

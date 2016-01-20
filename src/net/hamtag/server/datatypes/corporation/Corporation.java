@@ -1,6 +1,5 @@
 package net.hamtag.server.datatypes.corporation;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -16,21 +15,19 @@ import javax.persistence.Table;
 import net.hamtag.server.datatypes.ad.Ad;
 
 @Entity
-@Table(name="CORPORATIONS")
+@Table(name = "CORPORATIONS")
 public class Corporation {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id",unique=true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
-	
-	@Column(name="name")
+
+	@Column(name = "name")
 	private String name;
-	
-	@OneToMany
-	(fetch = FetchType.LAZY, mappedBy = "corporation")
-	private Set<Ad> ads = new HashSet<Ad>(0);
-	
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "corporation")
+	private Set<Ad> ads;
 
 	public Integer getId() {
 		return id;
@@ -43,7 +40,7 @@ public class Corporation {
 	public Set<Ad> getAds() {
 		return this.ads;
 	}
-	
+
 	public void setAds(Set<Ad> ads) {
 		this.ads = ads;
 	}
@@ -55,5 +52,5 @@ public class Corporation {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 }

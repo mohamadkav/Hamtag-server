@@ -1,7 +1,6 @@
 package net.hamtag.server.datatypes.news;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -19,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import net.hamtag.server.datatypes.category.Category;
+import net.hamtag.server.datatypes.device.Device;
 
 @Entity
 @Table(name = "NEWS")
@@ -34,16 +34,15 @@ public class News {
 
 	@Column(name = "TITLE")
 	private String title;
-	
-	@Column(name="PUBLISH_TIME")
+
+	@Column(name = "PUBLISH_TIME")
 	private Date publishTime;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "news")
-	private Set<NewsShown> newsShowns = new HashSet<NewsShown>(0);
-	
-	@OneToMany
-	(fetch = FetchType.LAZY, mappedBy = "news")
-	private Set<NewsContent> newsContents = new HashSet<NewsContent>(0);
+	private Set<NewsShown> newsShowns;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "news")
+	private Set<NewsContent> newsContents;
 
 	@JoinColumn
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -51,6 +50,13 @@ public class News {
 			@JoinColumn(name = "NEWSID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "CATEGORYID", nullable = false, updatable = false) })
 	private Set<Category> categories;
+
+	@JoinColumn
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "NEWS_LIKES", joinColumns = {
+			@JoinColumn(name = "NEWSID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "DEVICEID", nullable = false, updatable = false) })
+	private Set<Device> likedByDevices;
 
 	public Set<Category> getCategories() {
 		return categories;
@@ -106,6 +112,14 @@ public class News {
 
 	public void setNewsShowns(Set<NewsShown> newsShowns) {
 		this.newsShowns = newsShowns;
+	}
+
+	public Set<Device> getLikedByDevices() {
+		return likedByDevices;
+	}
+
+	public void setLikedByDevices(Set<Device> likedByDevices) {
+		this.likedByDevices = likedByDevices;
 	}
 
 }

@@ -1,6 +1,5 @@
 package net.hamtag.server.datatypes.corporation;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -16,21 +15,19 @@ import javax.persistence.Table;
 import net.hamtag.server.datatypes.marketcontent.MarketContent;
 
 @Entity
-@Table(name="DEALER_CORPORATIONS")
+@Table(name = "DEALER_CORPORATIONS")
 public class DealerCorporation {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id",unique=true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
-	
-	@Column(name="name")
+
+	@Column(name = "name")
 	private String name;
-	
-	@OneToMany
-	(fetch = FetchType.LAZY, mappedBy = "dealerCorporation")
-	private Set<MarketContent> contents = new HashSet<MarketContent>(0);
-	
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "dealerCorporation")
+	private Set<MarketContent> contents;
 
 	public Integer getId() {
 		return id;

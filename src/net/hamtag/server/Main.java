@@ -8,6 +8,8 @@ import java.util.Set;
 
 import net.hamtag.server.datatypes.category.Category;
 import net.hamtag.server.datatypes.category.CategoryMgr;
+import net.hamtag.server.datatypes.device.Device;
+import net.hamtag.server.datatypes.device.DeviceMgr;
 import net.hamtag.server.datatypes.news.News;
 import net.hamtag.server.datatypes.news.NewsMgr;
 public class Main {
@@ -16,7 +18,17 @@ public class Main {
 		// System.err.println(new GetAdsByCategoryForDeviceRequest("2",
 		// "SPORTS","0").getHandler().handle().toString());
 		// System.err.println(GenerateTokenUtil.generateNewToken());
-		// Device d=DeviceMgr.getDeviceByPhoneNumber("0912");
+/*		 Device d=DeviceMgr.getDeviceByPhoneNumber("0912");
+		 Set<News>n=new HashSet<>();
+		 n.add(NewsMgr.getInstance().get(News.class, 2));
+		 n.add(NewsMgr.getInstance().get(News.class, 3));
+		 d.setLikedNews(n);
+		 DeviceMgr.update(d);*/
+//		 d.addToLikes(NewsMgr.getInstance().get(News.class, 2));
+//		 DeviceMgr.update(d);
+//		 for(News n:d.getLikedNews()){
+//			 System.err.println(n.getText());
+//		 }
 		// d.setPhoneNumber("0913!!!");
 		// DeviceMgr.update(d);
 /*		Ad a = AdMgr.getInstance().get(Ad.class, 1);
@@ -41,7 +53,7 @@ public class Main {
 		cat.add(CategoryMgr.getCategoryByName("SPORTS"));
 		n.setCategories(cat);
 		n.setPublishTime(new Date());
-		n.setText("Khabar mirese");
+		n.setText("Khabar Nemirese");
 		n.setTitle("A GREAT NEWS!!");
 		NewsMgr.add(n);*/
 /*		NewsContent nc= new NewsContent();

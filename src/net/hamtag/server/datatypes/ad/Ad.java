@@ -1,7 +1,6 @@
 package net.hamtag.server.datatypes.ad;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -22,57 +21,62 @@ import javax.persistence.Table;
 
 import net.hamtag.server.datatypes.category.Category;
 import net.hamtag.server.datatypes.corporation.Corporation;
+import net.hamtag.server.datatypes.device.Device;
 
 @Entity
-@Table(name="ADS", indexes = {
-        @Index(columnList = "CORPORATIONID", name = "corporation_index")})
+@Table(name = "ADS", indexes = { @Index(columnList = "CORPORATIONID", name = "corporation_index") })
 public class Ad {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id",unique=true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
-	
+
 	@Column(name = "price")
 	private String price;
-	
-	@Column(name="link")
+
+	@Column(name = "link")
 	private String link;
-	
-	@Column(name="phone")
+
+	@Column(name = "phone")
 	private String phone;
-	
-	@Column(name="location")
+
+	@Column(name = "location")
 	private String location;
-	
-	@Column(name="address")
+
+	@Column(name = "address")
 	private String address;
-	
-	@Column(name="comments")
+
+	@Column(name = "comments")
 	private String comments;
-	
-	@Column(name="publish_time")
+
+	@Column(name = "publish_time")
 	private Date publishTime;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CORPORATIONID", nullable = false)
 	private Corporation corporation;
-	
-	@OneToMany
-	(fetch = FetchType.LAZY, mappedBy = "ad")
-	private Set<AdShown> adShown = new HashSet<AdShown>(0);
-	
-	@OneToMany
-	(fetch = FetchType.LAZY, mappedBy = "ad")
-	private Set<AdContent> adContents = new HashSet<AdContent>(0);
-	
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ad")
+	private Set<AdShown> adShown;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ad")
+	private Set<AdContent> adContents;
+
 	@JoinColumn
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "AD_CATEGORY", joinColumns = {
 			@JoinColumn(name = "ADID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "CATEGORYID", nullable = false, updatable = false) })
 	private Set<Category> categories;
-	
+
+	@JoinColumn
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "AD_LIKES", joinColumns = {
+			@JoinColumn(name = "ADID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "DEVICEID", nullable = false, updatable = false) })
+	private Set<Device> likedByDevices;
+
 	public Date getPublishTime() {
 		return publishTime;
 	}
@@ -84,7 +88,7 @@ public class Ad {
 	public Set<Category> getCategories() {
 		return categories;
 	}
-	
+
 	public String getAddress() {
 		return address;
 	}
@@ -108,44 +112,55 @@ public class Ad {
 	public Set<AdShown> getAdShown() {
 		return adShown;
 	}
-	
+
 	public Corporation getCorporation() {
 		return this.corporation;
 	}
-	public void setCorporation(Corporation corporation){
-		this.corporation=corporation;
+
+	public void setCorporation(Corporation corporation) {
+		this.corporation = corporation;
 	}
-	
+
 	public Set<AdContent> getAdContents() {
 		return adContents;
 	}
+
 	public void setAdContents(Set<AdContent> adContents) {
 		this.adContents = adContents;
 	}
+
 	public String getPrice() {
 		return price;
 	}
+
 	public void setPrice(String price) {
 		this.price = price;
 	}
+
 	public String getLink() {
 		return link;
 	}
+
 	public void setLink(String link) {
 		this.link = link;
 	}
+
 	public String getPhone() {
 		return phone;
 	}
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 	public String getLocation() {
 		return location;
 	}
+
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -153,4 +168,17 @@ public class Ad {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+	public Set<Device> getLikedByDevices() {
+		return likedByDevices;
+	}
+
+	public void setLikedByDevices(Set<Device> likedByDevices) {
+		this.likedByDevices = likedByDevices;
+	}
+
+	public void setAdShown(Set<AdShown> adShown) {
+		this.adShown = adShown;
+	}
+
 }

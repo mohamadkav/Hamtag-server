@@ -1,6 +1,5 @@
 package net.hamtag.server.datatypes.category;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -26,21 +25,18 @@ public class Category {
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 
-	@Column(name = "name",unique=true)
+	@Column(name = "name", unique = true)
 	private String name;
-	
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
-	private Set<News> news = new HashSet<News>(0);
-	
+	private Set<News> news;
+
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
-	private Set<Device> devices = new HashSet<Device>(0);
-	
+	private Set<Device> devices;
+
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
-	private Set<Ad> ads = new HashSet<Ad>(0);
-	
-	
-	
+	private Set<Ad> ads;
+
 	public void setAds(Set<Ad> ads) {
 		this.ads = ads;
 	}

@@ -1,7 +1,6 @@
 package net.hamtag.server.datatypes.marketcontent;
 
 import java.io.File;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -38,7 +37,7 @@ public class MarketContent {
 	private DealerCorporation dealerCorporation;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "marketContent")
-	private Set<Purchase> purchases = new HashSet<Purchase>(0);
+	private Set<Purchase> purchases;
 
 	// TODO: CHECK FOR CORRECTNESS
 	@Column(name = "CONTENT")
