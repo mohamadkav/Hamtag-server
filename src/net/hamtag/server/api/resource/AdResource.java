@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 
 import net.hamtag.server.api.request.types.ads.GetAdContentRequest;
 import net.hamtag.server.api.request.types.ads.GetAdsByCategoryForDeviceRequest;
+import net.hamtag.server.api.request.types.ads.AdLikeRequest;
 
 @Path("/ads/")
 public class AdResource {
@@ -22,7 +23,7 @@ public class AdResource {
 	 * 		AUTH_FAILED,
 		TOKEN_NULL_OR_EMPTY,
 		PHONE_NUMBER_NULL_OR_EMPTY,
-		PHONE_NUMBER_INVALID
+		PHONE_NUMBER_INVALID@QueryParam("phone-number") String phoneNumber
 	*/
 	@POST
 	@Path("/get")
@@ -33,6 +34,15 @@ public class AdResource {
 			@QueryParam("last-update-time") String lastUpdateTime){
 		return new GetAdsByCategoryForDeviceRequest(maxResults, lastUpdateTime,token,phoneNumber).getHandler().handle();
 	}
+	
+	@POST
+	@Path("/like")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response like(@QueryParam("ad-id") String adId,@QueryParam("token") String token,@QueryParam("phone-number") String phoneNumber){
+		return new AdLikeRequest(adId, token, phoneNumber).handle();
+	}
+	
 	//EG: http://localhost:8080/Hamtag/resource/ads/content/?id=2&token=RifJzGdMoRXKhD3HRbNzH24uUOym9B&phone=09128145827
 	@POST
 	@Path("/content")

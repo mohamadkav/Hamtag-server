@@ -1,6 +1,7 @@
 package net.hamtag.server.datatypes.news;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -57,6 +58,18 @@ public class News {
 			@JoinColumn(name = "NEWSID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "DEVICEID", nullable = false, updatable = false) })
 	private Set<Device> likedByDevices;
+	
+	public boolean addToLikes(Device device){
+		if(likedByDevices==null){
+			likedByDevices=new HashSet<>();
+			likedByDevices.add(device);
+			return true;
+		}
+		if(likedByDevices.contains(device))
+			return false;
+		likedByDevices.add(device);
+		return true;
+	}
 
 	public Set<Category> getCategories() {
 		return categories;

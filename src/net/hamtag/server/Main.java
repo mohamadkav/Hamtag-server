@@ -62,7 +62,7 @@ public class Main {
 		NewsMgr.add(n);
 /*		NewsContent nc= new NewsContent();
 		nc.setNews(NewsMgr.getInstance().get(News.class, 1));
-		nc.setType("TUMBNAIL");
+		nc.setType("TUMBNAIL");id
 		File file = new File("/home/mohammad/Desktop/1.jpg");
 		byte[] bFile = new byte[(int) file.length()];
 		try {
