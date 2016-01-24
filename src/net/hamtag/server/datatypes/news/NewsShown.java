@@ -25,7 +25,7 @@ public class NewsShown {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id",unique=true, nullable = false)
-	private Integer id;
+	private Long id;
 	
 	@Column(name = "SHOWN_TIME")
 	private Integer shownTime;
@@ -41,11 +41,11 @@ public class NewsShown {
 	@JoinColumn(name = "NEWSID", nullable = false)
 	private News news;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

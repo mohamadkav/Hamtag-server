@@ -30,7 +30,7 @@ public class Ad {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "id", unique = true, nullable = false)
-	private Integer id;
+	private Long id;
 
 	@Column(name = "price")
 	private String price;
@@ -161,11 +161,11 @@ public class Ad {
 		this.location = location;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

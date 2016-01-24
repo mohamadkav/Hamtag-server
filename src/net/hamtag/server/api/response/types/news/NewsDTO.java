@@ -8,7 +8,7 @@ import net.hamtag.server.api.response.types.content.ContentDTO;
 
 public class NewsDTO {
 	@JsonProperty
-	private Integer id;
+	private Long id;
 	
 	@JsonProperty
 	private String text;
@@ -22,11 +22,11 @@ public class NewsDTO {
 	@JsonProperty
 	private List<ContentDTO> contentInfos;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

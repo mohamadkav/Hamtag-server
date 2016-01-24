@@ -25,7 +25,7 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id",unique=true, nullable = false)
-	private Integer id;
+	private Long id;
 	@Column(name="PURCHASE_DATE")
 	private Date purchaseDate;
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -34,10 +34,10 @@ public class Purchase {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CONTENTID", nullable = false)
 	private MarketContent marketContent;
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public Date getPurchaseDate() {

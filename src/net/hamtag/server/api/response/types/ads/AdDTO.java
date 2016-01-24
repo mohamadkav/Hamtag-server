@@ -8,7 +8,7 @@ import net.hamtag.server.api.response.types.content.ContentDTO;
 
 public class AdDTO {
 	@JsonProperty
-	private Integer id;
+	private Long id;
 	
 	@JsonProperty
 	private String price;
@@ -42,11 +42,11 @@ public class AdDTO {
 		this.contentInfos = contentInfos;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -29,13 +29,13 @@ public class RootMgr {
 		return session;
 	}
 
-	public static Integer add(Object object) {
+	public static Long add(Object object) {
 		Session session = getInstance();
 		Transaction tx = null;
-		Integer addedId = null;
+		Long addedId = null;
 		try {
 			tx = session.beginTransaction();
-			addedId = (Integer) session.save(object);
+			addedId = (Long) session.save(object);
 			tx.commit();
 		} catch (HibernateException e) {
 			if (tx != null)
@@ -63,7 +63,7 @@ public class RootMgr {
 		}
 	}
 	@Deprecated
-	public static void delete(Integer id, Class<Object> classType) {
+	public static void delete(Long id, Class<Object> classType) {
 		Session session = getInstance();
 		Transaction tx = null;
 		try {

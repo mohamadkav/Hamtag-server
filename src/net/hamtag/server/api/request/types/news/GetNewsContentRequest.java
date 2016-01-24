@@ -31,7 +31,7 @@ public class GetNewsContentRequest extends BaseDeviceRequest{
 			return response;
 		if(id==null||id.trim().isEmpty())
 			return new HamtagResponse(Error.ID_NOT_PROVIDED).getResponse(Response.Status.BAD_REQUEST);
-		NewsContent nc=NewsContentMgr.getInstance().get(NewsContent.class, Integer.parseInt(id));
+		NewsContent nc=NewsContentMgr.getInstance().get(NewsContent.class, Long.parseLong(id));
 		if(nc==null)
 			return new HamtagResponse(Error.CONTENT_NOT_IN_DB).getResponse(Response.Status.BAD_REQUEST);
 		byte[] file = nc.getContent();

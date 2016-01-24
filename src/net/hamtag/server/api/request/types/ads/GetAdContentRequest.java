@@ -31,7 +31,7 @@ public class GetAdContentRequest extends BaseDeviceRequest{
 			return response;
 		if(id==null||id.trim().isEmpty())
 			return new HamtagResponse(Error.ID_NOT_PROVIDED).getResponse(Response.Status.BAD_REQUEST);
-		AdContent ac=AdContentMgr.getInstance().get(AdContent.class, Integer.parseInt(id));
+		AdContent ac=AdContentMgr.getInstance().get(AdContent.class, Long.parseLong(id));
 		if(ac==null)
 			return new HamtagResponse(Error.CONTENT_NOT_IN_DB).getResponse(Response.Status.BAD_REQUEST);
 		byte[] file = ac.getContent();
