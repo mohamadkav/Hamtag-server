@@ -12,6 +12,8 @@ import net.hamtag.server.datatypes.ad.AdContentMgr;
 import net.hamtag.server.datatypes.ad.AdMgr;
 import net.hamtag.server.datatypes.category.Category;
 import net.hamtag.server.datatypes.category.CategoryMgr;
+import net.hamtag.server.datatypes.corporation.Corporation;
+import net.hamtag.server.datatypes.corporation.CorporationMgr;
 import net.hamtag.server.datatypes.device.Device;
 import net.hamtag.server.datatypes.device.DeviceMgr;
 import net.hamtag.server.datatypes.news.News;
@@ -52,14 +54,23 @@ public class Main {
 
 		ac.setContent(bFile);
 		AdContentMgr.add(ac);*/
-		News n=new News();
+/*		Ad a=new Ad();
+		Set<Category>cat=new HashSet<>();
+		cat.add(CategoryMgr.getCategoryByName("SPORTS"));
+		a.setCategories(cat);
+		a.setCorporation(CorporationMgr.getInstance().get(Corporation.class,1L));
+		a.setPrice(200);
+		a.setPublishTime(new Date());
+		AdMgr.add(a);*/
+		System.out.println(new Date().getTime());
+/*		News n=new News();
 		Set<Category>cat=new HashSet<>();
 		cat.add(CategoryMgr.getCategoryByName("SPORTS"));
 		n.setCategories(cat);
 		n.setPublishTime(new Date());
 		n.setText("Khabar Nemirese");
 		n.setTitle("A GREAT NEWS!!");
-		NewsMgr.add(n);
+		NewsMgr.add(n);*/
 /*		NewsContent nc= new NewsContent();
 		nc.setNews(NewsMgr.getInstance().get(News.class, 1));
 		nc.setType("TUMBNAIL");id

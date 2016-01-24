@@ -41,7 +41,7 @@ public class GetAdsByCategoryForDeviceRequestHandler extends BaseRequestHandler{
 			dto.setLink(ad.getLink());
 			dto.setLocation(ad.getLocation());
 			dto.setPhone(ad.getPhone());
-			dto.setPrice(ad.getPrice());
+			dto.setPrice(ad.getPrice()+"");
 			dtos.add(dto);
 		}
 		return new HamtagResponse(dtos).getResponse(null);

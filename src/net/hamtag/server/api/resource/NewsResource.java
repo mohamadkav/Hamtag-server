@@ -11,6 +11,7 @@ import javax.ws.rs.core.Response;
 import net.hamtag.server.api.request.types.news.GetNewsByCategoryForDeviceRequest;
 import net.hamtag.server.api.request.types.news.GetNewsContentRequest;
 import net.hamtag.server.api.request.types.news.NewsLikeRequest;
+import net.hamtag.server.api.request.types.news.NewsShownRequest;
 
 @Path("/news/")
 public class NewsResource {
@@ -31,6 +32,16 @@ public class NewsResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response like(@QueryParam("news-id") String adId,@QueryParam("token") String token,@QueryParam("phone-number") String phoneNumber){
 		return new NewsLikeRequest(adId, token, phoneNumber).handle();
+	}
+	
+	//Example: http://localhost:8080/Hamtag/resource/news/shown/?news-id=2&phone-number=0912&token=123&shown-date=1453632425648&shown-seconds=15
+	@POST
+	@Path("/shown")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addToShown(@QueryParam("news-id") String newsId,@QueryParam("phone-number") String phoneNumber,@QueryParam("token") String token,@QueryParam("shown-date") String shownDate
+			,@QueryParam("shown-seconds") String shownSeconds){
+		return new NewsShownRequest(newsId, token, phoneNumber,shownDate,shownSeconds).handle();
 	}
 	
 	//EG: http://localhost:8080/Hamtag/resource/news/content/?id=2&token=RifJzGdMoRXKhD3HRbNzH24uUOym9B&phone=09128145827
