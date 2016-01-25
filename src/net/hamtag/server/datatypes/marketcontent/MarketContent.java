@@ -1,6 +1,5 @@
 package net.hamtag.server.datatypes.marketcontent;
 
-import java.io.File;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -39,9 +38,8 @@ public class MarketContent {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "marketContent")
 	private Set<Purchase> purchases;
 
-	// TODO: CHECK FOR CORRECTNESS
 	@Column(name = "CONTENT")
-	private File content;
+	private byte[] content;
 
 	public Set<Purchase> getPurchases() {
 		return purchases;
@@ -51,11 +49,11 @@ public class MarketContent {
 		this.purchases = purchases;
 	}
 
-	public File getContent() {
+	public byte[] getContent() {
 		return content;
 	}
 
-	public void setContent(File content) {
+	public void setContent(byte[] content) {
 		this.content = content;
 	}
 

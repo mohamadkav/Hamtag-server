@@ -55,4 +55,13 @@ public class DeviceResource {
 	public Response loginWithCredentials(@PathParam("number")String number,@PathParam("password")String password){
 		return new LoginDeviceRequest(number, password).handle() ;
 	}
+	
+/*	//Example: http://localhost:8080/Hamtag/resource/devices/categories/update/?categories=SPORTS,FILM&phone=0912&token=123
+	@POST
+	@Path("/categories/update")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response updateCategories(@QueryParam("categories")String categories,@QueryParam("phone")String phoneNumber,@QueryParam("token")String token){
+		return new UpdateDeviceCategoriesRequest(categories, phoneNumber, token).handle() ;
+	}*/
 }

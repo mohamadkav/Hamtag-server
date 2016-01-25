@@ -19,7 +19,6 @@ import javax.persistence.Table;
 
 import net.hamtag.server.datatypes.ad.Ad;
 import net.hamtag.server.datatypes.ad.AdShown;
-import net.hamtag.server.datatypes.category.Category;
 import net.hamtag.server.datatypes.news.News;
 import net.hamtag.server.datatypes.purchase.Purchase;
 import net.hamtag.server.datatypes.withdrawal.MoneyWithdrawal;
@@ -56,13 +55,6 @@ public class Device {
 	
 	@JoinColumn
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "DEVICE_CATEGORY", joinColumns = {
-			@JoinColumn(name = "DEVICEID", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "CATEGORYID", nullable = false, updatable = false) })
-	private Set<Category> categories;
-	
-	@JoinColumn
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "AD_LIKES", joinColumns = {
 			@JoinColumn(name = "DEVICEID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "ADID", nullable = false, updatable = false) })
@@ -84,14 +76,6 @@ public class Device {
 		likedNews.add(news);
 	}
 	
-	public Set<Category> getCategories() {
-		return categories;
-	}
-
-	public void setCategories(Set<Category> categories) {
-		this.categories = categories;
-	}
-
 	public String getPassword() {
 		return password;
 	}

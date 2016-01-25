@@ -4,8 +4,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.ws.rs.core.Response;
+
+import net.hamtag.server.api.request.types.ads.GetAdsByTimeRequest;
+import net.hamtag.server.api.request.types.news.GetNewsByCategoryForDeviceRequest;
+import net.hamtag.server.api.resource.NewsResource;
 import net.hamtag.server.datatypes.ad.Ad;
 import net.hamtag.server.datatypes.ad.AdContent;
 import net.hamtag.server.datatypes.ad.AdContentMgr;
@@ -20,6 +26,11 @@ import net.hamtag.server.datatypes.news.News;
 import net.hamtag.server.datatypes.news.NewsMgr;
 public class Main {
 	public static void main(String[] args) {
+/*		for(Category c:DeviceMgr.getDeviceByPhoneNumber("0912").getCategories())
+			System.err.println(c.getName());
+		System.err.println(DeviceMgr.getDeviceByPhoneNumber("0912").getCategories());*/
+		Response r=new GetAdsByTimeRequest("4", "0","123","0912").getHandler().handle();
+		System.err.println();
 		// TODO: change location parameter for ad to float
 		// System.err.println(new GetAdsByCategoryForDeviceRequest("2",
 		// "SPORTS","0").getHandler().handle().toString());
@@ -62,7 +73,7 @@ public class Main {
 		a.setPrice(200);
 		a.setPublishTime(new Date());
 		AdMgr.add(a);*/
-		System.out.println(new Date().getTime());
+//		System.out.println(new Date().getTime());
 /*		News n=new News();
 		Set<Category>cat=new HashSet<>();
 		cat.add(CategoryMgr.getCategoryByName("SPORTS"));

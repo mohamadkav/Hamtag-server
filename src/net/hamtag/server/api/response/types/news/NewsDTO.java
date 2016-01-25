@@ -21,6 +21,9 @@ public class NewsDTO {
 	
 	@JsonProperty
 	private List<ContentDTO> contentInfos;
+	
+	@JsonProperty
+	private List<String> categories;
 
 	public Long getId() {
 		return id;
@@ -56,6 +59,14 @@ public class NewsDTO {
 
 	public List<ContentDTO> getContentInfos() {
 		return contentInfos;
+	}
+	
+	public List<String> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<String> categories) {
+		this.categories = categories;
 	}
 
 	public void setContentInfos(List<ContentDTO> contentInfos) {

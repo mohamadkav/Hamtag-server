@@ -33,6 +33,9 @@ public class AdDTO {
 	
 	@JsonProperty
 	private List<ContentDTO> contentInfos;
+	
+	@JsonProperty
+	private List<String> categories;
 
 	public List<ContentDTO> getContentInfos() {
 		return contentInfos;
@@ -80,6 +83,14 @@ public class AdDTO {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	public List<String> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<String> categories) {
+		this.categories = categories;
 	}
 
 	public String getAddress() {
