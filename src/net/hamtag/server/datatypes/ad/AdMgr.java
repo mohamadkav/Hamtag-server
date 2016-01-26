@@ -7,6 +7,7 @@ import org.hibernate.criterion.Restrictions;
 
 import net.hamtag.server.core.RootMgr;
 import net.hamtag.server.datatypes.corporation.Corporation;
+import net.hamtag.server.utils.Config;
 
 public class AdMgr extends RootMgr {
 	@SuppressWarnings("unchecked")
@@ -21,12 +22,10 @@ public class AdMgr extends RootMgr {
 		if(lastUpdateTime!=null&&!(lastUpdateTime.trim().isEmpty()))
 			criteria.add(Restrictions.ge("publishTime", new Date(Long.parseLong(lastUpdateTime))));
 		if(maxNumber==null||maxNumber.trim().isEmpty())
-			//TODO: CONFIG
-			criteria.setMaxResults(200);
+			criteria.setMaxResults(Config.DEFAULT_MAX_RESULTS);
 		else
 			criteria.setMaxResults(Integer.parseInt(maxNumber));
-		//TODO: DB restriction/ random is just for PostgreSQL
-		criteria.add(Restrictions.sqlRestriction("1=1 order by random()"));
+		criteria.add(Restrictions.sqlRestriction(Config.DATABASE_RANDOM_QUERY));
 		return criteria.list();
 	}
 }

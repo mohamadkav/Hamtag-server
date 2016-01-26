@@ -11,6 +11,7 @@ import net.hamtag.server.api.response.HamtagResponse;
 import net.hamtag.server.datatypes.device.DeviceMgr;
 import net.hamtag.server.datatypes.device.TempDevice;
 import net.hamtag.server.datatypes.device.TempDeviceMgr;
+import net.hamtag.server.utils.Config;
 import net.hamtag.server.utils.SmsConfirmationUtil;
 
 public class NewDeviceRequest {
@@ -56,7 +57,6 @@ public class NewDeviceRequest {
 		if(reallySendMessage){
 			boolean success=SmsConfirmationUtil.sendMessage(number, token);
 			if(!success)
-				//TODO: inja ham 500 mikhore
 				return new HamtagResponse(Error.REQUEST_SENDING_ERROR).getResponse(Response.Status.SERVICE_UNAVAILABLE);
 		}
 		TempDevice tempDevice=new TempDevice();
@@ -64,9 +64,7 @@ public class NewDeviceRequest {
 		tempDevice.setToken(token);
 		tempDevice.setPassword(password);
 		date=new Date().getTime();
-		//3 Minutes Validation
-		//TODO: CONFIG
-		date+=180000;
+		date+=Config.MESSAGE_VALIDATION_TIME;
 		tempDevice.setValidUntill(new Date(date));
 		TempDeviceMgr.add(tempDevice);
 		return new HamtagResponse().getResponse(null);

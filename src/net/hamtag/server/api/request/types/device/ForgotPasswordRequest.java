@@ -12,6 +12,7 @@ import net.hamtag.server.datatypes.device.Device;
 import net.hamtag.server.datatypes.device.DeviceMgr;
 import net.hamtag.server.datatypes.device.TempDevice;
 import net.hamtag.server.datatypes.device.TempDeviceMgr;
+import net.hamtag.server.utils.Config;
 import net.hamtag.server.utils.SmsConfirmationUtil;
 
 public class ForgotPasswordRequest {
@@ -51,16 +52,13 @@ public class ForgotPasswordRequest {
 		String token = SmsConfirmationUtil.generateToken();
 		boolean success = SmsConfirmationUtil.sendMessage(number, token);
 		if (!success)
-			//TODO: inja 503 mikhore
 			return new HamtagResponse(Error.REQUEST_SENDING_ERROR).getResponse(Response.Status.SERVICE_UNAVAILABLE);
 
 		TempDevice tempDevice = new TempDevice();
 		tempDevice.setPhoneNumber(number);
 		tempDevice.setToken(token);
 		date = new Date().getTime();
-		// 3 Minutes Validation
-		// TODO: CONFIG
-		date += 180000;
+		date += Config.MESSAGE_VALIDATION_TIME;
 		tempDevice.setValidUntill(new Date(date));
 		TempDeviceMgr.add(tempDevice);
 		return new HamtagResponse().getResponse(null);
