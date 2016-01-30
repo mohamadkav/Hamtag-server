@@ -1,6 +1,7 @@
 package net.hamtag.server.api.resource;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -13,6 +14,7 @@ import net.hamtag.server.api.request.types.device.ConfirmForgotPasswordRequest;
 import net.hamtag.server.api.request.types.device.ForgotPasswordRequest;
 import net.hamtag.server.api.request.types.device.LoginDeviceRequest;
 import net.hamtag.server.api.request.types.device.NewDeviceRequest;
+import net.hamtag.server.api.request.types.device.NewVersionRequest;
 
 @Path("/devices/")
 public class DeviceResource {
@@ -54,6 +56,13 @@ public class DeviceResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response loginWithCredentials(@PathParam("number")String number,@PathParam("password")String password){
 		return new LoginDeviceRequest(number, password).handle() ;
+	}
+	// http://185.105.239.61:8080/Hamtag/resource/devices/newversion/
+	@GET
+	@Path("/newversion/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getNewVersionInfo(){
+		return new NewVersionRequest().handle() ;
 	}
 	
 /*	//Example: http://localhost:8080/Hamtag/resource/devices/categories/update/?categories=SPORTS,FILM&phone=0912&token=123
