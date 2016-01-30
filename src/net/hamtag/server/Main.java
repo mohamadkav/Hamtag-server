@@ -9,7 +9,6 @@ import java.util.Set;
 
 import javax.ws.rs.core.Response;
 
-import net.hamtag.server.api.request.types.ads.GetAdsByTimeRequest;
 import net.hamtag.server.api.request.types.news.GetNewsByCategoryForDeviceRequest;
 import net.hamtag.server.api.resource.NewsResource;
 import net.hamtag.server.datatypes.ad.Ad;
@@ -29,8 +28,6 @@ public class Main {
 /*		for(Category c:DeviceMgr.getDeviceByPhoneNumber("0912").getCategories())
 			System.err.println(c.getName());
 		System.err.println(DeviceMgr.getDeviceByPhoneNumber("0912").getCategories());*/
-		Response r=new GetAdsByTimeRequest("4", "0","123","0912").getHandler().handle();
-		System.err.println();
 		// TODO: change location parameter for ad to float
 		// System.err.println(new GetAdsByCategoryForDeviceRequest("2",
 		// "SPORTS","0").getHandler().handle().toString());

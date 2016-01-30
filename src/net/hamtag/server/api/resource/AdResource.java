@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import net.hamtag.server.api.request.types.ads.GetAdContentRequest;
-import net.hamtag.server.api.request.types.ads.GetAdsByTimeRequest;
+import net.hamtag.server.api.request.types.ads.GetAdsRequest;
 import net.hamtag.server.api.request.types.ads.AdLikeRequest;
 import net.hamtag.server.api.request.types.ads.AdShownRequest;
 
@@ -31,9 +31,8 @@ public class AdResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getAdsByCategory(@QueryParam("max-results") String maxResults,@QueryParam("token") String token,
-			@QueryParam("phone-number") String phoneNumber,
-			@QueryParam("last-update-time") String lastUpdateTime){
-		return new GetAdsByTimeRequest(maxResults, lastUpdateTime,token,phoneNumber).getHandler().handle();
+			@QueryParam("phone-number") String phoneNumber){
+		return new GetAdsRequest(maxResults,token,phoneNumber).getHandler().handle();
 	}
 	
 	@POST

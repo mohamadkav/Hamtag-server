@@ -38,17 +38,24 @@ public class NewsShownRequest extends BaseDeviceRequest{
 		Device device=DeviceMgr.getDeviceByPhoneNumber(getPhoneNumber());
 		if(news==null)
 			return new HamtagResponse(Error.NEWS_NOT_FOUND).getResponse(Response.Status.BAD_REQUEST);
-		NewsShown newsShown=new NewsShown();
+		NewsShown newsShown=NewsShownMgr.getNewsShownByDeviceAndAd(DeviceMgr.getDeviceByPhoneNumber(getPhoneNumber()), news);
+		try{
+			Integer.parseInt(shownSeconds);
+		}catch(NumberFormatException e){
+			return new HamtagResponse(Error.SHOWN_SECONDS_INVALID).getResponse(Response.Status.BAD_REQUEST);
+		}
+		if(newsShown!=null){
+			newsShown.setShownTime(Integer.parseInt(shownSeconds)+newsShown.getShownTime());
+			NewsShownMgr.update(newsShown);
+			return new HamtagResponse().getResponse(null);
+		}
+		newsShown=new NewsShown();
 		newsShown.setNews(news);
 		newsShown.setDevice(device);
 		if(!DateValidator.validateLongStringDate(shownDate))
 			return new HamtagResponse(Error.DATE_INVALID).getResponse(Response.Status.BAD_REQUEST);
 		newsShown.setShowDate(new Date(Long.parseLong(shownDate)));
-		try{
-			newsShown.setShownTime(Integer.parseInt(shownSeconds));
-		}catch(NumberFormatException e){
-			return new HamtagResponse(Error.SHOWN_SECONDS_INVALID).getResponse(Response.Status.BAD_REQUEST);
-		}
+		newsShown.setShownTime(Integer.parseInt(shownSeconds));
 		NewsShownMgr.add(newsShown);
 		return new HamtagResponse().getResponse(null);
 	}

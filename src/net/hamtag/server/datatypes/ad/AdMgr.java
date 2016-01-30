@@ -28,4 +28,10 @@ public class AdMgr extends RootMgr {
 		criteria.add(Restrictions.sqlRestriction(Config.DATABASE_RANDOM_QUERY));
 		return criteria.list();
 	}
+	@SuppressWarnings("unchecked")
+	public static List<Ad>list(){
+		Criteria criteria=getInstance().createCriteria(Ad.class);
+		criteria.add(Restrictions.sqlRestriction(Config.DATABASE_RANDOM_QUERY));
+		return criteria.list();
+	}
 }
