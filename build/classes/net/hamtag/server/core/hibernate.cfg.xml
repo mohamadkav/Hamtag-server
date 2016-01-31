@@ -44,6 +44,9 @@
 	<mapping class="net.hamtag.server.datatypes.purchase.Purchase"/>
 	<mapping class="net.hamtag.server.datatypes.category.Category"/>
 	<mapping class="net.hamtag.server.datatypes.withdrawal.MoneyWithdrawal"/>
+	<mapping class="net.hamtag.server.datatypes.user.User"/>
+	<mapping class="net.hamtag.server.datatypes.user.UserRole"/>
+	
 
 </session-factory>
 </hibernate-configuration>
