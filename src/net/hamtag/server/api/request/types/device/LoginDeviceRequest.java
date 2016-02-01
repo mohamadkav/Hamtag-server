@@ -24,8 +24,10 @@ public class LoginDeviceRequest {
 			 return new HamtagResponse(Error.DEVICE_NOT_IN_DB).getResponse(Response.Status.UNAUTHORIZED);
 		}
 		if(password.equals(device.getPassword())){
-			device.setToken(GenerateTokenUtil.generateNewToken());
-			DeviceMgr.update(device);
+			if(device.getToken()==null){
+				device.setToken(GenerateTokenUtil.generateNewToken());
+				DeviceMgr.update(device);
+			}
 			TokenDTO dto=new TokenDTO();
 			dto.setToken(device.getToken());
 			return new HamtagResponse(dto).getResponse(null);
