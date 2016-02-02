@@ -8,6 +8,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import net.hamtag.server.api.request.types.news.GetAllCategoriesRequest;
 import net.hamtag.server.api.request.types.news.GetNewsByCategoryForDeviceRequest;
 import net.hamtag.server.api.request.types.news.GetNewsContentRequest;
 import net.hamtag.server.api.request.types.news.NewsLikeRequest;
@@ -50,7 +51,15 @@ public class NewsResource {
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getNewsContents(@QueryParam("id") String id,@QueryParam("token") String token,
-			@QueryParam("phone") String phoneNumber){
+			@QueryParam("phone-number") String phoneNumber){
 		return new GetNewsContentRequest(id,token,phoneNumber).handle();
+	}
+	// http://localhost:8080/Hamtag/resource/news/categories/?token=123&phone-number=0912
+	@POST
+	@Path("/categories")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getAllCategories(@QueryParam("token") String token,@QueryParam("phone-number") String phoneNumber){
+		return new GetAllCategoriesRequest(phoneNumber, token).handle();
 	}
 }
