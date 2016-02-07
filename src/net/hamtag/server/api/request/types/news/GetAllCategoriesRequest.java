@@ -8,6 +8,7 @@ import javax.ws.rs.core.Response;
 import net.hamtag.server.api.request.handler.BaseRequestHandler;
 import net.hamtag.server.api.request.types.BaseDeviceRequest;
 import net.hamtag.server.api.response.HamtagResponse;
+import net.hamtag.server.api.response.types.category.CategoryDTO;
 import net.hamtag.server.datatypes.category.Category;
 import net.hamtag.server.datatypes.category.CategoryMgr;
 
@@ -25,10 +26,16 @@ public class GetAllCategoriesRequest extends BaseDeviceRequest{
 		Response response=auth();
 		if(response!=null)
 			return response;
-		List<String>names=new ArrayList<>();
-		for(Category category:CategoryMgr.list()){
-			names.add(category.getName());
+		List<CategoryDTO>dtos=new ArrayList<>();
+		List<Category>allCategories=CategoryMgr.list();
+		System.out.println(allCategories.size());
+		for(Category category:allCategories){
+			CategoryDTO dto=new CategoryDTO();
+			dto.setId(category.getId());
+			dto.setImage((Object)category.getImage());
+			dto.setName(category.getName());
+			dtos.add(dto);
 		}
-		return new HamtagResponse(names).getResponse(null);
+		return new HamtagResponse(dtos).getResponse(null);
 	}
 }
