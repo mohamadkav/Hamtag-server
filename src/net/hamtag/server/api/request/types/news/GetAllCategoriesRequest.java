@@ -28,7 +28,6 @@ public class GetAllCategoriesRequest extends BaseDeviceRequest{
 			return response;
 		List<CategoryDTO>dtos=new ArrayList<>();
 		List<Category>allCategories=CategoryMgr.list();
-		System.out.println(allCategories.size());
 		for(Category category:allCategories){
 			CategoryDTO dto=new CategoryDTO();
 			dto.setId(category.getId());
