@@ -34,6 +34,7 @@ public class ConfirmDeviceRequest {
 			device.setPhoneNumber(number);
 			device.setPassword(tempDevice.getPassword());
 			device.setToken(GenerateTokenUtil.generateNewToken());
+			device.setId(null);
 			DeviceMgr.add(device);
 			TokenDTO dto=new TokenDTO();
 			dto.setToken(device.getToken());
