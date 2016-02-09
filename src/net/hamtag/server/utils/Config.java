@@ -9,4 +9,8 @@ public class Config {
 	public static final double VERSION=1.0;
 	public static final String NEW_VERSION_TEXT="Test";
 	public static final String NEW_VERSION_LINK="http://www.hamtag.net/";
+	public static final String fromEmail="hamtag.bot@gmail.com";
+	public static final String fromPassword="@n0th3rHamtag";
+	public static final String emailSubject="کد فعالسازی";
+	
 }

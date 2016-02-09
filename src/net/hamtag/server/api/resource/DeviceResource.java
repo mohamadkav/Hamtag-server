@@ -14,6 +14,7 @@ import net.hamtag.server.api.request.types.device.ConfirmForgotPasswordRequest;
 import net.hamtag.server.api.request.types.device.ForgotPasswordRequest;
 import net.hamtag.server.api.request.types.device.LoginDeviceRequest;
 import net.hamtag.server.api.request.types.device.NewDeviceRequest;
+import net.hamtag.server.api.request.types.device.NewDeviceRequestWithEmail;
 import net.hamtag.server.api.request.types.device.NewVersionRequest;
 
 @Path("/devices/")
@@ -25,6 +26,14 @@ public class DeviceResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response requestMessage(@PathParam("number")String number,@PathParam("password")String password){
 		return new NewDeviceRequest(number,password,true).handle();
+	}
+	
+	@POST
+	@Path("/newemail/{email}/{password}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response requestEmail(@PathParam("email")String email,@PathParam("password")String password){
+		return new NewDeviceRequestWithEmail(email, password).handle();
 	}
 	
 	@POST
