@@ -15,11 +15,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import net.hamtag.server.datatypes.category.Category;
+import net.hamtag.server.datatypes.contentprovider.ContentProvider;
 import net.hamtag.server.datatypes.device.Device;
+import net.hamtag.server.datatypes.user.User;
 
 @Entity
 @Table(name = "NEWS")
@@ -38,12 +41,20 @@ public class News {
 
 	@Column(name = "PUBLISH_TIME")
 	private Date publishTime;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USERID", nullable = false)
+	private User user;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "news")
 	private Set<NewsShown> newsShowns;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "news")
 	private Set<NewsContent> newsContents;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PROVIDERID", nullable = false)
+	private ContentProvider contentProvider;
 
 	@JoinColumn
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -81,6 +92,22 @@ public class News {
 
 	public String getText() {
 		return text;
+	}
+
+	public ContentProvider getContentProvider() {
+		return contentProvider;
+	}
+
+	public void setContentProvider(ContentProvider contentProvider) {
+		this.contentProvider = contentProvider;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public void setText(String text) {

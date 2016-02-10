@@ -20,6 +20,12 @@ public class AdDTO {
 	private String phone;
 	
 	@JsonProperty
+	private String description;
+	
+	@JsonProperty
+	private String title;
+	
+	@JsonProperty
 	private String location;
 	
 	@JsonProperty
@@ -115,6 +121,24 @@ public class AdDTO {
 
 	public void setCorporation(String corporation) {
 		this.corporation = corporation;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}	
+	
+	
 	
 }

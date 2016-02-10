@@ -14,6 +14,7 @@ public class AdMgr extends RootMgr {
 	public static List<Ad> getAdsByCorporation(Corporation c){
 		Criteria criteria=getInstance().createCriteria(Ad.class);
 		criteria.add(Restrictions.eq("corporation", c));
+		criteria.add(Restrictions.eq("isRelatedToNews", false));
 		return (List<Ad>)criteria.list();
 	}
 	@SuppressWarnings("unchecked")
@@ -25,13 +26,13 @@ public class AdMgr extends RootMgr {
 			criteria.setMaxResults(Config.DEFAULT_MAX_RESULTS);
 		else
 			criteria.setMaxResults(Integer.parseInt(maxNumber));
+		criteria.add(Restrictions.eq("isRelatedToNews", false));
 		criteria.add(Restrictions.sqlRestriction(Config.DATABASE_RANDOM_QUERY));
 		return criteria.list();
 	}
 	@SuppressWarnings("unchecked")
 	public static List<Ad>list(){
 		Criteria criteria=getInstance().createCriteria(Ad.class);
-		criteria.add(Restrictions.sqlRestriction(Config.DATABASE_RANDOM_QUERY));
 		return criteria.list();
 	}
 }

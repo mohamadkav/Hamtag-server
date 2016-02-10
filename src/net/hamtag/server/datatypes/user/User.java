@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import net.hamtag.server.datatypes.ad.Ad;
+import net.hamtag.server.datatypes.news.News;
+
 @Entity
 @Table(name = "USERS")
 public class User {
@@ -33,6 +36,12 @@ public class User {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<UserRole> userRoles;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private Set<Ad> adsMadeByUser;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private Set<News> newsMadeByUser;
 	
 	
 	public Long getId() {
@@ -65,5 +74,18 @@ public class User {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
+	public Set<Ad> getAdsMadeByUser() {
+		return adsMadeByUser;
+	}
+	public void setAdsMadeByUser(Set<Ad> adsMadeByUser) {
+		this.adsMadeByUser = adsMadeByUser;
+	}
+	public Set<News> getNewsMadeByUser() {
+		return newsMadeByUser;
+	}
+	public void setNewsMadeByUser(Set<News> newsMadeByUser) {
+		this.newsMadeByUser = newsMadeByUser;
+	}
+	
 	
 }

@@ -46,6 +46,7 @@
 	<mapping class="net.hamtag.server.datatypes.withdrawal.MoneyWithdrawal"/>
 	<mapping class="net.hamtag.server.datatypes.user.User"/>
 	<mapping class="net.hamtag.server.datatypes.user.UserRole"/>
+	<mapping class="net.hamtag.server.datatypes.contentprovider.ContentProvider"/>
 	
 
 </session-factory>

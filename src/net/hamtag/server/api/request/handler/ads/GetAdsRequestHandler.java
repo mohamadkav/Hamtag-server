@@ -62,6 +62,8 @@ public class GetAdsRequestHandler extends BaseRequestHandler{
 			dto.setContentInfos(AdContentMgr.getContentInfoByAd(ad));
 			dto.setCorporation(ad.getCorporation().getName());
 			dto.setId(ad.getId());
+			dto.setDescription(ad.getShortDescription());
+			dto.setTitle(ad.getTitle());
 			dto.setLink(ad.getLink());
 			dto.setLocation(ad.getLocation());
 			dto.setCategories(GetNewsByCategoryForDeviceRequestHandler.getCategoryList(ad.getCategories()));

@@ -11,6 +11,9 @@ public class CategoryDTO {
 	
 	@JsonProperty
 	private Object image;
+	
+	@JsonProperty
+	private String translation;
 
 	public String getName() {
 		return name;
@@ -18,6 +21,14 @@ public class CategoryDTO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getTranslation() {
+		return translation;
+	}
+
+	public void setTranslation(String translation) {
+		this.translation = translation;
 	}
 
 	public Long getId() {

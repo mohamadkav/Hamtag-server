@@ -17,6 +17,8 @@ public class CategoryCMDManager {
 			System.out.println("Name: ");
 			Category category=new Category();
 			category.setName(input.nextLine());
+			System.out.println("In persian: ");
+			category.setTranslation(input.nextLine());
 			CategoryMgr.add(category);
 		}
 		else{

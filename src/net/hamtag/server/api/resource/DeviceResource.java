@@ -6,16 +6,19 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import net.hamtag.server.api.request.types.device.ConfirmDeviceRequest;
 import net.hamtag.server.api.request.types.device.ConfirmForgotPasswordRequest;
 import net.hamtag.server.api.request.types.device.ForgotPasswordRequest;
+import net.hamtag.server.api.request.types.device.GetDeviceInfoRequest;
 import net.hamtag.server.api.request.types.device.LoginDeviceRequest;
 import net.hamtag.server.api.request.types.device.NewDeviceRequest;
 import net.hamtag.server.api.request.types.device.NewDeviceRequestWithEmail;
 import net.hamtag.server.api.request.types.device.NewVersionRequest;
+import net.hamtag.server.api.request.types.device.UpdateCredentialsRequest;
 
 @Path("/devices/")
 public class DeviceResource {
@@ -72,6 +75,24 @@ public class DeviceResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getNewVersionInfo(){
 		return new NewVersionRequest().handle() ;
+	}
+	
+	@POST
+	@Path("/update/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response updateCredentials(@QueryParam("new-name") String name,@QueryParam("token") String token,
+			@QueryParam("phone-number") String phoneNumber){
+		return new UpdateCredentialsRequest(name, phoneNumber, token).handle() ;
+	}
+	
+	@POST
+	@Path("/sync/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getDeviceInfo(@QueryParam("token") String token,
+			@QueryParam("phone-number") String phoneNumber){
+		return new GetDeviceInfoRequest(phoneNumber, token).handle() ;
 	}
 	
 /*	//Example: http://localhost:8080/Hamtag/resource/devices/categories/update/?categories=SPORTS,FILM&phone=0912&token=123

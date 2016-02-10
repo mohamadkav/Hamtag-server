@@ -27,6 +27,9 @@ public class Category {
 	@Column(name = "name", unique = true)
 	private String name;
 	
+	@Column(name = "translation")
+	private String translation;
+	
 	@Column(name = "IMAGE")
 	private byte[] image;
 
@@ -75,7 +78,13 @@ public class Category {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
-	
-	
 
+	public String getTranslation() {
+		return translation;
+	}
+
+	public void setTranslation(String translation) {
+		this.translation = translation;
+	}
+	
 }

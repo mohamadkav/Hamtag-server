@@ -49,6 +49,9 @@ public class Device {
 	
 	@Column(name = "TOKEN")
 	private String token;
+	
+	@Column(name = "NAME")
+	private String name;
 
 	@Column(name = "CHARGE",nullable = false, insertable=false, columnDefinition = "INT NOT NULL DEFAULT 0")
 	private Integer charge;
@@ -114,6 +117,14 @@ public class Device {
 
 	public Set<Purchase> getPurchases() {
 		return purchases;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setPurchases(Set<Purchase> purchases) {

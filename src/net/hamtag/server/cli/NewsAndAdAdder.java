@@ -18,6 +18,8 @@ public class NewsAndAdAdder {
 	public static void main(String[] args) {
 		@SuppressWarnings("resource")
 		Scanner input=new Scanner(System.in);
+		CategoryMgr.getCategoryByName("SPORTS");
+		System.out.println("\n\n");
 		System.out.println("Enter News or Ad? n/a");
 		String choice=input.nextLine();
 		System.out.println("Enter Categories: (type finish to finish)");
@@ -52,6 +54,7 @@ public class NewsAndAdAdder {
 			ad.setPublishTime(new Date());
 			System.out.println("THE ID FOR YOUR AD IS: ");
 			AdMgr.add(ad);
+			System.out.println(ad.getId());
 		}
 		else if(choice.equalsIgnoreCase("n")){
 			News news=new News();

@@ -23,6 +23,7 @@ import javax.persistence.Table;
 import net.hamtag.server.datatypes.category.Category;
 import net.hamtag.server.datatypes.corporation.Corporation;
 import net.hamtag.server.datatypes.device.Device;
+import net.hamtag.server.datatypes.user.User;
 
 @Entity
 @Table(name = "ADS", indexes = { @Index(columnList = "CORPORATIONID", name = "corporation_index") })
@@ -50,9 +51,22 @@ public class Ad {
 
 	@Column(name = "comments")
 	private String comments;
+	
+	@Column(name = "short_desription")
+	private String shortDescription;
+	
+	@Column(name = "title")
+	private String title;
 
 	@Column(name = "publish_time")
 	private Date publishTime;
+	
+	@Column(name="isrelatedtonews")
+	private Boolean isRelatedToNews;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USERID", nullable = false)
+	private User user;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CORPORATIONID", nullable = false)
@@ -88,6 +102,18 @@ public class Ad {
 			return false;
 		likedByDevices.add(device);
 		return true;
+	}
+	
+	public Boolean isRelatedToNews() {
+		return isRelatedToNews;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Date getPublishTime() {
@@ -184,6 +210,22 @@ public class Ad {
 
 	public Set<Device> getLikedByDevices() {
 		return likedByDevices;
+	}
+
+	public String getShortDescription() {
+		return shortDescription;
+	}
+
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public void setLikedByDevices(Set<Device> likedByDevices) {

@@ -33,6 +33,7 @@ public class GetAllCategoriesRequest extends BaseDeviceRequest{
 			dto.setId(category.getId());
 			dto.setImage((Object)category.getImage());
 			dto.setName(category.getName());
+			dto.setTranslation(category.getTranslation());
 			dtos.add(dto);
 		}
 		return new HamtagResponse(dtos).getResponse(null);
