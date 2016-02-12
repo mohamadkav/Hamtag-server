@@ -52,7 +52,7 @@ public class Ad {
 	@Column(name = "comments")
 	private String comments;
 	
-	@Column(name = "short_desription")
+	@Column(name = "short_description")
 	private String shortDescription;
 	
 	@Column(name = "title")
