@@ -3,7 +3,6 @@ package net.hamtag.server.api.request.types.ads;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
-import net.hamtag.server.api.request.handler.BaseRequestHandler;
 import net.hamtag.server.api.request.types.BaseDeviceRequest;
 import net.hamtag.server.api.response.HamtagResponse;
 import net.hamtag.server.datatypes.ad.AdContent;
@@ -21,10 +20,6 @@ public class GetAdContentRequest extends BaseDeviceRequest{
 		setToken(token);
 	}
 	@Override
-	@Deprecated
-	public BaseRequestHandler getHandler() {
-		return null;
-	}
 	public Response handle(){
 		Response response=auth();
 		if(response!=null)

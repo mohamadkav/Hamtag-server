@@ -1,8 +1,18 @@
 package net.hamtag.server.api.request.types.news;
 
-import net.hamtag.server.api.request.handler.BaseRequestHandler;
-import net.hamtag.server.api.request.handler.news.GetNewsByCategoryForDeviceRequestHandler;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import javax.ws.rs.core.Response;
+
 import net.hamtag.server.api.request.types.BaseDeviceRequest;
+import net.hamtag.server.api.response.HamtagResponse;
+import net.hamtag.server.api.response.types.news.NewsDTO;
+import net.hamtag.server.datatypes.category.Category;
+import net.hamtag.server.datatypes.news.News;
+import net.hamtag.server.datatypes.news.NewsContentMgr;
+import net.hamtag.server.datatypes.news.NewsMgr;
 
 public class GetNewsByCategoryForDeviceRequest extends BaseDeviceRequest{
 	private String maxNumber,lastUpdateTime;
@@ -13,28 +23,28 @@ public class GetNewsByCategoryForDeviceRequest extends BaseDeviceRequest{
 		setPhoneNumber(phoneNumber);
 	}
 	@Override
-	public BaseRequestHandler getHandler() {
-		return new GetNewsByCategoryForDeviceRequestHandler(this);
+	public Response handle() {
+		List<NewsDTO>dtos=new ArrayList<>();
+		Response response=auth();
+		if(response!=null)
+			return response;
+		List<News>allNews=NewsMgr.getNewsByDate(lastUpdateTime, maxNumber);
+		for(News news:allNews){
+			NewsDTO dto=new NewsDTO();
+			dto.setId(news.getId());
+			dto.setDate(news.getPublishTime().getTime()+"");
+			dto.setText(news.getText());
+			dto.setTitle(news.getTitle());
+			dto.setCategories(getCategoryList(news.getCategories()));
+			dto.setContentInfos(NewsContentMgr.getContentInfoByNews(news));
+			dtos.add(dto);
+		}
+		return new HamtagResponse(dtos).getResponse(null);
 	}
-	public String getNumber() {
-		return maxNumber;
-	}
-	
-	public String getMaxNumber() {
-		return maxNumber;
-	}
-	public void setMaxNumber(String maxNumber) {
-		this.maxNumber = maxNumber;
-	}
-	
-	public void setNumber(String number) {
-		this.maxNumber = number;
-	}
-
-	public String getLastUpdateTime() {
-		return lastUpdateTime;
-	}
-	public void setLastUpdateTime(String lastUpdateTime) {
-		this.lastUpdateTime = lastUpdateTime;
+	public static List<String> getCategoryList(Set<Category> categories){
+		List<String>toReturn=new ArrayList<>();
+		for(Category category:categories)
+			toReturn.add(category.getName());
+		return toReturn;
 	}
 }

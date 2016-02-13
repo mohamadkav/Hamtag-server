@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.ws.rs.core.Response;
 
-import net.hamtag.server.api.request.handler.BaseRequestHandler;
 import net.hamtag.server.api.request.types.BaseDeviceRequest;
 import net.hamtag.server.api.response.HamtagResponse;
 import net.hamtag.server.api.response.types.category.CategoryDTO;
@@ -18,10 +17,6 @@ public class GetAllCategoriesRequest extends BaseDeviceRequest{
 		setToken(token);
 	}
 	@Override
-	@Deprecated
-	public BaseRequestHandler getHandler() {
-		return null;
-	}
 	public Response handle(){
 		Response response=auth();
 		if(response!=null)

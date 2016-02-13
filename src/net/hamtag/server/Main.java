@@ -10,7 +10,7 @@ import java.util.Set;
 import javax.ws.rs.core.Response;
 
 import net.hamtag.server.api.request.types.news.GetNewsByCategoryForDeviceRequest;
-import net.hamtag.server.api.resource.NewsResource;
+import net.hamtag.server.api.resource.NewsResourceAndroid;
 import net.hamtag.server.datatypes.ad.Ad;
 import net.hamtag.server.datatypes.ad.AdContent;
 import net.hamtag.server.datatypes.ad.AdContentMgr;

@@ -22,7 +22,7 @@ public abstract class BaseDeviceRequest extends BaseRequest{
 			return new HamtagResponse(Error.TOKEN_NULL_OR_EMPTY).getResponse(Response.Status.BAD_REQUEST);
 		Device device=DeviceMgr.getDeviceByPhoneNumber(phoneNumber);
 		if(device==null)
-			return new HamtagResponse(Error.PHONE_NUMBER_INVALID).getResponse(Response.Status.BAD_REQUEST);;
+			return new HamtagResponse(Error.PHONE_NUMBER_INVALID).getResponse(Response.Status.BAD_REQUEST);
 		if(!token.equals(device.getToken()))
 			return new HamtagResponse(Error.AUTH_FAILED).getResponse(Response.Status.UNAUTHORIZED);
 		return null;

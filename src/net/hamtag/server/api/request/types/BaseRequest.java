@@ -5,13 +5,11 @@ import javax.ws.rs.core.Response;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import net.hamtag.server.api.request.handler.BaseRequestHandler;
-
 public abstract class BaseRequest {
 	private static ObjectMapper mapper;
 
 	@JsonIgnore
-	public abstract BaseRequestHandler getHandler();
+	public abstract Response handle();
 	
 	
 	public static BaseRequest buildRequest(String requestJson , Class<? extends BaseRequest> requestClass){
@@ -25,10 +23,4 @@ public abstract class BaseRequest {
 		}
 		return request;
 	}
-	
-	
-	public Response handle(){
-    	return null;
-    }
-
 }

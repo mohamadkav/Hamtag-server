@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.ws.rs.core.Response;
 
-import net.hamtag.server.api.request.handler.BaseRequestHandler;
 import net.hamtag.server.api.request.types.BaseDeviceRequest;
 import net.hamtag.server.api.response.HamtagResponse;
 import net.hamtag.server.datatypes.ad.Ad;
@@ -53,9 +52,5 @@ public class AdShownRequest extends BaseDeviceRequest{
 		device.setCharge(device.getCharge()+ad.getPrice());
 		DeviceMgr.update(device);
 		return new HamtagResponse().getResponse(null);
-	}
-	@Override
-	public BaseRequestHandler getHandler() {
-		return null;
 	}
 }

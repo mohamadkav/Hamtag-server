@@ -2,7 +2,6 @@ package net.hamtag.server.api.request.types.ads;
 
 import javax.ws.rs.core.Response;
 
-import net.hamtag.server.api.request.handler.BaseRequestHandler;
 import net.hamtag.server.api.request.types.BaseDeviceRequest;
 import net.hamtag.server.api.response.HamtagResponse;
 import net.hamtag.server.datatypes.ad.Ad;
@@ -32,9 +31,5 @@ public class AdLikeRequest extends BaseDeviceRequest{
 			return new HamtagResponse(Error.DEVICE_ALREADY_LIKED).getResponse(Response.Status.BAD_REQUEST);
 		AdMgr.update(ad);
 		return new HamtagResponse().getResponse(null);
-	}
-	@Override
-	public BaseRequestHandler getHandler() {
-		return null;
 	}
 }
