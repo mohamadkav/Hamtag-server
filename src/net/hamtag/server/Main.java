@@ -23,6 +23,7 @@ import net.hamtag.server.datatypes.device.Device;
 import net.hamtag.server.datatypes.device.DeviceMgr;
 import net.hamtag.server.datatypes.news.News;
 import net.hamtag.server.datatypes.news.NewsMgr;
+import net.hamtag.server.datatypes.news.NewsShownMgr;
 public class Main {
 	public static void main(String[] args) {
 /*		for(Category c:DeviceMgr.getDeviceByPhoneNumber("0912").getCategories())
@@ -94,5 +95,6 @@ public class Main {
 		}
 		nc.setContent(bFile);
 		NewsContentMgr.add(nc);*/
+		System.out.println(DeviceMgr.getTotalDebt());
 	}
 }

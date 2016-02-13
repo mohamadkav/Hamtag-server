@@ -12,5 +12,6 @@ public class Config {
 	public static final String fromEmail="hamtag.bot@gmail.com";
 	public static final String fromPassword="@n0th3rHamtag";
 	public static final String emailSubject="کد فعالسازی";
+	public static final int DAYS_THAT_DEVICE_CONSIDERS_ACTIVE=2;
 	
 }
