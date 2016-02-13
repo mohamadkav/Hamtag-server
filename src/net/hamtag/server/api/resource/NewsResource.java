@@ -24,7 +24,7 @@ public class NewsResource {
 	public Response getNewsByCategory(@QueryParam("max-results") String maxResults,@QueryParam("token") String token,
 			@QueryParam("phone-number") String phoneNumber,
 			@QueryParam("last-update-time") String lastUpdateTime){
-		return new GetNewsByCategoryForDeviceRequest(maxResults, lastUpdateTime,token,phoneNumber).getHandler().handle();
+		return new GetNewsByCategoryForDeviceRequest(maxResults, lastUpdateTime,token,phoneNumber).handle();
 	}
 	//http://localhost:8080/Hamtag/resource/news/like/?news-id=1&token=123&phone-number=0912
 	@POST

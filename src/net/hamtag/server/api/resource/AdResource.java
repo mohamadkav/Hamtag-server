@@ -32,7 +32,7 @@ public class AdResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getAdsByCategory(@QueryParam("max-results") String maxResults,@QueryParam("token") String token,
 			@QueryParam("phone-number") String phoneNumber){
-		return new GetAdsRequest(maxResults,token,phoneNumber).getHandler().handle();
+		return new GetAdsRequest(maxResults,token,phoneNumber).handle();
 	}
 	
 	@POST
