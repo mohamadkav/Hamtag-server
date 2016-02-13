@@ -10,9 +10,6 @@ public class CategoryDTO {
 	private Long id;
 	
 	@JsonProperty
-	private Object image;
-	
-	@JsonProperty
 	private String translation;
 
 	public String getName() {
@@ -38,14 +35,5 @@ public class CategoryDTO {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Object getImage() {
-		return image;
-	}
-
-	public void setImage(Object image) {
-		this.image = image;
-	}
-	
 	
 }

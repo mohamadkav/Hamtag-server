@@ -11,14 +11,12 @@ import net.hamtag.server.api.response.types.device.DeviceSummaryDTO;
 import net.hamtag.server.datatypes.ad.AdShownMgr;
 import net.hamtag.server.datatypes.device.DeviceMgr;
 import net.hamtag.server.datatypes.news.NewsShownMgr;
-import net.hamtag.server.datatypes.user.UserRole;
-import net.hamtag.server.datatypes.user.UserRoleMgr;
 
 public class GetMainDeviceInfosRequest extends BaseWebPanelRequest {
-	Set<UserRole>neededRoles=new HashSet<>();
+	Set<String>neededRoles=new HashSet<>();
 	public GetMainDeviceInfosRequest(){}
 	public Response handle(){
-		neededRoles.add(UserRoleMgr.getByName("ROLE_ADMIN"));
+		neededRoles.add("ROLE_ADMIN");
 		
 		Response response=auth(neededRoles);
 		if(response!=null)

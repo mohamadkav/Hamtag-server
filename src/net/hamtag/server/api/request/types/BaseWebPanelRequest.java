@@ -1,5 +1,7 @@
 package net.hamtag.server.api.request.types;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.ws.rs.core.Response;
@@ -15,10 +17,14 @@ public abstract class BaseWebPanelRequest extends BaseRequest{
 	private enum Error{
 		AUTH_FAILED
 	}
-	public Response auth(Set<UserRole>roles){
+	public Response auth(Set<String>roles){
 		try{
 			User user=UserMgr.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-			if(!user.getUserRoles().containsAll(roles))
+			List<String>rolesString=new ArrayList<>();
+			for(UserRole ur:user.getUserRoles())
+				if(!rolesString.contains(ur.getRole()))
+					rolesString.add(ur.getRole());
+			if(!rolesString.containsAll(roles))
 				throw new NullPointerException();
 			return null;
 		}catch(NullPointerException e){

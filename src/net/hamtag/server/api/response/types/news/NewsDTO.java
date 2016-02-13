@@ -23,6 +23,12 @@ public class NewsDTO {
 	private List<ContentDTO> contentInfos;
 	
 	@JsonProperty
+	private Long providerId;
+	
+	@JsonProperty
+	private String providerName;
+	
+	@JsonProperty
 	private List<String> categories;
 
 	public Long getId() {
@@ -73,4 +79,20 @@ public class NewsDTO {
 		this.contentInfos = contentInfos;
 	}
 
+	public Long getProviderId() {
+		return providerId;
+	}
+
+	public void setProviderId(Long providerId) {
+		this.providerId = providerId;
+	}
+
+	public String getProviderName() {
+		return providerName;
+	}
+
+	public void setProviderName(String providerName) {
+		this.providerName = providerName;
+	}
+	
 }

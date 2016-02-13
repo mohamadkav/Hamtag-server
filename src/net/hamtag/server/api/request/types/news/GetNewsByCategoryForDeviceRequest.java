@@ -36,6 +36,10 @@ public class GetNewsByCategoryForDeviceRequest extends BaseDeviceRequest{
 			dto.setText(news.getText());
 			dto.setTitle(news.getTitle());
 			dto.setCategories(getCategoryList(news.getCategories()));
+			try{
+			dto.setProviderId(news.getContentProvider().getId());
+			dto.setProviderName(news.getContentProvider().getName());
+			}catch(NullPointerException e){}
 			dto.setContentInfos(NewsContentMgr.getContentInfoByNews(news));
 			dtos.add(dto);
 		}

@@ -26,7 +26,6 @@ public class GetAllCategoriesRequest extends BaseDeviceRequest{
 		for(Category category:allCategories){
 			CategoryDTO dto=new CategoryDTO();
 			dto.setId(category.getId());
-			dto.setImage((Object)category.getImage());
 			dto.setName(category.getName());
 			dto.setTranslation(category.getTranslation());
 			dtos.add(dto);

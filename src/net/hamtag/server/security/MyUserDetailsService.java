@@ -23,6 +23,8 @@ public class MyUserDetailsService implements UserDetailsService {
 		throws UsernameNotFoundException {
 	
 		User user=UserMgr.getByUsername(username);
+		if(user==null)
+			throw new UsernameNotFoundException("Username not found in DB");
 		List<GrantedAuthority> authorities = 
                                       buildUserAuthority(user.getUserRoles());
 
