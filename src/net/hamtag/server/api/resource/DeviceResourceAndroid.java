@@ -95,6 +95,15 @@ public class DeviceResourceAndroid {
 		return new GetDeviceInfoRequest(phoneNumber, token).handle() ;
 	}
 	
+	@POST
+	@Path("/syncprivders/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getProviderInfo(@QueryParam("token") String token,
+			@QueryParam("phone-number") String phoneNumber){
+		return new GetDeviceInfoRequest(phoneNumber, token).handle() ;
+	}
+	
 /*	//Example: http://localhost:8080/Hamtag/resource/devices/categories/update/?categories=SPORTS,FILM&phone=0912&token=123
 	@POST
 	@Path("/categories/update")
