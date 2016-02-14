@@ -1,7 +1,5 @@
 package net.hamtag.server.cli;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.Scanner;
 
 import org.hibernate.Transaction;
@@ -15,7 +13,7 @@ public class CategoryCMDManager {
 		Scanner input = new Scanner(System.in);
 		CategoryMgr.getCategoryByName("SPORTS");
 		while (true) {
-			System.out.println("\nChoice 1 to add or change Category, Choice 2 to add image to Category, or 3 to remove the Fucked up Category"
+			System.out.println("\nChoice 1 to add or change Category, Choice 3 to remove the Fucked up Category"
 					+ " and 4 to list all the Categories: ");
 			int choice = Integer.parseInt(input.nextLine());
 			if (choice == 1) {
@@ -30,21 +28,6 @@ public class CategoryCMDManager {
 				System.out.println("In persian: ");
 				category.setTranslation(input.nextLine());
 				CategoryMgr.add(category);
-			} else if(choice==2){
-				System.out.println("Category Name to add Image: ");
-				Category category = CategoryMgr.getCategoryByName(input.nextLine());
-				System.out.println("File Location: ");
-				File file = new File(input.nextLine());
-				byte[] bFile = new byte[(int) file.length()];
-				try {
-					FileInputStream fileInputStream = new FileInputStream(file);
-					fileInputStream.read(bFile);
-					fileInputStream.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				category.setImage(bFile);
-				CategoryMgr.update(category);
 			}
 			else if(choice==3){
 				System.out.println("Category Name to DELETE: ");

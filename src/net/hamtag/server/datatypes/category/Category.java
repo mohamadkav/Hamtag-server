@@ -29,9 +29,6 @@ public class Category {
 	
 	@Column(name = "translation")
 	private String translation;
-	
-	@Column(name = "IMAGE")
-	private byte[] image;
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
 	private Set<News> news;
@@ -70,15 +67,7 @@ public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public byte[] getImage() {
-		return image;
-	}
-
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
-
+	
 	public String getTranslation() {
 		return translation;
 	}

@@ -9,10 +9,13 @@ import net.hamtag.server.datatypes.ad.Ad;
 import net.hamtag.server.datatypes.ad.AdMgr;
 import net.hamtag.server.datatypes.category.Category;
 import net.hamtag.server.datatypes.category.CategoryMgr;
+import net.hamtag.server.datatypes.contentprovider.ContentProvider;
+import net.hamtag.server.datatypes.contentprovider.ContentProviderMgr;
 import net.hamtag.server.datatypes.corporation.Corporation;
 import net.hamtag.server.datatypes.corporation.CorporationMgr;
 import net.hamtag.server.datatypes.news.News;
 import net.hamtag.server.datatypes.news.NewsMgr;
+import net.hamtag.server.datatypes.user.UserMgr;
 
 public class NewsAndAdAdder {
 	public static void main(String[] args) {
@@ -52,6 +55,8 @@ public class NewsAndAdAdder {
 			System.out.println("Enter price (must be numeric): ");
 			ad.setPrice(Integer.parseInt(input.nextLine()));
 			ad.setPublishTime(new Date());
+			System.out.println("Enter Username of the adder: mohamad.gholami");
+			ad.setUser(UserMgr.getByUsername(input.nextLine()));
 			System.out.println("THE ID FOR YOUR AD IS: ");
 			AdMgr.add(ad);
 			System.out.println(ad.getId());
@@ -64,6 +69,10 @@ public class NewsAndAdAdder {
 			news.setTitle(input.nextLine());
 			System.out.println("Text: ");
 			news.setText(input.nextLine());
+			System.out.println("Content provider ID: ");
+			news.setContentProvider(ContentProviderMgr.getInstance().get(ContentProvider.class,Long.parseLong(input.nextLine())));
+			System.out.println("Enter Username of the adder: mohamad.gholami");
+			news.setUser(UserMgr.getByUsername(input.nextLine()));
 			System.out.println("THE ID FOR YOU NEWS IS: ");
 			System.out.println(NewsMgr.add(news));
 		}
