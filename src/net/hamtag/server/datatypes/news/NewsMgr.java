@@ -21,7 +21,7 @@ public class NewsMgr extends RootMgr{
 		else
 			criteria.setMaxResults(Integer.parseInt(maxNumber));
 		criteria.addOrder(Order.desc("publishTime"));
-		criteria.add(Restrictions.sqlRestriction(Config.DATABASE_RANDOM_QUERY));
+	//	criteria.add(Restrictions.sqlRestriction(Config.DATABASE_RANDOM_QUERY));
 		return criteria.list();
 	}
 	@SuppressWarnings("unchecked")
