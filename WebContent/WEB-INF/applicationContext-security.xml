@@ -10,7 +10,7 @@
 		<intercept-url pattern="/resource/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<!-- access denied page -->
 		<access-denied-handler error-page="/403.jsp" />
-		<form-login login-page="/login.jsp" default-target-url="/admin/hello.jsp"
+		<form-login login-page="/login.jsp" default-target-url="/admin/index.html"
 			authentication-failure-url="/login.jsp?error" username-parameter="username"
 			password-parameter="password" />
 		<logout logout-success-url="/login.jsp?logout" />
