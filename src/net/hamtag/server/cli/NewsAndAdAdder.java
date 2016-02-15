@@ -57,6 +57,7 @@ public class NewsAndAdAdder {
 			ad.setPublishTime(new Date());
 			System.out.println("Enter Username of the adder: mohamad.gholami");
 			ad.setUser(UserMgr.getByUsername(input.nextLine()));
+			ad.setIsRelatedToNews(false);
 			System.out.println("THE ID FOR YOUR AD IS: ");
 			AdMgr.add(ad);
 			System.out.println(ad.getId());

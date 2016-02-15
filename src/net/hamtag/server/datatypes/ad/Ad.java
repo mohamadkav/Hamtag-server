@@ -104,10 +104,17 @@ public class Ad {
 		return true;
 	}
 	
-	public Boolean isRelatedToNews() {
+	
+	public Boolean getIsRelatedToNews() {
 		return isRelatedToNews;
 	}
-	
+
+
+	public void setIsRelatedToNews(Boolean isRelatedToNews) {
+		this.isRelatedToNews = isRelatedToNews;
+	}
+
+
 	public User getUser() {
 		return user;
 	}
