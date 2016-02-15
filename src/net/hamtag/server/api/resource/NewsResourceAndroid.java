@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 
 import net.hamtag.server.api.request.types.news.GetAllCategoriesRequest;
 import net.hamtag.server.api.request.types.news.GetNewsByCategoryForDeviceRequest;
+import net.hamtag.server.api.request.types.news.GetNewsByProviderRequest;
 import net.hamtag.server.api.request.types.news.GetNewsContentRequest;
 import net.hamtag.server.api.request.types.news.NewsLikeRequest;
 import net.hamtag.server.api.request.types.news.NewsShownRequest;
@@ -25,6 +26,15 @@ public class NewsResourceAndroid {
 			@QueryParam("phone-number") String phoneNumber,
 			@QueryParam("last-update-time") String lastUpdateTime){
 		return new GetNewsByCategoryForDeviceRequest(maxResults, lastUpdateTime,token,phoneNumber).handle();
+	}
+	@POST
+	@Path("/getbyprovider")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getNewsByProvider(@QueryParam("max-results") String maxResults,@QueryParam("token") String token,
+			@QueryParam("phone-number") String phoneNumber,
+			@QueryParam("before-time") String beforeTime,@QueryParam("provider-id") String providerId){
+		return new GetNewsByProviderRequest(providerId, beforeTime, maxResults, phoneNumber, token).handle();
 	}
 	//http://localhost:8080/Hamtag/resource/news/like/?news-id=1&token=123&phone-number=0912
 	@POST

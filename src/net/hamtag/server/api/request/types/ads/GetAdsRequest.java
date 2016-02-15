@@ -12,6 +12,7 @@ import net.hamtag.server.api.response.types.ads.AdDTO;
 import net.hamtag.server.datatypes.ad.Ad;
 import net.hamtag.server.datatypes.ad.AdContentMgr;
 import net.hamtag.server.datatypes.ad.AdMgr;
+import net.hamtag.server.utils.CategoryToStringConverter;
 
 public class GetAdsRequest extends BaseDeviceRequest{
 	private String maxNumber;
@@ -58,7 +59,7 @@ public class GetAdsRequest extends BaseDeviceRequest{
 			dto.setTitle(ad.getTitle());
 			dto.setLink(ad.getLink());
 			dto.setLocation(ad.getLocation());
-			dto.setCategories(GetNewsByCategoryForDeviceRequest.getCategoryList(ad.getCategories()));
+			dto.setCategories(CategoryToStringConverter.getCategoryList(ad.getCategories()));
 			dto.setPhone(ad.getPhone());
 			dto.setPrice(ad.getPrice()+"");
 			dtos.add(dto);

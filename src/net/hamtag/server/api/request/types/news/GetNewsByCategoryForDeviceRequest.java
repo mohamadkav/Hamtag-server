@@ -2,17 +2,15 @@ package net.hamtag.server.api.request.types.news;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
 import javax.ws.rs.core.Response;
 
 import net.hamtag.server.api.request.types.BaseDeviceRequest;
 import net.hamtag.server.api.response.HamtagResponse;
 import net.hamtag.server.api.response.types.news.NewsDTO;
-import net.hamtag.server.datatypes.category.Category;
 import net.hamtag.server.datatypes.news.News;
 import net.hamtag.server.datatypes.news.NewsContentMgr;
 import net.hamtag.server.datatypes.news.NewsMgr;
+import net.hamtag.server.utils.CategoryToStringConverter;
 
 public class GetNewsByCategoryForDeviceRequest extends BaseDeviceRequest{
 	private String maxNumber,lastUpdateTime;
@@ -35,7 +33,7 @@ public class GetNewsByCategoryForDeviceRequest extends BaseDeviceRequest{
 			dto.setDate(news.getPublishTime().getTime()+"");
 			dto.setText(news.getText());
 			dto.setTitle(news.getTitle());
-			dto.setCategories(getCategoryList(news.getCategories()));
+			dto.setCategories(CategoryToStringConverter.getCategoryList(news.getCategories()));
 			try{
 			dto.setProviderId(news.getContentProvider().getId());
 			dto.setProviderName(news.getContentProvider().getName());
@@ -44,11 +42,5 @@ public class GetNewsByCategoryForDeviceRequest extends BaseDeviceRequest{
 			dtos.add(dto);
 		}
 		return new HamtagResponse(dtos).getResponse(null);
-	}
-	public static List<String> getCategoryList(Set<Category> categories){
-		List<String>toReturn=new ArrayList<>();
-		for(Category category:categories)
-			toReturn.add(category.getName());
-		return toReturn;
 	}
 }
