@@ -8,10 +8,10 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import net.hamtag.server.api.request.types.ads.GetAdContentRequest;
-import net.hamtag.server.api.request.types.ads.GetAdsRequest;
-import net.hamtag.server.api.request.types.ads.AdLikeRequest;
-import net.hamtag.server.api.request.types.ads.AdShownRequest;
+import net.hamtag.server.api.request.types.ads.android.AdLikeRequest;
+import net.hamtag.server.api.request.types.ads.android.AdShownRequest;
+import net.hamtag.server.api.request.types.ads.android.GetAdContentRequest;
+import net.hamtag.server.api.request.types.ads.android.GetAdsRequest;
 
 @Path("/ads/")
 public class AdResourceAndroid {

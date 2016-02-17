@@ -1,4 +1,4 @@
-package net.hamtag.server.api.request.types.ads;
+package net.hamtag.server.api.request.types.ads.android;
 
 import java.util.Date;
 

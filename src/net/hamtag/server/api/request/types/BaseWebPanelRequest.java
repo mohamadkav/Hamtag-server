@@ -17,14 +17,14 @@ public abstract class BaseWebPanelRequest extends BaseRequest{
 	private enum Error{
 		AUTH_FAILED
 	}
-	public Response auth(Set<String>roles){
+	public Response auth(Set<String>rolesWhoCanAccess){
 		try{
 			User user=UserMgr.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 			List<String>rolesString=new ArrayList<>();
 			for(UserRole ur:user.getUserRoles())
-				if(!rolesString.contains(ur.getRole()))
+				if(!rolesString.contains(ur.getRole())&&!ur.getRole().equals("ROLE_USER"))
 					rolesString.add(ur.getRole());
-			if(!rolesString.containsAll(roles))
+			if(rolesString.size()!=1||!rolesWhoCanAccess.contains(rolesString.get(0)))
 				throw new NullPointerException();
 			return null;
 		}catch(NullPointerException e){
