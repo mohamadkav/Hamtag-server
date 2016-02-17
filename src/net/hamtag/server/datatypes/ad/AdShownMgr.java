@@ -32,4 +32,11 @@ public class AdShownMgr extends RootMgr{
 		criteria.setProjection(Projections.countDistinct("device"));
 		return (Long)criteria.uniqueResult();
 	}
+	
+	public static AdShown getAdsShownByDeviceAndAd(Device device,Ad ad){
+		Criteria criteria=getInstance().createCriteria(AdShown.class);
+		criteria.add(Restrictions.eq("device", device));
+		criteria.add(Restrictions.eq("ad", ad));
+		return (AdShown)criteria.uniqueResult();
+	}
 }

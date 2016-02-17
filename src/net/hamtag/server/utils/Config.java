@@ -13,5 +13,5 @@ public class Config {
 	public static final String fromPassword="@n0th3rHamtag";
 	public static final String emailSubject="کد فعالسازی";
 	public static final int DAYS_THAT_DEVICE_CONSIDERS_ACTIVE=2;
-	
+	public static final int MAXIMUM_CHARGE=2000;
 }

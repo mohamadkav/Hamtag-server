@@ -48,8 +48,8 @@ public class AdResourceAndroid {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addToShown(@QueryParam("ad-id") String adId,@QueryParam("phone-number") String phoneNumber,@QueryParam("token") String token,@QueryParam("shown-date") String shownDate
-			,@QueryParam("shown-seconds") String shownSeconds){
-		return new AdShownRequest(adId, token, phoneNumber,shownDate,shownSeconds).handle();
+			,@QueryParam("shown-seconds") String shownSeconds,@QueryParam("percentage") String percentage){
+		return new AdShownRequest(adId, token, phoneNumber,shownDate,shownSeconds,percentage).handle();
 	}
 	
 	//EG: http://localhost:8080/Hamtag/resource/ads/content/?id=2&token=RifJzGdMoRXKhD3HRbNzH24uUOym9B&phone=09128145827

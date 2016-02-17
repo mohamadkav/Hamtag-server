@@ -12,6 +12,7 @@ import net.hamtag.server.datatypes.ad.AdShown;
 import net.hamtag.server.datatypes.ad.AdShownMgr;
 import net.hamtag.server.datatypes.device.Device;
 import net.hamtag.server.datatypes.device.DeviceMgr;
+import net.hamtag.server.utils.Config;
 import net.hamtag.server.utils.DateValidator;
 
 public class AdShownRequest extends BaseDeviceRequest{
@@ -19,15 +20,17 @@ public class AdShownRequest extends BaseDeviceRequest{
 		DEVICE_ALREADY_HAS_SHOWN,
 		AD_NOT_FOUND,
 		DATE_INVALID,
-		SHOWN_SECONDS_INVALID
+		SHOWN_SECONDS_INVALID,
+		INVALID_REQUEST
 	}
-	private String adId,shownDate,shownSeconds;
-	public AdShownRequest(String adId, String token,String phoneNumber,String shownDate,String shownSeconds){
+	private String adId,shownDate,shownSeconds,percentage;
+	public AdShownRequest(String adId, String token,String phoneNumber,String shownDate,String shownSeconds,String percentage){
 		this.adId=adId;
 		setToken(token);
 		setPhoneNumber(phoneNumber);
 		this.shownDate=shownDate;
 		this.shownSeconds=shownSeconds;
+		this.percentage=percentage;
 	}
 	public Response handle(){
 		Response response=auth();
@@ -37,6 +40,24 @@ public class AdShownRequest extends BaseDeviceRequest{
 		Device device=DeviceMgr.getDeviceByPhoneNumber(getPhoneNumber());
 		if(ad==null)
 			return new HamtagResponse(Error.AD_NOT_FOUND).getResponse(Response.Status.BAD_REQUEST);
+		double chargeToAdd=(double)ad.getPrice()*(Double.parseDouble(percentage)/100);
+		if(chargeToAdd<0||chargeToAdd>Config.MAXIMUM_CHARGE||Double.parseDouble(percentage)>100)
+			return new HamtagResponse(Error.INVALID_REQUEST).getResponse(Response.Status.BAD_REQUEST);
+		
+		AdShown adShownFromPastIfExisted=AdShownMgr.getAdsShownByDeviceAndAd(device,ad);
+		if(adShownFromPastIfExisted!=null){
+			if(adShownFromPastIfExisted.getPercentage()>Integer.parseInt(percentage))
+				return new HamtagResponse(0).getResponse(null);
+			int percentageDiff=Integer.parseInt(percentage)-adShownFromPastIfExisted.getPercentage();
+			adShownFromPastIfExisted.setPercentage(Integer.parseInt(percentage));
+			chargeToAdd=(double)ad.getPrice()*((double)(percentageDiff)/100);
+			AdShownMgr.update(adShownFromPastIfExisted);
+			device.setCharge(device.getCharge()+(int)Math.floor(chargeToAdd));
+			DeviceMgr.update(device);
+			return new HamtagResponse((int)Math.floor(chargeToAdd)).getResponse(null);
+		}
+		
+		
 		AdShown adShown=new AdShown();
 		adShown.setAd(ad);
 		adShown.setDevice(device);
@@ -48,9 +69,10 @@ public class AdShownRequest extends BaseDeviceRequest{
 		}catch(NumberFormatException e){
 			return new HamtagResponse(Error.SHOWN_SECONDS_INVALID).getResponse(Response.Status.BAD_REQUEST);
 		}
+		adShown.setPercentage(Integer.parseInt(percentage));
 		AdShownMgr.add(adShown);
-		device.setCharge(device.getCharge()+ad.getPrice());
+		device.setCharge(device.getCharge()+(int)Math.floor(chargeToAdd));
 		DeviceMgr.update(device);
-		return new HamtagResponse().getResponse(null);
+		return new HamtagResponse((int)Math.floor(chargeToAdd)).getResponse(null);
 	}
 }

@@ -33,6 +33,9 @@ public class AdShown {
 	@Column(name="SHOWDATE")
 	private Date showDate;
 	
+	@Column(name="PERCENTAGE")
+	private Integer percentage;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ADID", nullable = false)
 	private Ad ad;
@@ -81,6 +84,12 @@ public class AdShown {
 	public void setAd(Ad ad) {
 		this.ad = ad;
 	}
-	
-	
+
+	public Integer getPercentage() {
+		return percentage;
+	}
+
+	public void setPercentage(Integer percentage) {
+		this.percentage = percentage;
+	}
 }
