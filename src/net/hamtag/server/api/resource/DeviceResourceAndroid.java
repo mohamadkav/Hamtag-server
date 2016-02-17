@@ -13,7 +13,6 @@ import javax.ws.rs.core.Response;
 import net.hamtag.server.api.request.types.device.android.ConfirmDeviceRequest;
 import net.hamtag.server.api.request.types.device.android.ConfirmForgotPasswordRequest;
 import net.hamtag.server.api.request.types.device.android.ForgotPasswordRequest;
-import net.hamtag.server.api.request.types.device.android.GetAllProviderInfoRequest;
 import net.hamtag.server.api.request.types.device.android.GetDeviceInfoRequest;
 import net.hamtag.server.api.request.types.device.android.LoginDeviceRequest;
 import net.hamtag.server.api.request.types.device.android.NewDeviceRequest;
@@ -94,15 +93,6 @@ public class DeviceResourceAndroid {
 	public Response getDeviceInfo(@QueryParam("token") String token,
 			@QueryParam("phone-number") String phoneNumber){
 		return new GetDeviceInfoRequest(phoneNumber, token).handle() ;
-	}
-	
-	@POST
-	@Path("/syncproviders/")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getProviderInfo(@QueryParam("token") String token,
-			@QueryParam("phone-number") String phoneNumber){
-		return new GetAllProviderInfoRequest(phoneNumber, token).handle() ;
 	}
 	
 /*	//Example: http://localhost:8080/Hamtag/resource/devices/categories/update/?categories=SPORTS,FILM&phone=0912&token=123

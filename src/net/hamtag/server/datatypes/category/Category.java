@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import net.hamtag.server.datatypes.ad.Ad;
+import net.hamtag.server.datatypes.contentprovider.ContentProvider;
 import net.hamtag.server.datatypes.news.News;
 
 @Entity
@@ -35,6 +36,9 @@ public class Category {
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
 	private Set<Ad> ads;
+	
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
+	private Set<ContentProvider> contentProviders;
 
 	public void setAds(Set<Ad> ads) {
 		this.ads = ads;
@@ -74,6 +78,14 @@ public class Category {
 
 	public void setTranslation(String translation) {
 		this.translation = translation;
+	}
+
+	public Set<ContentProvider> getContentProviders() {
+		return contentProviders;
+	}
+
+	public void setContentProviders(Set<ContentProvider> contentProviders) {
+		this.contentProviders = contentProviders;
 	}
 	
 }
