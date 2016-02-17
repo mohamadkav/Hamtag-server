@@ -19,7 +19,9 @@ public class GetUserPrivilagesRequest extends BaseWebPanelRequest {
 	}
 
 	Set<String> neededRoles = new HashSet<>();
-
+	private enum Error{
+		PROBLEM_IN_USER_PRIVILAGES
+	}
 	public Response handle() {
 		neededRoles.add("ROLE_USER");
 
@@ -28,8 +30,11 @@ public class GetUserPrivilagesRequest extends BaseWebPanelRequest {
 			return response;
 		List<String>roles=new ArrayList<>();
 		for(UserRole ur:UserMgr.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).getUserRoles()){
-			roles.add(ur.getRole());
+			if(!ur.getRole().equals("ROLE_USER"))
+				roles.add(ur.getRole());
 		}
-		return new HamtagResponse(roles).getResponse(null);
+		if(roles.size()>1||roles.isEmpty())
+			return new HamtagResponse(Error.PROBLEM_IN_USER_PRIVILAGES).getResponse(Response.Status.EXPECTATION_FAILED);
+		return new HamtagResponse(roles.get(0)).getResponse(null);
 	}
 }
