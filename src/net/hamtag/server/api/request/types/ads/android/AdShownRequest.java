@@ -43,15 +43,27 @@ public class AdShownRequest extends BaseDeviceRequest{
 		double chargeToAdd=(double)ad.getPrice()*(Double.parseDouble(percentage)/100);
 		if(chargeToAdd<0||chargeToAdd>Config.MAXIMUM_CHARGE||Double.parseDouble(percentage)>100)
 			return new HamtagResponse(Error.INVALID_REQUEST).getResponse(Response.Status.BAD_REQUEST);
-		
+		if(!DateValidator.validateLongStringDate(shownDate))
+			return new HamtagResponse(Error.DATE_INVALID).getResponse(Response.Status.BAD_REQUEST);
+		try{
+			Integer.parseInt(shownSeconds);
+		}catch(NumberFormatException e){
+			return new HamtagResponse(Error.SHOWN_SECONDS_INVALID).getResponse(Response.Status.BAD_REQUEST);
+		}
 		AdShown adShownFromPastIfExisted=AdShownMgr.getAdsShownByDeviceAndAd(device,ad);
 		if(adShownFromPastIfExisted!=null){
+			AdShown adShown=new AdShown();
+			adShown.setDevice(device);
+			adShown.setPercentage(Integer.parseInt(percentage));
+			adShown.setShowDate(new Date(Long.parseLong(shownDate)));
+			adShown.setShownTime(Integer.parseInt(shownSeconds));
+			adShown.setAd(ad);
+			AdShownMgr.add(adShown);
 			if(adShownFromPastIfExisted.getPercentage()>Integer.parseInt(percentage))
 				return new HamtagResponse(0).getResponse(null);
 			int percentageDiff=Integer.parseInt(percentage)-adShownFromPastIfExisted.getPercentage();
-			adShownFromPastIfExisted.setPercentage(Integer.parseInt(percentage));
-			chargeToAdd=(double)ad.getPrice()*((double)(percentageDiff)/100);
-			AdShownMgr.update(adShownFromPastIfExisted);
+			double fromOne=(double)(percentageDiff)/100;
+			chargeToAdd=(double)ad.getPrice()*fromOne;
 			device.setCharge(device.getCharge()+(int)Math.floor(chargeToAdd));
 			DeviceMgr.update(device);
 			return new HamtagResponse((int)Math.floor(chargeToAdd)).getResponse(null);
@@ -61,14 +73,8 @@ public class AdShownRequest extends BaseDeviceRequest{
 		AdShown adShown=new AdShown();
 		adShown.setAd(ad);
 		adShown.setDevice(device);
-		if(!DateValidator.validateLongStringDate(shownDate))
-			return new HamtagResponse(Error.DATE_INVALID).getResponse(Response.Status.BAD_REQUEST);
 		adShown.setShowDate(new Date(Long.parseLong(shownDate)));
-		try{
-			adShown.setShownTime(Integer.parseInt(shownSeconds));
-		}catch(NumberFormatException e){
-			return new HamtagResponse(Error.SHOWN_SECONDS_INVALID).getResponse(Response.Status.BAD_REQUEST);
-		}
+		adShown.setShownTime(Integer.parseInt(shownSeconds));
 		adShown.setPercentage(Integer.parseInt(percentage));
 		AdShownMgr.add(adShown);
 		device.setCharge(device.getCharge()+(int)Math.floor(chargeToAdd));

@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
@@ -37,6 +38,8 @@ public class AdShownMgr extends RootMgr{
 		Criteria criteria=getInstance().createCriteria(AdShown.class);
 		criteria.add(Restrictions.eq("device", device));
 		criteria.add(Restrictions.eq("ad", ad));
+		criteria.addOrder(Order.desc("percentage"));
+		criteria.setMaxResults(1);
 		return (AdShown)criteria.uniqueResult();
 	}
 }
