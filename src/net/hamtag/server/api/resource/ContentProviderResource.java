@@ -8,25 +8,31 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import net.hamtag.server.api.request.types.contentproviders.GetContentProvidersByCategoryRequest;
-import net.hamtag.server.api.request.types.device.android.GetAllProviderInfoRequest;
+import net.hamtag.server.api.request.types.contentproviders.panel.AddNewProviderRequest;
+import net.hamtag.server.api.request.types.contentproviders.panel.GetAllProviderInfoRequest;
 
-@Path("/content-providers/")
+@Path("/content-providers-panel/")
 public class ContentProviderResource {
 	@POST
-	@Path("/sync/")
+	@Path("/all/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getProviderInfo(@QueryParam("token") String token,
 			@QueryParam("phone-number") String phoneNumber){
-		return new GetAllProviderInfoRequest(phoneNumber, token).handle() ;
+		return new GetAllProviderInfoRequest().handle();
 	}
+/*	Example Json:
+	{
+	    "providername" : "hamshahri",
+	    "categories" : [
+	        "FILM","SPORTS"]
+	    
+	}*/
 	@POST
-	@Path("/category/")
+	@Path("/add/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getProvidersByCategory(@QueryParam("token") String token,
-			@QueryParam("phone-number") String phoneNumber,@QueryParam("category-id") String categoryId){
-		return new GetContentProvidersByCategoryRequest(phoneNumber, token, categoryId).handle();
+	public Response addNewProvider(String requestJson){
+		return new AddNewProviderRequest(requestJson).handle();
 	}
 }

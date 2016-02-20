@@ -9,8 +9,11 @@ import java.util.Set;
 
 import javax.ws.rs.core.Response;
 
+import org.hibernate.Query;
+
 import net.hamtag.server.api.request.types.news.GetNewsByCategoryForDeviceRequest;
 import net.hamtag.server.api.resource.NewsResourceAndroid;
+import net.hamtag.server.core.RootMgr;
 import net.hamtag.server.datatypes.ad.Ad;
 import net.hamtag.server.datatypes.ad.AdContent;
 import net.hamtag.server.datatypes.ad.AdContentMgr;
@@ -95,6 +98,9 @@ public class Main {
 		}
 		nc.setContent(bFile);
 		NewsContentMgr.add(nc);*/
-		System.out.println(DeviceMgr.getTotalDebt());
+//		System.out.println(DeviceMgr.getTotalDebt());
+		Query query=RootMgr.getInstance().createSQLQuery("select count(id) from ad_display ac where ac.adid in (select distinct id from ads ad where ad.id in(select adid from ad_category where categoryid=1))");
+		System.out.println(query.uniqueResult());
+		
 	}
 }
