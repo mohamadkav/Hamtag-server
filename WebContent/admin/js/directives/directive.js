@@ -1,1 +1,0 @@
-var directivesModule = angular.module("lbs-panel-directives" , []);

@@ -1,1 +1,0 @@
-var servicesModule = angular.module("lbs-panel-services" , ['restangular']);
