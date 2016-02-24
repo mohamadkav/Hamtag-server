@@ -1,0 +1,86 @@
+<div style="direction:rtl;font-family:monospace">		
+	<div class="modal-header">
+        <h2 style="font-family:cursive;font-size:25px;font-style:italic;font-weight:bold;text-align:center;">{{product.title}}</h2>
+    </div>
+    <div class="modal-body">
+    	<span ng-switch on="inEditMode">
+	    	<table class="table table-hover center-aligned-table">
+	    		<thead>
+	    			<tr class="warning">
+	    				<th>توضیحات نقشه</th>
+	    				<th>gid محصول</th>
+	    				<th>قیمت</th>
+	    				<th>sku</th>
+	    			</tr>
+	    		</thead>
+	    		<tbody>
+	    			<tr ng-switch-when="false">
+	    				<td>{{product.description}}</td>
+	    				<td>{{product.gid}}</td>
+	    				<td>{{product.price}}</td>
+	    				<td>{{product.sku}}</td>
+	    			</tr>
+	    			<tr ng-switch-when="true">
+	    				<td><input class="modal-form" type="text" ng-model="product.description"></td>
+	    				<!-- <td><input class="modal-form" type="text" ng-model="product.gid"></td> -->
+	    				<td>{{product.gid}}</td>
+	    				<td><input class="modal-form" type="text" ng-model="product.price"></td>
+	    				<!-- <td><input class="modal-form" type="text" ng-model="product.sku"></td> -->
+	    				<td>{{product.sku}}</td>
+	    			</tr>
+	    		</tbody>
+	    	</table>
+    	</span>
+
+    	<table class="table table-bordered center-aligned-table">
+    		<thead>
+    			<caption>آیتم ها</caption>
+    			<tr class="success">
+    				<th>عنوان</th>
+    				<th>نوع</th>
+    				<th>توضیحات</th>
+    				<th>زوم</th>
+    				<th>gid</th>
+    				<th>gid نقشه</th>
+    				<th>سایز فایل</th>
+    				<th>checksum</th>
+    				<td ng-show="inEditMode">ویرایش/حذف</td>
+    			</tr>
+    		</thead>
+    		<tbody>
+    		
+    			<tr ng-repeat="item in product.items" ng-hide="item.is_deleted">
+    <!--    	<td>{{item}}</td> -->
+    				<td ng-hide="itemEditMode[$index]">{{item.title}}</td>
+    				<td ng-hide="itemEditMode[$index]">{{item.item_type}}</td>
+    				<td ng-hide="itemEditMode[$index]">{{item.description}}</td>
+    				<td ng-hide="itemEditMode[$index]">{{item.zoom_level}}</td>
+    				<td ng-hide="itemEditMode[$index]">{{item.gid}}</td>
+    				<td ng-hide="itemEditMode[$index]">{{item.map_gid}}</td>
+    				<td ng-hide="itemEditMode[$index]">{{item.file_size}}</td>
+    				<td ng-hide="itemEditMode[$index]">{{item.file_checksum}}</td>
+    				<td  ng-show="inEditMode&&!itemEditMode[$index]">
+    					<i class="glyphicon glyphicon-edit" style="cursor:pointer" ng-click="editItem($index)"></i>
+    					<i class="glyphicon glyphicon-remove" style="cursor:pointer" ng-click="deleteItem($index)"></i>
+    				</td>
+
+    				<td ng-show="itemEditMode[$index]"><input class="modal-form" type="text" ng-model="item.title"></td>
+    				<td ng-show="itemEditMode[$index]"><input class="modal-form" type="text" ng-model="item.item_type"></td>
+    				<td ng-show="itemEditMode[$index]"><input class="modal-form" type="text" ng-model="item.description">{{item.}}</td>
+    				<td ng-show="itemEditMode[$index]"><input class="modal-form" type="text" ng-model="item.zoom_level"></td>
+    				<td ng-show="itemEditMode[$index]">{{item.gid}}</td>
+    				<td ng-show="itemEditMode[$index]">{{item.map_gid}}</td>
+    				<td ng-show="itemEditMode[$index]"><input class="modal-form" type="text" ng-model="item.file_size"></td>
+    				<td ng-show="itemEditMode[$index]"><input class="modal-form" type="text" ng-model="item.file_checksum"></td>
+    				<td ng-show="itemEditMode[$index]&&inEditMode">
+    					<i class="glyphicon glyphicon-check" style="cursor:pointer" ng-click="updateItem($index)"></i>
+    				</td>
+    			</tr>
+    		</tbody>
+    	</table>
+    </div>
+    <div class="modal-footer" style="text-align:center">
+    	<button ng-hide="inEditMode" class="btn btn-warning" ng-click="toggleEditMode()">ویرایش</button>
+    	<button ng-show="inEditMode" class="btn btn-primary" ng-click="updateProduct()">ذخیره</button>
+    </div>
+</div>

@@ -47,6 +47,7 @@
 	<mapping class="net.hamtag.server.datatypes.user.User"/>
 	<mapping class="net.hamtag.server.datatypes.user.UserRole"/>
 	<mapping class="net.hamtag.server.datatypes.contentprovider.ContentProvider"/>
+	<mapping class="net.hamtag.server.datatypes.device.GCMEntity"/>
 	
 
 </session-factory>

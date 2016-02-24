@@ -40,6 +40,9 @@ public class Device {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "device")
 	private Set<MoneyWithdrawal> moneyWithdrawal;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "device")
+	private Set<GCMEntity> gcmEntities;
 
 	@Column(name = "PHONE_NUMBER", unique = true, nullable = false)
 	private String phoneNumber;
@@ -165,5 +168,13 @@ public class Device {
 
 	public void setLikedNews(Set<News> likedNews) {
 		this.likedNews = likedNews;
+	}
+
+	public Set<GCMEntity> getGcmEntities() {
+		return gcmEntities;
+	}
+
+	public void setGcmEntities(Set<GCMEntity> gcmEntities) {
+		this.gcmEntities = gcmEntities;
 	}
 }

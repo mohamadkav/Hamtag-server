@@ -18,6 +18,7 @@ import net.hamtag.server.api.request.types.device.android.LoginDeviceRequest;
 import net.hamtag.server.api.request.types.device.android.NewDeviceRequest;
 import net.hamtag.server.api.request.types.device.android.NewDeviceRequestWithEmail;
 import net.hamtag.server.api.request.types.device.android.NewVersionRequest;
+import net.hamtag.server.api.request.types.device.android.SetOrUpdateGCMTokenRequest;
 import net.hamtag.server.api.request.types.device.android.UpdateCredentialsRequest;
 
 @Path("/devices/")
@@ -93,6 +94,15 @@ public class DeviceResourceAndroid {
 	public Response getDeviceInfo(@QueryParam("token") String token,
 			@QueryParam("phone-number") String phoneNumber){
 		return new GetDeviceInfoRequest(phoneNumber, token).handle() ;
+	}
+	
+	@POST
+	@Path("/gcm")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateGCMToken(@QueryParam("gcm-token") String gcmToken,@QueryParam("token") String token,
+			@QueryParam("phone-number") String phoneNumber){
+		return new SetOrUpdateGCMTokenRequest(gcmToken, token, phoneNumber).handle();
 	}
 	
 /*	//Example: http://localhost:8080/Hamtag/resource/devices/categories/update/?categories=SPORTS,FILM&phone=0912&token=123

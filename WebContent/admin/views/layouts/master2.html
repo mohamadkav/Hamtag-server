@@ -1,0 +1,32 @@
+<div ng-controller="MasterCtrl">
+	<div class="navbar navbar-inverse navbar-fixed-top my-navbar" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header navbar-right">
+				<a class="navbar-brand" href="#" style="font-size:24px; margin-right: -15px;">پنل مدیریت سیستم مکان یاب</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-left">
+					<li><a href="#">یه چیز دیگه</a></li>
+					<li><a href="#">ارتباط با ما</a></li>
+					<li><a href="#">درباره</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-9 col-md-10 master-main">
+				<div style="margin-top:80px;font-family:'Tahoma';font-size:13px" ng-view></div>
+			</div>
+			<div class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 master-sidebar">
+				<ul class="nav sidebar-menu">
+					<!-- <li ng-class="returnActiveClass('send-notifications')"><a href="#/send-notifications"><i class="glyphicon glyphicon-send"></i> ارسال اعلان</a></li> -->
+					<!-- <li ng-class="returnActiveClass('send-declaration')" ng-click="setCurrentUrl('send-declaration')"><a href="#"><i class="glyphicon glyphicon-inbox"></i> دریافت گزارش ها</a></li> -->
+					<li ng-class="returnActiveClass('send-map')"><a href="#/send-map"><i class="glyphicon glyphicon-globe"></i> نقشه ها</a></li>
+					<li ng-class="returnActiveClass('define-product')"><a href="#/define-product"><i class="glyphicon glyphicon-barcode"></i> محصولات</a></li>
+					<li ng-class="returnActiveClass('send-notifications')"><a href="#/send-notifications"><i class="glyphicon glyphicon-exclamation-sign"></i>یه چیزای دیگه</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
