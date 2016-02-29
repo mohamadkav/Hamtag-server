@@ -57,7 +57,7 @@ public class DeviceResourceAndroid {
 	}
 	
 	@POST
-	@Path("/forgot/confirm/{number}/{token}")
+	@Path("/forgot/confirm/{number}/{token}/{password}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response confirmForgotPassword(@PathParam("number")String number,@PathParam("token")String token,@PathParam("password")String password){
 		return new ConfirmForgotPasswordRequest(number,token,password).handle();
