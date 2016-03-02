@@ -16,6 +16,7 @@ public class CsrfSecurityRequestMatcher implements RequestMatcher {
         if(allowedMethods.matcher(request.getMethod()).matches()){
             return false;
         }
+        //TODO: Check to see the resource pattern in protected with csrf...
         return !unprotectedMatcher.matches(request);
     }
 }

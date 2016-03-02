@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import net.hamtag.server.datatypes.device.Device;
+import net.hamtag.server.datatypes.device.DeviceMgr;
 import net.hamtag.server.datatypes.user.User;
 import net.hamtag.server.datatypes.user.UserMgr;
 import net.hamtag.server.datatypes.user.UserRole;
@@ -23,16 +25,24 @@ public class MyUserDetailsService implements UserDetailsService {
 		throws UsernameNotFoundException {
 	
 		User user=UserMgr.getByUsername(username);
-		if(user==null)
+		Device device=DeviceMgr.getDeviceByPhoneNumber(username);
+		if(user==null&&device==null)
 			throw new UsernameNotFoundException("Username not found in DB");
-		List<GrantedAuthority> authorities = 
-                                      buildUserAuthority(user.getUserRoles());
+		if(user!=null){
+			List<GrantedAuthority> authorities = 
+						buildUserAuthority(user.getUserRoles());
 
 		return buildUserForAuthentication(user, authorities);
-		
+		}
+		else {
+			List<GrantedAuthority> setAuths = new ArrayList<GrantedAuthority>();
+			setAuths.add(new SimpleGrantedAuthority("ROLE_DEVICE"));
+			return new org.springframework.security.core.userdetails.User(device.getPhoneNumber(),device.getPassword(), 
+					true, true, true, true, setAuths);
+		}
 	}
 
-	// Converts com.mkyong.users.model.User user to
+	// Converts User to
 	// org.springframework.security.core.userdetails.User
 	private org.springframework.security.core.userdetails.User buildUserForAuthentication(User user, 
 		List<GrantedAuthority> authorities) {
