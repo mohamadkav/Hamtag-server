@@ -7,11 +7,13 @@ import java.util.Set;
 
 import javax.ws.rs.core.Response;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import net.hamtag.server.api.request.types.BaseWebPanelRequest;
 import net.hamtag.server.api.response.HamtagResponse;
 import net.hamtag.server.api.response.types.device.ProviderInfoDTO;
 import net.hamtag.server.datatypes.contentprovider.ContentProvider;
-import net.hamtag.server.datatypes.contentprovider.ContentProviderMgr;
+import net.hamtag.server.datatypes.user.UserMgr;
 
 public class GetAllProviderInfoRequest extends BaseWebPanelRequest{
 	public GetAllProviderInfoRequest(){}
@@ -23,7 +25,7 @@ public class GetAllProviderInfoRequest extends BaseWebPanelRequest{
 		if(response!=null)
 			return response;
 		List<ProviderInfoDTO>dtos=new ArrayList<>();
-		for(ContentProvider cp:ContentProviderMgr.list()){
+		for(ContentProvider cp:UserMgr.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).getVisibleProviders()){
 			ProviderInfoDTO dto=new ProviderInfoDTO();
 			dto.setId(cp.getId());
 			dto.setName(cp.getName());

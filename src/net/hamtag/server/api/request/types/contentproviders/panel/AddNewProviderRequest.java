@@ -14,6 +14,9 @@ import net.hamtag.server.datatypes.category.Category;
 import net.hamtag.server.datatypes.category.CategoryMgr;
 import net.hamtag.server.datatypes.contentprovider.ContentProvider;
 import net.hamtag.server.datatypes.contentprovider.ContentProviderMgr;
+import net.hamtag.server.datatypes.user.User;
+import net.hamtag.server.datatypes.user.UserMgr;
+import net.hamtag.server.datatypes.user.UserRole;
 
 public class AddNewProviderRequest extends BaseWebPanelRequest{
 	String requestJson;
@@ -51,6 +54,20 @@ public class AddNewProviderRequest extends BaseWebPanelRequest{
 		contentProvider.setCategories(categories);
 		contentProvider.setName(requestInputJson.getProviderName());
 		ContentProviderMgr.add(contentProvider);
+		for(User user:UserMgr.list()){
+			boolean auth=false;
+			Set<UserRole>allRoles=user.getUserRoles();
+			for(UserRole ur:allRoles){
+				if(ur.getRole().equals("ROLE_ADMIN")){
+					auth=true;
+					break;
+				}
+			}
+			if(auth){
+				user.addNewProvider(contentProvider);
+				UserMgr.update(user);
+			}
+		}
 		return new HamtagResponse().getResponse(null);
 	}
 }

@@ -18,6 +18,7 @@ import javax.persistence.Table;
 
 import net.hamtag.server.datatypes.category.Category;
 import net.hamtag.server.datatypes.news.News;
+import net.hamtag.server.datatypes.user.User;
 
 @Entity
 @Table(name = "CONTENT_PROVIDERS")
@@ -40,6 +41,9 @@ public class ContentProvider {
 			@JoinColumn(name = "CONTENTPROVIDERID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "CATEGORYID", nullable = false, updatable = false) })
 	private Set<Category> categories;
+	
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "visibleProviders")
+	private Set<User>shownToWhichUsers;
 
 	public Long getId() {
 		return id;
@@ -72,4 +76,13 @@ public class ContentProvider {
 	public void setCategories(Set<Category> categories) {
 		this.categories = categories;
 	}
+
+	public Set<User> getShownToWhichUsers() {
+		return shownToWhichUsers;
+	}
+
+	public void setShownToWhichUsers(Set<User> shownToWhichUsers) {
+		this.shownToWhichUsers = shownToWhichUsers;
+	}
+	
 }

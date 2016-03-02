@@ -1,4 +1,4 @@
-package net.hamtag.server.api.request.types.news;
+package net.hamtag.server.api.request.types.news.android;
 
 import java.util.ArrayList;
 import java.util.List;

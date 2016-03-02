@@ -1,18 +1,24 @@
 package net.hamtag.server.datatypes.user;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import net.hamtag.server.datatypes.ad.Ad;
+import net.hamtag.server.datatypes.contentprovider.ContentProvider;
 import net.hamtag.server.datatypes.news.News;
 
 @Entity
@@ -34,7 +40,7 @@ public class User {
 	@Column(name = "ENABLED")
 	private Boolean enabled;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private Set<UserRole> userRoles;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
@@ -43,6 +49,23 @@ public class User {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<News> newsMadeByUser;
 	
+	@JoinColumn
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "USER_VISIBLE_CONTENT_PROVIDERS", joinColumns = {
+			@JoinColumn(name = "USERID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "PROVIDERID", nullable = false, updatable = false) })
+	private Set<ContentProvider> visibleProviders;
+	
+	public boolean addNewProvider(ContentProvider contentProvider){
+		if(visibleProviders==null){
+			visibleProviders=new HashSet<>();
+			visibleProviders.add(contentProvider);
+			return true;
+		}
+		else
+			visibleProviders.add(contentProvider);
+		return true;
+	}
 	
 	public Long getId() {
 		return id;
@@ -86,6 +109,11 @@ public class User {
 	public void setNewsMadeByUser(Set<News> newsMadeByUser) {
 		this.newsMadeByUser = newsMadeByUser;
 	}
-	
+	public Set<ContentProvider> getVisibleProviders() {
+		return visibleProviders;
+	}
+	public void setVisibleProviders(Set<ContentProvider> visibleProviders) {
+		this.visibleProviders = visibleProviders;
+	}
 	
 }

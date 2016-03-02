@@ -8,12 +8,12 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import net.hamtag.server.api.request.types.news.GetAllCategoriesRequest;
-import net.hamtag.server.api.request.types.news.GetNewsByCategoryForDeviceRequest;
-import net.hamtag.server.api.request.types.news.GetNewsByProviderRequest;
-import net.hamtag.server.api.request.types.news.GetNewsContentRequest;
-import net.hamtag.server.api.request.types.news.NewsLikeRequest;
-import net.hamtag.server.api.request.types.news.NewsShownRequest;
+import net.hamtag.server.api.request.types.news.android.GetAllCategoriesRequest;
+import net.hamtag.server.api.request.types.news.android.GetNewsByCategoryForDeviceRequest;
+import net.hamtag.server.api.request.types.news.android.GetNewsByProviderRequest;
+import net.hamtag.server.api.request.types.news.android.GetNewsContentRequest;
+import net.hamtag.server.api.request.types.news.android.NewsLikeRequest;
+import net.hamtag.server.api.request.types.news.android.NewsShownRequest;
 
 @Path("/news/")
 public class NewsResourceAndroid {

@@ -6,7 +6,7 @@ import java.util.List;
 import javax.ws.rs.core.Response;
 
 import net.hamtag.server.api.request.types.BaseDeviceRequest;
-import net.hamtag.server.api.request.types.news.GetNewsByCategoryForDeviceRequest;
+import net.hamtag.server.api.request.types.news.android.GetNewsByCategoryForDeviceRequest;
 import net.hamtag.server.api.response.HamtagResponse;
 import net.hamtag.server.api.response.types.ads.AdDTO;
 import net.hamtag.server.datatypes.ad.Ad;

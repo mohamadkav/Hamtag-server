@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 
 import org.hibernate.Query;
 
-import net.hamtag.server.api.request.types.news.GetNewsByCategoryForDeviceRequest;
+import net.hamtag.server.api.request.types.news.android.GetNewsByCategoryForDeviceRequest;
 import net.hamtag.server.api.resource.NewsResourceAndroid;
 import net.hamtag.server.core.RootMgr;
 import net.hamtag.server.datatypes.ad.Ad;
@@ -20,6 +20,8 @@ import net.hamtag.server.datatypes.ad.AdContentMgr;
 import net.hamtag.server.datatypes.ad.AdMgr;
 import net.hamtag.server.datatypes.category.Category;
 import net.hamtag.server.datatypes.category.CategoryMgr;
+import net.hamtag.server.datatypes.contentprovider.ContentProvider;
+import net.hamtag.server.datatypes.contentprovider.ContentProviderMgr;
 import net.hamtag.server.datatypes.corporation.Corporation;
 import net.hamtag.server.datatypes.corporation.CorporationMgr;
 import net.hamtag.server.datatypes.device.Device;
@@ -27,6 +29,8 @@ import net.hamtag.server.datatypes.device.DeviceMgr;
 import net.hamtag.server.datatypes.news.News;
 import net.hamtag.server.datatypes.news.NewsMgr;
 import net.hamtag.server.datatypes.news.NewsShownMgr;
+import net.hamtag.server.datatypes.user.User;
+import net.hamtag.server.datatypes.user.UserMgr;
 public class Main {
 	public static void main(String[] args) {
 /*		for(Category c:DeviceMgr.getDeviceByPhoneNumber("0912").getCategories())
@@ -99,8 +103,14 @@ public class Main {
 		nc.setContent(bFile);
 		NewsContentMgr.add(nc);*/
 //		System.out.println(DeviceMgr.getTotalDebt());
-		Query query=RootMgr.getInstance().createSQLQuery("select count(id) from ad_display ac where ac.adid in (select distinct id from ads ad where ad.id in(select adid from ad_category where categoryid=1))");
-		System.out.println(query.uniqueResult());
-		
+//		Query query=RootMgr.getInstance().createSQLQuery("select count(id) from ad_display ac where ac.adid in (select distinct id from ads ad where ad.id in(select adid from ad_category where categoryid=1))");
+//		System.out.println(query.uniqueResult());
+/*		List<ContentProvider>prov=ContentProviderMgr.list();
+		Set <ContentProvider>toset=new HashSet<ContentProvider>(prov);
+		for(User u:UserMgr.list()){
+			u.setVisibleProviders(toset);
+			UserMgr.update(u);
+		}*/
+		System.out.println(new Date().getTime());
 	}
 }
