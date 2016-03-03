@@ -111,6 +111,12 @@ public class Main {
 			u.setVisibleProviders(toset);
 			UserMgr.update(u);
 		}*/
-		System.out.println(new Date().getTime());
+/*		List<Corporation>prov=CorporationMgr.list();
+		Set <Corporation>toset=new HashSet<Corporation>(prov);
+		for(User u:UserMgr.list()){
+			u.setVisibleCorporations(toset);
+			UserMgr.update(u);
+		}
+		System.out.println(new Date().getTime());*/
 	}
 }

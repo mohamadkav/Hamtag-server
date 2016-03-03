@@ -19,6 +19,7 @@ import javax.persistence.Table;
 
 import net.hamtag.server.datatypes.ad.Ad;
 import net.hamtag.server.datatypes.contentprovider.ContentProvider;
+import net.hamtag.server.datatypes.corporation.Corporation;
 import net.hamtag.server.datatypes.news.News;
 
 @Entity
@@ -56,6 +57,13 @@ public class User {
 					@JoinColumn(name = "PROVIDERID", nullable = false, updatable = false) })
 	private Set<ContentProvider> visibleProviders;
 	
+	@JoinColumn
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "USER_VISIBLE_CORPORATIONS", joinColumns = {
+			@JoinColumn(name = "USERID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "CORPORATIONID", nullable = false, updatable = false) })
+	private Set<Corporation> visibleCorporations;
+	
 	public boolean addNewProvider(ContentProvider contentProvider){
 		if(visibleProviders==null){
 			visibleProviders=new HashSet<>();
@@ -64,6 +72,17 @@ public class User {
 		}
 		else
 			visibleProviders.add(contentProvider);
+		return true;
+	}
+	
+	public boolean addNewCorporation(Corporation corporation){
+		if(visibleCorporations==null){
+			visibleCorporations=new HashSet<>();
+			visibleCorporations.add(corporation);
+			return true;
+		}
+		else
+			visibleCorporations.add(corporation);
 		return true;
 	}
 	
@@ -114,6 +133,14 @@ public class User {
 	}
 	public void setVisibleProviders(Set<ContentProvider> visibleProviders) {
 		this.visibleProviders = visibleProviders;
+	}
+
+	public Set<Corporation> getVisibleCorporations() {
+		return visibleCorporations;
+	}
+
+	public void setVisibleCorporations(Set<Corporation> visibleCorporations) {
+		this.visibleCorporations = visibleCorporations;
 	}
 	
 }

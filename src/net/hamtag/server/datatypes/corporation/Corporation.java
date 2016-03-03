@@ -9,10 +9,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import net.hamtag.server.datatypes.ad.Ad;
+import net.hamtag.server.datatypes.user.User;
 
 @Entity
 @Table(name = "CORPORATIONS")
@@ -28,6 +30,9 @@ public class Corporation {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "corporation")
 	private Set<Ad> ads;
+	
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "visibleCorporations")
+	private Set<User>shownToWhichUsers;
 
 	public Long getId() {
 		return id;
@@ -53,4 +58,11 @@ public class Corporation {
 		this.name = name;
 	}
 
+	public Set<User> getShownToWhichUsers() {
+		return shownToWhichUsers;
+	}
+
+	public void setShownToWhichUsers(Set<User> shownToWhichUsers) {
+		this.shownToWhichUsers = shownToWhichUsers;
+	}
 }
