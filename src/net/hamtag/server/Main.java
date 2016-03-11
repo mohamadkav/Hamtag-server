@@ -102,7 +102,7 @@ public class Main {
 		}
 		nc.setContent(bFile);
 		NewsContentMgr.add(nc);*/
-//		System.out.println(DeviceMgr.getTotalDebt());
+		System.out.println(new Date().getTime());
 //		Query query=RootMgr.getInstance().createSQLQuery("select count(id) from ad_display ac where ac.adid in (select distinct id from ads ad where ad.id in(select adid from ad_category where categoryid=1))");
 //		System.out.println(query.uniqueResult());
 /*		List<ContentProvider>prov=ContentProviderMgr.list();

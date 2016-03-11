@@ -86,6 +86,13 @@ public class User {
 		return true;
 	}
 	
+	public boolean isAdmin(){
+		for(UserRole ur:this.getUserRoles())
+			if(ur.getRole().equals("ROLE_ADMIN"))
+				return true;
+		return false;
+	}
+	
 	public Long getId() {
 		return id;
 	}

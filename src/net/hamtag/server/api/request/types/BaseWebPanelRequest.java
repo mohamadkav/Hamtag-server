@@ -31,4 +31,7 @@ public abstract class BaseWebPanelRequest extends BaseRequest{
 			return new HamtagResponse(Error.AUTH_FAILED).getResponse(Response.Status.FORBIDDEN);
 		}
 	}
+	public User getAuthenticatedUser(){
+		return UserMgr.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+	}
 }

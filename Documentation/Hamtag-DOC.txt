@@ -1,0 +1,30 @@
+Count no. of users who have seen following attributes in News:
+
+http://localhost:8080/Hamtag/resource/adpanel/count
+
+Json input:
+{
+"categories":["FILM","SPORTS"],
+"min-price":100,
+"max-price":200
+}
+
+
+http://localhost:8080/Hamtag/resource/adpanel/add
+Json input:
+{
+"categories":["FILM","SPORTS"],
+"title":"Tiiiitle",
+"text":"Tabliiigh ast",
+"address":"Ooonja",
+"comments":"are khooolaawwse",
+"link":"https://hamtag.tk/",
+"location":"34.3.332423.5.3.5",
+"phone-number":"021",
+"price":"100",
+"corporation-id":1
+}
+
+http://localhost:8080/Hamtag/resource/adpanel/get/?max-results=6&last-publish-time=1457706768875
+{"success":true,"error":null,"original_response":[{"id":1,"price":"100","link":"https://hamtag.tk/","phone":"021","description":null,"title":"Tiiiitle","location":"34.3.332423.5.3.5","address":"Ooonja","comments":"are khooolaawwse","corporation":"Golrang","contentInfos":[],"categories":["FILM","SPORTS"]}],"response_type":"normal_response"}
+

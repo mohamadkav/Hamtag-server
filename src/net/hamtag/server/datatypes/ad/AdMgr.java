@@ -2,7 +2,10 @@ package net.hamtag.server.datatypes.ad;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import net.hamtag.server.core.RootMgr;
@@ -28,6 +31,20 @@ public class AdMgr extends RootMgr {
 			criteria.setMaxResults(Integer.parseInt(maxNumber));
 		criteria.add(Restrictions.eq("isRelatedToNews", false));
 		criteria.add(Restrictions.sqlRestriction(Config.DATABASE_RANDOM_QUERY));
+		return criteria.list();
+	}
+	@SuppressWarnings("unchecked")
+	public static List<Ad>getAdsByPublishTime(int maxResults,Date lastPublishTime,Set<Corporation> corporations){
+		Criteria criteria=getInstance().createCriteria(Ad.class);
+		if(maxResults>Config.DEFAULT_MAX_RESULTS)
+			criteria.setMaxResults(Config.DEFAULT_MAX_RESULTS);
+		else
+			criteria.setMaxResults(maxResults);
+		criteria.add(Restrictions.le("publishTime", lastPublishTime));
+		if(corporations!=null&&!corporations.isEmpty()){
+			criteria.add(Restrictions.in("corporation", corporations));
+		}
+		criteria.addOrder(Order.desc("publishTime"));
 		return criteria.list();
 	}
 	@SuppressWarnings("unchecked")
