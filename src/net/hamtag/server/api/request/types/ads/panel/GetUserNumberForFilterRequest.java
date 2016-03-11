@@ -18,7 +18,7 @@ import net.hamtag.server.datatypes.category.CategoryMgr;
 
 public class GetUserNumberForFilterRequest extends BaseWebPanelRequest {
 	String requestJson;
-	AdsToSendRequestJson requestInputJson;
+	AdReportRequestJson requestInputJson;
 
 	private enum Error {
 		CATEGORY_DOES_NOT_EXIST, JSON_PARSE_EXCEPTION,
@@ -36,7 +36,7 @@ public class GetUserNumberForFilterRequest extends BaseWebPanelRequest {
 			return response;
 		try {
 			this.requestInputJson = new ObjectMapper().readValue(requestJson,
-					AdsToSendRequestJson.class);
+					AdReportRequestJson.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return new HamtagResponse(Error.JSON_PARSE_EXCEPTION)

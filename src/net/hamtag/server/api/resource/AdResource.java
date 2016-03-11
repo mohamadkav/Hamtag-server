@@ -8,6 +8,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import net.hamtag.server.api.request.types.ads.panel.AdShownReportRequest;
 import net.hamtag.server.api.request.types.ads.panel.AddAdRequest;
 import net.hamtag.server.api.request.types.ads.panel.GetAdsRequest;
 import net.hamtag.server.api.request.types.ads.panel.GetUserNumberForFilterRequest;
@@ -34,5 +35,12 @@ public class AdResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getUserNumberForAdSending(String requestJson){
 		return new GetUserNumberForFilterRequest(requestJson).handle();
+	}
+	@POST
+	@Path("/report")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getShownAdCount(String requestJson){
+		return new AdShownReportRequest(requestJson).handle();
 	}
 }

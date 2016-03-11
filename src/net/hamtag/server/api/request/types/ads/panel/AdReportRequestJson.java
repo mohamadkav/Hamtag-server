@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class AdsToSendRequestJson {
+public class AdReportRequestJson {
 	@JsonProperty("categories")
 	private List<String>categories;
 	@JsonProperty("min-price")
