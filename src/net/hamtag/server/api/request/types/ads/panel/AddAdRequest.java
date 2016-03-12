@@ -34,7 +34,8 @@ public class AddAdRequest extends BaseWebPanelRequest{
 		CATEGORIES_MUST_BE_SELECTED,
 		JSON_PARSE_EXCEPTION,
 		CORPORATION_VISIBILITY_ERROR,
-		CORPORATION_NOT_FOUND
+		CORPORATION_NOT_FOUND,
+		AD_NOT_FOUND_FOR_UPDATE
 	}
 	public Response handle(){
 		Set<String>authorizedRoles=new HashSet<>();
@@ -74,7 +75,14 @@ public class AddAdRequest extends BaseWebPanelRequest{
 				return new HamtagResponse(Error.CORPORATION_VISIBILITY_ERROR).getResponse(Response.Status.BAD_REQUEST);
 		}
 		
-		Ad ad=new Ad();
+		Ad ad;
+		if(requestInputJson.getId()!=null){
+			ad=AdMgr.getInstance().get(Ad.class, requestInputJson.getId());
+			if(ad==null)
+				return new HamtagResponse(Error.AD_NOT_FOUND_FOR_UPDATE).getResponse(Response.Status.BAD_REQUEST);
+		}
+		else
+			ad=new Ad();
 		ad.setCategories(categories);
 		ad.setAddress(requestInputJson.getAddress());
 		ad.setComments(requestInputJson.getComments());
@@ -85,9 +93,14 @@ public class AddAdRequest extends BaseWebPanelRequest{
 		ad.setPhone(requestInputJson.getPhoneNumber());
 		ad.setPrice(requestInputJson.getPrice());
 		ad.setPublishTime(new Date());
-		ad.setUser(user);
 		ad.setIsRelatedToNews(false);
-		AdMgr.add(ad);
+		if(requestInputJson.getId()!=null){
+			AdMgr.update(ad);
+		}
+		else{
+			ad.setUser(user);
+			AdMgr.add(ad);
+		}
 		return new HamtagResponse().getResponse(null);
 	}
 

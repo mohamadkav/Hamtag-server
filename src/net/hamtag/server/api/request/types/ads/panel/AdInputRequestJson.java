@@ -5,6 +5,8 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AdInputRequestJson {
+	@JsonProperty("id")
+	private Long id;
 	@JsonProperty("categories")
 	private List<String>categories;
 	@JsonProperty("title")
@@ -84,6 +86,11 @@ public class AdInputRequestJson {
 	}
 	public void setCorporationId(Long corporationId) {
 		this.corporationId = corporationId;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}	
-	
 }
