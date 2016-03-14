@@ -52,9 +52,9 @@ public class GetAdsRequest extends BaseWebPanelRequest{
 			fromDate=new Date(Long.parseLong(lastPublishTime));
 		List<Ad>allAds;
 		if(!canGetAll)
-			allAds=AdMgr.getAdsByPublishTime(max, fromDate, user.getVisibleCorporations());
+			allAds=AdMgr.getAdsByPublishTime(max, fromDate, user.getVisibleCorporations(),false);
 		else
-			allAds=AdMgr.getAdsByPublishTime(max, fromDate, null);
+			allAds=AdMgr.getAdsByPublishTime(max, fromDate, null,true);
 		List<AdDTO>dtos=new ArrayList<>();
 		for(Ad ad:allAds){
 			AdDTO dto=new AdDTO();

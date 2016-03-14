@@ -14,6 +14,7 @@ import net.hamtag.server.core.RootMgr;
 import net.hamtag.server.datatypes.corporation.Corporation;
 import net.hamtag.server.datatypes.device.Device;
 import net.hamtag.server.utils.Config;
+import net.hamtag.server.utils.DateUtils;
 
 public class AdShownMgr extends RootMgr{
 /*	@SuppressWarnings("unchecked")
@@ -60,5 +61,12 @@ public class AdShownMgr extends RootMgr{
 		criteria.addOrder(Order.desc("percentage"));
 		criteria.setMaxResults(1);
 		return (AdShown)criteria.uniqueResult();
+	}
+	public static Long getCountShownForDay(Date day){
+		Criteria criteria=getInstance().createCriteria(AdShown.class);
+		criteria.setProjection(Projections.rowCount());
+		criteria.add(Restrictions.ge("showDate", DateUtils.getStartOfDay(day)));
+		criteria.add(Restrictions.le("showDate", DateUtils.getEndOfDay(day)));
+		return (Long)criteria.uniqueResult();
 	}
 }

@@ -84,7 +84,7 @@ public class AddNewsRequest extends BaseWebPanelRequest {
 		news.setUser(user);
 		news.setId(null);
 		NewsMgr.add(news);
-		return new HamtagResponse().getResponse(null);
+		return new HamtagResponse(news.getId()).getResponse(null);
 	}
 
 }

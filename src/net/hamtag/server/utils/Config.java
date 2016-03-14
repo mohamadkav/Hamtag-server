@@ -16,4 +16,6 @@ public class Config {
 	public static final String emailSubject="کد فعالسازی";
 	public static final int DAYS_THAT_DEVICE_CONSIDERS_ACTIVE=2;
 	public static final int MAXIMUM_CHARGE=2000;
+	public static final String NEWS_UPLOAD_LOCATION_FOLDER="/home/mohammad/upload/news";
+	public static final String ADS_UPLOAD_LOCATION_FOLDER="/home/mohammad/upload/ads";
 }

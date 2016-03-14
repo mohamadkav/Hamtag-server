@@ -13,7 +13,7 @@ import net.hamtag.server.datatypes.ad.AdShownMgr;
 import net.hamtag.server.datatypes.device.Device;
 import net.hamtag.server.datatypes.device.DeviceMgr;
 import net.hamtag.server.utils.Config;
-import net.hamtag.server.utils.DateValidator;
+import net.hamtag.server.utils.DateUtils;
 
 public class AdShownRequest extends BaseDeviceRequest{
 	private enum Error{
@@ -43,7 +43,7 @@ public class AdShownRequest extends BaseDeviceRequest{
 		double chargeToAdd=(double)ad.getPrice()*(Double.parseDouble(percentage)/100);
 		if(chargeToAdd<0||chargeToAdd>Config.MAXIMUM_CHARGE||Double.parseDouble(percentage)>100)
 			return new HamtagResponse(Error.INVALID_REQUEST).getResponse(Response.Status.BAD_REQUEST);
-		if(!DateValidator.validateLongStringDate(shownDate))
+		if(!DateUtils.validateLongStringDate(shownDate))
 			return new HamtagResponse(Error.DATE_INVALID).getResponse(Response.Status.BAD_REQUEST);
 		try{
 			Integer.parseInt(shownSeconds);

@@ -101,7 +101,7 @@ public class AddAdRequest extends BaseWebPanelRequest{
 			ad.setUser(user);
 			AdMgr.add(ad);
 		}
-		return new HamtagResponse().getResponse(null);
+		return new HamtagResponse(ad.getId()).getResponse(null);
 	}
 
 }

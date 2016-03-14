@@ -2,8 +2,10 @@ package net.hamtag.server.datatypes.news;
 
 import java.util.Date;
 import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import net.hamtag.server.core.RootMgr;
@@ -61,5 +63,10 @@ public class NewsMgr extends RootMgr{
 		}
 		criteria.addOrder(Order.desc("publishTime"));
 		return criteria.list();
+	}
+	public static Long getAllNewsCount(){
+		Criteria criteria=getInstance().createCriteria(News.class);
+		criteria.setProjection(Projections.rowCount());
+		return (Long)criteria.uniqueResult();
 	}
 }

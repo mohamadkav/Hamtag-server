@@ -11,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import net.hamtag.server.core.RootMgr;
 import net.hamtag.server.datatypes.device.Device;
 import net.hamtag.server.utils.Config;
+import net.hamtag.server.utils.DateUtils;
 
 public class NewsShownMgr extends RootMgr{
 	@SuppressWarnings("unchecked")
@@ -32,6 +33,13 @@ public class NewsShownMgr extends RootMgr{
 		calendar.add(Calendar.DATE,-1*Config.DAYS_THAT_DEVICE_CONSIDERS_ACTIVE);
 		criteria.add(Restrictions.ge("showDate", calendar.getTime()));
 		criteria.setProjection(Projections.countDistinct("device"));
+		return (Long)criteria.uniqueResult();
+	}
+	public static Long getCountShownForDay(Date day){
+		Criteria criteria=getInstance().createCriteria(NewsShown.class);
+		criteria.setProjection(Projections.rowCount());
+		criteria.add(Restrictions.ge("showDate", DateUtils.getStartOfDay(day)));
+		criteria.add(Restrictions.le("showDate", DateUtils.getEndOfDay(day)));
 		return (Long)criteria.uniqueResult();
 	}
 }

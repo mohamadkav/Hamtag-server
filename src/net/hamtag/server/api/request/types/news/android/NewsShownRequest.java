@@ -12,7 +12,7 @@ import net.hamtag.server.datatypes.news.News;
 import net.hamtag.server.datatypes.news.NewsMgr;
 import net.hamtag.server.datatypes.news.NewsShown;
 import net.hamtag.server.datatypes.news.NewsShownMgr;
-import net.hamtag.server.utils.DateValidator;
+import net.hamtag.server.utils.DateUtils;
 
 public class NewsShownRequest extends BaseDeviceRequest {
 	private enum Error {
@@ -53,7 +53,7 @@ public class NewsShownRequest extends BaseDeviceRequest {
 		newsShown = new NewsShown();
 		newsShown.setNews(news);
 		newsShown.setDevice(device);
-		if (!DateValidator.validateLongStringDate(shownDate))
+		if (!DateUtils.validateLongStringDate(shownDate))
 			return new HamtagResponse(Error.DATE_INVALID).getResponse(Response.Status.BAD_REQUEST);
 		newsShown.setShowDate(new Date(Long.parseLong(shownDate)));
 		newsShown.setShownTime(Integer.parseInt(shownSeconds));
