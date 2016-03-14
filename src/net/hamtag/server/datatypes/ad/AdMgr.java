@@ -12,6 +12,7 @@ import org.hibernate.criterion.Restrictions;
 
 import net.hamtag.server.core.RootMgr;
 import net.hamtag.server.datatypes.corporation.Corporation;
+import net.hamtag.server.datatypes.user.User;
 import net.hamtag.server.utils.Config;
 
 public class AdMgr extends RootMgr {
@@ -60,5 +61,11 @@ public class AdMgr extends RootMgr {
 	public static List<Ad>list(){
 		Criteria criteria=getInstance().createCriteria(Ad.class);
 		return criteria.list();
+	}
+	public static Long getCountForUser(User user){
+		Criteria criteria=getInstance().createCriteria(Ad.class);
+		criteria.add(Restrictions.eq("user", user));
+		criteria.setProjection(Projections.rowCount());
+		return (Long)criteria.uniqueResult();
 	}
 }

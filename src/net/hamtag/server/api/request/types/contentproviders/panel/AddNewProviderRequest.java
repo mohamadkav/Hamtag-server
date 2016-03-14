@@ -30,17 +30,17 @@ public class AddNewProviderRequest extends BaseWebPanelRequest{
 		this.requestJson=requestJson;
 	}
 	public Response handle(){
+		Set<String>authorizedRoles=new HashSet<>();
+		authorizedRoles.add("ROLE_ADMIN");
+		Response response=auth(authorizedRoles);
+		if(response!=null)
+			return response;
 		try {
 			this.requestInputJson=new ObjectMapper().readValue(requestJson, AddNewProviderRequestInputJson.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return new HamtagResponse(Error.JSON_PARSE_EXCEPTION).getResponse(Response.Status.BAD_REQUEST);
 		}
-		Set<String>authorizedRoles=new HashSet<>();
-		authorizedRoles.add("ROLE_ADMIN");
-		Response response=auth(authorizedRoles);
-		if(response!=null)
-			return response;
 		Set<Category>categories=new HashSet<>();
 		if(requestInputJson.getCategories()==null||requestInputJson.getCategories().isEmpty())
 			return new HamtagResponse(Error.CATEGORIES_MUST_BE_SELECTED).getResponse(Response.Status.BAD_REQUEST);

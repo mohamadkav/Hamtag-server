@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 
 import net.hamtag.server.core.RootMgr;
 import net.hamtag.server.datatypes.contentprovider.ContentProvider;
+import net.hamtag.server.datatypes.user.User;
 import net.hamtag.server.utils.Config;
 
 public class NewsMgr extends RootMgr{
@@ -66,6 +67,12 @@ public class NewsMgr extends RootMgr{
 	}
 	public static Long getAllNewsCount(){
 		Criteria criteria=getInstance().createCriteria(News.class);
+		criteria.setProjection(Projections.rowCount());
+		return (Long)criteria.uniqueResult();
+	}
+	public static Long getCountForUser(User user){
+		Criteria criteria=getInstance().createCriteria(News.class);
+		criteria.add(Restrictions.eq("user", user));
 		criteria.setProjection(Projections.rowCount());
 		return (Long)criteria.uniqueResult();
 	}

@@ -7,6 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import net.hamtag.server.api.request.types.users.GetAllUserInfoRequest;
 import net.hamtag.server.api.request.types.users.GetUserPrivilagesRequest;
 
 @Path("/users/")
@@ -17,5 +18,12 @@ public class UserResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getPrivilages(){
 		return new GetUserPrivilagesRequest().handle();
+	}
+	@POST
+	@Path("/all-info")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getAllUserinfoRequest(){
+		return new GetAllUserInfoRequest().handle();
 	}
 }
