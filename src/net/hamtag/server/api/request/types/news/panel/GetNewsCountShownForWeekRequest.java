@@ -24,7 +24,7 @@ public class GetNewsCountShownForWeekRequest extends BaseWebPanelRequest{
 		List<CountShownDTO>dtos=new ArrayList<>();
 		for(int i=0;i<7;i++){
 			Calendar cal = Calendar.getInstance();
-			cal.add(Calendar.DATE, -1);
+			cal.add(Calendar.DATE, -1*i);
 			CountShownDTO dto=new CountShownDTO();
 			dto.setDaysBefore(i);
 			dto.setCount(NewsShownMgr.getCountShownForDay(cal.getTime()));
