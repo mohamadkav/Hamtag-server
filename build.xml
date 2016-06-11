@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project >
 
-<project name="Hamtag" default="usage" basedir=".">
+<project name="Hamtag" default="usage" basedir="." xmlns:sonar="antlib:org.sonar.ant">
 
 	<property name="project.name" value="${ant.project.name}" />
 	<property environment="env" />
 	<property file="build.xml.properties" />
-	
+	<property name="sonar.projectKey" value="net.hamtag:server" />
+        <property name="sonar.projectName" value="Hamtag: SonarQube" />
+        <property name="sonar.projectVersion" value="1.0" />
+        <property name="sonar.language" value="java" />
+        <property name="sonar.sources" value="src" />
+        <property name="sonar.binaries" value="build" />
+        <property name="sonar.java.libraries" value="lib/*.jar" />
+        <property name="sonar.sourceEncoding" value="UTF-8" />
 
 	<path id="compile.classpath">
 		<pathelement location="${catalina.home}/common/classes" />
@@ -17,7 +24,15 @@
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
+   	 <target name="sonar">
+        <taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml">
+        
+            <classpath path="lib/sonarqube-ant-task-2.4.1.jar" />
+        </taskdef>
 
+        <!-- Execute Sonar -->
+        <sonar:sonar />
+    </target>
 	<target name="usage">
 		<echo message=""/>
 		<echo message="${webapp.name} build file"/>
